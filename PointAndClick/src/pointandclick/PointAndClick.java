@@ -22,6 +22,7 @@ public class PointAndClick extends JFrame {
         // Create a 600x400 window
         PointAndClick pac = new PointAndClick("Point and Click Game");
         pac.setSize(600, 400);
+        pac.setResizable(false); // Forces Window to ALWAYS remain 600x400
         pac.setLocationRelativeTo(null); // Centers window on the screen
         pac.setVisible(true); // Show window
     }
@@ -53,13 +54,20 @@ public class PointAndClick extends JFrame {
             layout.show(cards, "MainMenu");
         };
         ///endregion
+        
+        // Gets triggered when hangman games ends. Post Showing Score.
+        ActionListener gameEndListener = evt -> {
+            layout.show(cards, "MainMenu");
+        };
 
         // Create components
         LoadingScreen loadingScreen = new LoadingScreen(loadingScreenListener);
         MainMenu mainMenu = new MainMenu(mainMenuListener);
         HighScores highScores = new HighScores(backButtonListener);
         Credits credits = new Credits(backButtonListener);
-        Hangman hangman = new Hangman();
+        
+        //TEMP LISTENER
+        Hangman hangman = new Hangman(gameEndListener);
          
         // Create the panel that contains the other frames
         layout = new CardLayout();
