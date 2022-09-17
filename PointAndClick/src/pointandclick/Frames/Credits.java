@@ -17,14 +17,15 @@ public class Credits extends JPanel {
     @Override
     public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                Font titleFont = new Font("Marker Felt", Font.BOLD, 30);
-                Font teamFont = new Font("Marker Felt", Font.PLAIN, 20);
+                Font personFont = new Font("Marker Felt", Font.PLAIN, 20);
+                
                 Graphics2D g2 = (Graphics2D) g;
-                g2.setFont(titleFont);
+                g2.setFont(personFont);
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.drawString("Point and Click Game", 200, 80);
-                g2.setFont(teamFont);
-                g2.drawString("Team Goofy Goobers", 230, 300);
-   
+                g2.drawString("Leonardo Davalos, #", 165, 90);
+                g2.drawString("Matthew Finerty, #", 165, 150);
+                g2.drawString("Jasroop Singh, #", 165, 210);
+                g2.drawString("Noris Tang, #", 165, 270);
+                g2.drawString("Vivian Trieu, #", 165, 330);
     }
 }
