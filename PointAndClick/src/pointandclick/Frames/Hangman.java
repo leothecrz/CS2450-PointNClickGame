@@ -4,15 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Hangman extends JPanel implements ActionListener {
     
-    private final int ALPHABET_COUNT = 26;
-    private final String keys = "qwertyuiopasdfghjklzxcvbnm";
-    private final String[] wordBank = {
+    private static final int ALPHABET_COUNT = 26;
+    private static final String KEYS = "qwertyuiopasdfghjklzxcvbnm";
+    private static final String[] wordBank = {
         "abstract", "cemetery", "nurse", "pharmacy", "climbing"
     };
         
@@ -94,9 +93,9 @@ public class Hangman extends JPanel implements ActionListener {
         for(int i=0; i<ALPHABET_COUNT; i++){
             keyButtons[i] = new JButton(); 
             //keyButtons[i].setSize(40, 25);
-            keyButtons[i].setText(String.valueOf(keys.charAt(i))); // Each Key Represents its letter
+            keyButtons[i].setText(String.valueOf(KEYS.charAt(i))); // Each Key Represents its letter
             keyButtons[i].addActionListener(buttonsGameListener); // AllButtons Connected To Same Listener
-            keyButtons[i].setActionCommand(String.valueOf(keys.charAt(i))); // Buttons Have Action Command Correspondint To Its Letter. Key a has command "a".
+            keyButtons[i].setActionCommand(String.valueOf(KEYS.charAt(i))); // Buttons Have Action Command Correspondint To Its Letter. Key a has command "a".
             
             
             keyButtons[i].setFont(buttonFont);
@@ -109,14 +108,12 @@ public class Hangman extends JPanel implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-    
+        
     }
     
     public void resetButtons(){
-        for(int i=0; i<ALPHABET_COUNT; i++){
-            if(!keyButtons[i].isEnabled()){
-                keyButtons[i].setEnabled(true);
-            }
+        for(int i=0; i<ALPHABET_COUNT; i++){  
+            keyButtons[i].setEnabled(true);
         }
     }
     

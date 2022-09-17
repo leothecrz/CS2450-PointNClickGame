@@ -6,6 +6,9 @@ import javax.swing.*;
 
 
 public class LoadingScreen extends JPanel {
+    
+    //private Font MarkerFelt;  //FONT FIX//
+    
     // private final JLabel titleLabel;
     public LoadingScreen(ActionListener listener) {
         setLayout(new FlowLayout());
@@ -20,15 +23,29 @@ public class LoadingScreen extends JPanel {
     }
     @Override
     public void paintComponent(Graphics g){
-                super.paintComponent(g);
-                Font titleFont = new Font("Marker Felt", Font.BOLD, 25);
-                Font teamFont = new Font("Marker Felt", Font.PLAIN, 15);
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setFont(titleFont);
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.drawString("Point and Click Game", 200, 80);
-                g2.setFont(teamFont);
-                g2.drawString("Team Goofy Goobers", 230, 300);
+        super.paintComponent(g);
+        
+        /* //FONT FIX//
+        try {
+            MarkerFelt = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf"));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(MarkerFelt);
+            
+        } catch (FontFormatException | IOException e) {
+            System.err.println("Font not found");
+        }
+        */
+        
+        Font titleFont = new Font("Marker Felt", Font.BOLD, 25);
+        Font teamFont = new Font("Marker Felt", Font.PLAIN, 15);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setFont(titleFont);
+        //g2.setFont(MarkerFelt.deriveFont(25f)); //FONT FIX//
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.drawString("Point and Click Game", 200, 80);
+        g2.setFont(teamFont);
+        //g2.setFont(MarkerFelt.deriveFont(15f)); //FONT FIX//
+        g2.drawString("Team Goofy Goobers", 230, 300);
    
     }
 }
