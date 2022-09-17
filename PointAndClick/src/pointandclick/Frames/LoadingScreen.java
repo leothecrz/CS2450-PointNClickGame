@@ -21,14 +21,14 @@ public class LoadingScreen extends JPanel {
     @Override
     public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                Font titleFont = new Font("Courier New", Font.BOLD, 25);
-                Font teamFont = new Font("Courier New", Font.PLAIN, 15);
+                Font titleFont = new Font("Marker Felt", Font.BOLD, 25);
+                Font teamFont = new Font("Marker Felt", Font.PLAIN, 15);
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setFont(titleFont);
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.drawString("Point and Click Game", 150, 80);
+                g2.drawString("Point and Click Game", 200, 80);
                 g2.setFont(teamFont);
-                g2.drawString("Team Goofy Goobers", 210, 300);
+                g2.drawString("Team Goofy Goobers", 230, 300);
    
     }
 }
