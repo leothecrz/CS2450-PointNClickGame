@@ -2,10 +2,15 @@ package pointandclick.Frames;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
 import javax.swing.*;
 
 public class MainMenu extends JPanel {
 
+    private BufferedImage pic = null;
+    
     public MainMenu(ActionListener listener) {
         setLayout(new FlowLayout());
         
@@ -26,4 +31,15 @@ public class MainMenu extends JPanel {
         add(playButton);
     }
     
+    // adding a picture below the buttons
+    
+    /* @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        try {
+            pic = ImageIO.read(new File(Location of the picture, probably from source));
+        } catch (IOException e) {} // getting some errors with catch statement
+        g.drawImage(pic, 100, 100, 200, 200, this);
+    } */
 }
