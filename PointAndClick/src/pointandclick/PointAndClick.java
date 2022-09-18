@@ -6,6 +6,8 @@ package pointandclick;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.*;
 
 import pointandclick.Frames.*;
@@ -15,9 +17,14 @@ import pointandclick.Frames.*;
  * @author leothecrz
  */
 public class PointAndClick extends JFrame {
+    
     private CardLayout layout;
     private JPanel cards;
+    
+    private Hangman hangman;
 
+    private Font MarkerFelt;
+    
     public static void main(String[] args) {
         // Create a 600x400 window
         PointAndClick pac = new PointAndClick("Point and Click Game");
@@ -25,14 +32,23 @@ public class PointAndClick extends JFrame {
         pac.setResizable(false); // Forces Window to ALWAYS remain 600x400
         pac.setLocationRelativeTo(null); // Centers window on the screen
         pac.setVisible(true); // Show window
+        
     }
 
     // Maybe keep all panel-switching logic in this class just to make things easier?
     public PointAndClick(String title) {
         super(title); // Sets window title
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
+        
+        //Font only needs to be registered once for entire program.
+        try{
+           MarkerFelt = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf"));
+           GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+           ge.registerFont(MarkerFelt);
+        }catch(FontFormatException | IOException ex){
+            System.err.println("Font not Found - HighScores Jpanel");
+        }
+        
         ///region Event listeners
 
         // Gets triggered after 3 seconds
@@ -46,6 +62,12 @@ public class PointAndClick extends JFrame {
         ActionListener mainMenuListener = evt -> {
             // Show the frame specified in the action command (see MainMenu class)
             // Action command should be the name of a class/frame
+            
+            if(evt.getActionCommand().equals("Hangman")){
+                hangman.startGame();
+            }
+            
+            
             layout.show(cards, evt.getActionCommand());
         };
 
@@ -58,6 +80,7 @@ public class PointAndClick extends JFrame {
         // Gets triggered when hangman games ends. Post Showing Score.
         ActionListener gameEndListener = evt -> {
             layout.show(cards, "MainMenu");
+            
         };
 
         // Create components
@@ -67,7 +90,7 @@ public class PointAndClick extends JFrame {
         Credits credits = new Credits(backButtonListener);
         
         //TEMP LISTENER
-        Hangman hangman = new Hangman(gameEndListener);
+        hangman = new Hangman(gameEndListener);
          
         // Create the panel that contains the other frames
         layout = new CardLayout();

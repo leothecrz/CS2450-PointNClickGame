@@ -2,8 +2,6 @@ package pointandclick.Frames;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.*;
 
 public class HighScores extends JPanel {
@@ -29,6 +27,8 @@ public class HighScores extends JPanel {
             topFiveNames[i] = "";
             topFiveScores[i] = "0";
         }
+        
+        MarkerFelt = new Font("Marker Felt", Font.PLAIN, 20); // font set
 
     }
 
@@ -36,14 +36,6 @@ public class HighScores extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         
-        try{
-           MarkerFelt = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf"));
-           GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-           ge.registerFont(MarkerFelt);
-        }catch(FontFormatException | IOException ex){
-            System.err.println("Font not Found - HighScores Jpanel");
-        }
-
         Graphics2D g2 = (Graphics2D) g;
         
         g2.setFont(MarkerFelt.deriveFont(40f));
