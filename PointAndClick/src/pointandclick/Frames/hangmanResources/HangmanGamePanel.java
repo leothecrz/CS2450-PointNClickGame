@@ -31,9 +31,9 @@ public class HangmanGamePanel extends JPanel{
     
     /**
      * 
-     * @param hangmanListener 
+     * @param endAndSkip 
      */
-    public HangmanGamePanel(ActionListener hangmanListener){
+    public HangmanGamePanel(ActionListener endAndSkip){
         super();
         setPreferredSize(new Dimension(600, 400));
         setBackground(Color.lightGray);
@@ -76,7 +76,7 @@ public class HangmanGamePanel extends JPanel{
         };
         
         skipButton = new JButton("Skip");
-        skipButton.addActionListener(hangmanListener);
+        skipButton.addActionListener(endAndSkip);
         skipButton.setActionCommand("Skip");
             
         topPanel = new JPanel();
@@ -93,7 +93,7 @@ public class HangmanGamePanel extends JPanel{
         add(bottomPanel);
         
         keyButtons = new JButton[ALPHABET_COUNT];
-        Font buttonFont = new Font(null, Font.PLAIN, 16);
+        Font buttonFont = new Font(null, Font.PLAIN, 15);
         for(int i=0; i<ALPHABET_COUNT; i++){
             keyButtons[i] = new JButton(); 
             //keyButtons[i].setSize(40, 25);
@@ -105,7 +105,6 @@ public class HangmanGamePanel extends JPanel{
             
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 
         }
-        
         
     }
     

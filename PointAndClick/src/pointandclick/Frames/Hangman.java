@@ -20,18 +20,21 @@ public class Hangman extends JPanel{
     public Hangman(ActionListener listener) {
         
         ActionListener endAndSkip = evt -> {
-            panelLayout.show(face, scorePanel.getClass().getSimpleName());
+            if(evt.getActionCommand().equals("Skip")){
+                panelLayout.show(face, "HangmanScorePanel");
+                System.out.println("Skip Button Pressed");
+            }
         };
         
-        
-        panelLayout = new CardLayout();
+        panelLayout = new CardLayout(0, 0);
         face = new JPanel(panelLayout);
         gamePanel = new HangmanGamePanel(endAndSkip);
-        scorePanel = new HangmanScorePanel();
-        face.add(scorePanel, gamePanel.getClass().getSimpleName());
+        scorePanel = new HangmanScorePanel(listener);
+        System.out.println(scorePanel.getClass().getSimpleName());
+        face.add(scorePanel, scorePanel.getClass().getSimpleName());
+        System.out.println(gamePanel.getClass().getSimpleName());
         face.add(gamePanel, gamePanel.getClass().getSimpleName());
-        
-         
+             
         add(face);
     }
     
@@ -40,7 +43,7 @@ public class Hangman extends JPanel{
      */
     public void startGame(){
        gamePanel.startGame();
-       panelLayout.show(face, gamePanel.getClass().getSimpleName());
+       panelLayout.show(face, "HangmanGamePanel");
        
     }
   
