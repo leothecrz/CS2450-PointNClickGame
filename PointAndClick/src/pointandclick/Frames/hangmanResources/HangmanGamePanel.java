@@ -89,7 +89,7 @@ public class HangmanGamePanel extends JPanel{
         
         
         topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(600, (int)(400*0.6))); // HARD CODED PANEL SIZES
+        topPanel.setPreferredSize(new Dimension(600, (int)(400*0.55))); // HARD CODED PANEL SIZES
         topPanel.setBackground(Color.GRAY); // USED TO DIFFIRENTIATE
         topPanel.setOpaque(false);
         topPanel.add(skipButton);
