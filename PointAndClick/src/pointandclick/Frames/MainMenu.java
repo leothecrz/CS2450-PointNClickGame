@@ -39,8 +39,8 @@ public class MainMenu extends JPanel {
         super.paintComponent(g);
         
         try {
-            pic = ImageIO.read(new File(Location of the picture, probably from source));
+            pic = ImageIO.read(new File(" *your own location* + /CS2450-PointNClickGame/hangman.png"));
         } catch (IOException e) {} 
-        g.drawImage(pic, 100, 100, 200, 200, this);
+        g.drawImage(pic, 200, 80, 200, 210, this);
     } 
 }
