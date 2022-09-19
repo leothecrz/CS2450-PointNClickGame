@@ -6,6 +6,7 @@ import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
+import java.io.IOException;
 
 public class MainMenu extends JPanel {
 
@@ -31,15 +32,15 @@ public class MainMenu extends JPanel {
         add(playButton);
     }
     
-    // adding a picture below the buttons
+    // adding a hangman picture below the main menu buttons
     
-    /* @Override
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
         try {
             pic = ImageIO.read(new File(Location of the picture, probably from source));
-        } catch (IOException e) {} // getting some errors with catch statement
+        } catch (IOException e) {} 
         g.drawImage(pic, 100, 100, 200, 200, this);
-    } */
+    } 
 }
