@@ -81,10 +81,12 @@ public class HangmanGamePanel extends JPanel{
         skipButton = new JButton("Skip");
         skipButton.addActionListener(endAndSkip);
         skipButton.setActionCommand("Skip");
-            
+        
+        
         topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(600, (int)(400*0.6))); // HARD CODED PANEL SIZES
         topPanel.setBackground(Color.GRAY); // USED TO DIFFIRENTIATE
+        topPanel.setOpaque(false);
         topPanel.add(skipButton);
         add(topPanel);
         
@@ -132,7 +134,7 @@ public class HangmanGamePanel extends JPanel{
    
     }
     
-    /* This makes a stand for hanging the man but it appears behind the gray JPanel... i dont know how to bring it in front of the gray background
+    // This makes a stand for hanging the man but it appears behind the gray JPanel... i dont know how to bring it in front of the gray background
     @Override
     public void paintComponent(Graphics g){
                 super.paintComponent(g);
@@ -144,6 +146,7 @@ public class HangmanGamePanel extends JPanel{
                 g2.fillRect(30, 220, 180, 5);
                 g2.fillRect(100, 20, 80, 5);
                 g2.fillRect(180, 20, 5, 30);
-    } */ 
+                
+    } 
     
 }
