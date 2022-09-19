@@ -6,9 +6,10 @@ import javax.swing.*;
 
 public class Credits extends JPanel {
     public Credits(ActionListener listener) {
-        setLayout(new FlowLayout());
+        setLayout(null);
         JButton backButton = new JButton("Back");
         backButton.addActionListener(listener);
+        backButton.setBounds(480,310,80,30);
         add(backButton);
     }
     
@@ -20,7 +21,7 @@ public class Credits extends JPanel {
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setFont(creditsFont);
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.drawString("Credits", 245,70);
+                g2.drawString("Credits", 245,50);
                 g2.setFont(personFont);
                 g2.drawString("Leonardo Davalos, #", 165, 100);
                 g2.drawString("Matthew Finerty, #", 165, 160);
