@@ -13,8 +13,8 @@ import java.awt.RenderingHints;
 
 
 /**
+ *  
  *
- * @author LeothEcRz
  */
 public class HangmanGamePanel extends JPanel{
     
@@ -29,6 +29,8 @@ public class HangmanGamePanel extends JPanel{
     private JPanel topPanel;
     private JPanel bottomPanel;
     
+    private JLabel wordSpaces;
+    
     private JButton skipButton;
     private JButton[] keyButtons;
         
@@ -39,38 +41,79 @@ public class HangmanGamePanel extends JPanel{
     
     /**
      * 
-     * @param endAndSkip 
+     * @param skipListener 
      */
-    public HangmanGamePanel(ActionListener endAndSkip){
+    public HangmanGamePanel(ActionListener skipListener){
         super();
         setPreferredSize(new Dimension(600, 400));
         setBackground(Color.lightGray);
         
+        /**
+         * 
+         */
         ActionListener buttonsGameListener = evt -> { //Button Listener
                 
             char pressedLetter = evt.getActionCommand().charAt(0);
-            int keynum = pressedLetter - 97;
+            int keynum = pressedLetter - 97; 
 
             System.out.println(keyButtons[keynum].getText());
             
             keyButtons[keynum].setEnabled(false); // Disable each letter after it has been used.
+            
+            int index = wordToFind.indexOf(pressedLetter);
+            if( index != -1){
+                
+                do{
+                    wordFound[index] = pressedLetter;
+                    //wordToFind = wordToFind.replace(pressedLetter, '_');
+                    wordToFind = wordToFind.replaceFirst(String.valueOf(pressedLetter), "_");
+                    
+                    index = wordToFind.indexOf(pressedLetter);
+                
+                }while(index != -1);
+                
+                System.out.println(wordFoundContent());
+                
+            } else {
+                System.out.println("Not in Word");
+                if(errors == MAX_ERRORS){
+                    
+                } else{
+                    errors++;
+                    System.out.println(errors);
+
+                }
+            }
+            
+            
                
         };
         
-        skipButton = new JButton("Skip");
-        skipButton.addActionListener(endAndSkip);
-        skipButton.setActionCommand("Skip");
+        ActionListener ScreenUpdatesLister = evt -> { // Update Screen For Game start
+            
+        };
         
+        // TOP PANEL
         
         topPanel = new JPanel();
+        
+        topPanel.setLayout(null);
         topPanel.setPreferredSize(new Dimension(600, (int)(400*0.55))); // HARD CODED PANEL SIZES
         topPanel.setBackground(Color.GRAY); // USED TO DIFFIRENTIATE
         topPanel.setOpaque(false);
+        
+        skipButton = new JButton("Skip");
+        skipButton.addActionListener(skipListener);
+        skipButton.setActionCommand("Skip");
+        skipButton.setBounds(500, 15, 70, 25);
+        
         topPanel.add(skipButton);
+        
         add(topPanel);
         
+        // BOTTOM PANEL
         bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(590, (int)(400*0.4))); // HARD CODED PANEL SIZES
+        bottomPanel.setPreferredSize(new Dimension(595, (int)(400*0.4))); // HARD CODED PANEL SIZES
         bottomPanel.setBackground(Color.DARK_GRAY); // USED TO DIFFIRENTIATE
         //bottomPanel.setLayout(new GridLayout(4, 26)); // GRID LAYOUT 2x13
         bottomPanel.setLayout(new FlowLayout());
@@ -111,11 +154,15 @@ public class HangmanGamePanel extends JPanel{
        int r = (int) (Math.random() * (4)); 
        wordToFind = WORDBANK[r];                // Choose random word
        wordFound = new char[wordToFind.length()];
+       
+       
        for (int i = 0; i < wordFound.length; i++) {
                wordFound[i] = '_';
        }
-       JLabel wordSpaces = new JLabel (wordFoundContent()); // Doesn't work but an attempt to display empty letters
-       add(wordSpaces);                                     // like this "_ _ _ _"
+       
+       
+       //JLabel wordSpaces = new JLabel (wordFoundContent()); // Doesn't work but an attempt to display empty letters
+       //topPanel.add(wordSpaces);                                     // like this "_ _ _ _"
     }
     
     // This makes a stand for hanging the man but it appears behind the gray JPanel... i dont know how to bring it in front of the gray background
