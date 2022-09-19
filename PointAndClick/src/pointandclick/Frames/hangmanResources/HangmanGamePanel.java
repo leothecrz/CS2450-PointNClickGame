@@ -19,7 +19,7 @@ import java.awt.RenderingHints;
 public class HangmanGamePanel extends JPanel{
     
     private static final int ALPHABET_COUNT = 26;
-    private static final String KEYS = "qwertyuiopasdfghjklzxcvbnm";
+    private static final String KEYS = "abcdefghijklmnopqrstuvwxyz";
     private static final String[] WORDBANK = {
         "abstract", "cemetery", "nurse", "pharmacy", "climbing"
     };
@@ -47,40 +47,14 @@ public class HangmanGamePanel extends JPanel{
         setBackground(Color.lightGray);
         
         ActionListener buttonsGameListener = evt -> { //Button Listener
-                      
-            /* //Either Works Unsure Which is safer...
-            if(evt.getSource() == skipButton){
-                System.out.println("SKIP BUTTON PRESSED");
-            }
-            */ 
-            if((evt.getActionCommand()).equals("Skip")){
                 
-                System.out.println("SKIP BUTTON PRESSED");
-                
-                
-                  
-            } else {
+            char pressedLetter = evt.getActionCommand().charAt(0);
+            int keynum = pressedLetter - 97;
 
-                switch ((evt.getActionCommand()).charAt(0)) {
-                    case 'w':
-                        keyButtons[1].setEnabled(false); // Disable Button After Press
-                        break;
-
-                    case 'n':
-                        keyButtons[24].setEnabled(false); // Disable Button After Press
-                        break;
-
-                    default:
-                }
-
-                // IF Statements or a Switch...
-                if(evt.getActionCommand().equals("q")){
-                    keyButtons[0].setEnabled(false); // Disable Button After Press
-                }
-                if(evt.getActionCommand().equals("m")){
-                    keyButtons[25].setEnabled(false); // Disable Button After Press
-                }
-            }
+            System.out.println(keyButtons[keynum].getText());
+            
+            keyButtons[keynum].setEnabled(false); // Disable each letter after it has been used.
+               
         };
         
         skipButton = new JButton("Skip");
@@ -112,11 +86,10 @@ public class HangmanGamePanel extends JPanel{
             keyButtons[i].setActionCommand(String.valueOf(KEYS.charAt(i))); // Buttons Have Action Command Correspondint To Its Letter. Key a has command "a".
             
             keyButtons[i].setFont(buttonFont);
+            keyButtons[i].setEnabled(true);
             
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 
         }
-        startGame();
-        topPanel.repaint(); // refresh top panel
     }
     
     /**
