@@ -104,7 +104,7 @@ public class HangmanGamePanel extends JPanel {
             timeLabel.setText(formatter.format(new Date())); 
         };
         timeLabel = new JLabel("");
-        timeLabel.setBounds(335, 17, 200, 25);
+        timeLabel.setBounds(335, 16, 200, 25);
         timeLabel.setFont(new Font("Arial", Font.BOLD, 15));
         timeListener.actionPerformed(null); // Set the label's initial text
         timeLabelTimer = new Timer(1000, timeListener);
