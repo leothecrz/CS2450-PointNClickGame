@@ -5,6 +5,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -25,10 +30,12 @@ public class HangmanGamePanel extends JPanel {
     private JPanel bottomPanel; // Keyboard panel
     private JButton skipButton;
     private JButton[] keyButtons; // Keyboard buttons
+    private JLabel timeLabel;
+    private Timer timeLabelTimer;
     
     // Model
     private String wordToFind; // The current word
-    private char[] wordFound; // Char array of found characters in the word
+    private char[] charsFound; // Char array of found characters in the word
     private int errors; // Number of incorrect letters guessed
     private int playerScore;
     
@@ -52,15 +59,15 @@ public class HangmanGamePanel extends JPanel {
             int index = wordToFind.indexOf(pressedLetter);
             if (index != -1){
                 do {
-                    wordFound[index] = pressedLetter;
+                    charsFound[index] = pressedLetter;
                     wordToFind = wordToFind.replaceFirst(String.valueOf(pressedLetter), "_");             
                     index = wordToFind.indexOf(pressedLetter);
                 } while(index != -1);
                 repaint();
                 
                 boolean isWordFound = true;
-                for (int i = 0; i < wordFound.length; i++){
-                    if (wordFound[i] == '_') {
+                for (int i = 0; i < charsFound.length; i++){
+                    if (charsFound[i] == '_') {
                         isWordFound = false;
                         break;
                     }
@@ -69,21 +76,17 @@ public class HangmanGamePanel extends JPanel {
                 if (isWordFound) {
                     skipAndEndListener.actionPerformed(evt);
                 }
-                
             } else {
-                System.out.println("Not in Word");
-                if (errors == MAX_ERRORS - 1){
+                playerScore -= 10;
+                if (errors == MAX_ERRORS - 1) {
                     skipAndEndListener.actionPerformed(evt);
                 } else {
                     errors++;
                 }
-                System.out.println("Errors: " + errors);
             }
-            
-            
-               
+            System.out.println("Score: " + playerScore);
         };
-        
+
         // Top panel
         topPanel = new JPanel();
         topPanel.setLayout(null);
@@ -95,8 +98,20 @@ public class HangmanGamePanel extends JPanel {
         skipButton.addActionListener(skipAndEndListener);
         skipButton.setActionCommand("Skip");
         skipButton.setBounds(500, 15, 70, 25);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+        ActionListener timeListener = evt -> {
+            timeLabel.setText(formatter.format(new Date())); 
+        };
+        timeLabel = new JLabel("");
+        timeLabel.setBounds(335, 17, 200, 25);
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        timeListener.actionPerformed(null); // Set the label's initial text
+        timeLabelTimer = new Timer(1000, timeListener);
+        timeLabelTimer.start();
         
         topPanel.add(skipButton);
+        topPanel.add(timeLabel);
         
         // Bottom panel
         bottomPanel = new JPanel();
@@ -108,7 +123,6 @@ public class HangmanGamePanel extends JPanel {
         // Add panels
         add(topPanel);
         add(bottomPanel);
-        
         
         // Keyboard buttons
         keyButtons = new JButton[ALPHABET_COUNT];
@@ -130,19 +144,19 @@ public class HangmanGamePanel extends JPanel {
             keyButton.setEnabled(true);
     }
 
-    public void startGame(){
+    public void startGame() {
        resetButtons();
        playerScore = 100;
        errors = 0;
        wordToFind = WORDBANK[(int) (Math.random() * WORDBANK.length)]; // Choose random word from wordbank
-       wordFound = new char[wordToFind.length()];
-       for (int i = 0; i < wordFound.length; i++) {
-            wordFound[i] = '_';
+       charsFound = new char[wordToFind.length()];
+       for (int i = 0; i < charsFound.length; i++) {
+            charsFound[i] = '_';
        }
     }
     
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
         Graphics2D g2 = (Graphics2D) g;
@@ -174,10 +188,10 @@ public class HangmanGamePanel extends JPanel {
     
     private String wordFoundContent() {
         StringBuilder b = new StringBuilder();
-        for (int i = 0; i < wordFound.length; i++) {
-            b.append(wordFound[i]);
+        for (int i = 0; i < charsFound.length; i++) {
+            b.append(charsFound[i]);
 
-            if (i < wordFound.length - 1) {
+            if (i < charsFound.length - 1) {
                 b.append(" ");
             }
         }         
