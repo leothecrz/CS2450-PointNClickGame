@@ -5,11 +5,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+
 
 /**
  *
@@ -22,15 +23,19 @@ public class HangmanGamePanel extends JPanel{
     private static final String[] WORDBANK = {
         "abstract", "cemetery", "nurse", "pharmacy", "climbing"
     };
-  
+    
+    public static final int MAX_ERRORS = 6;
+    
     private JPanel topPanel;
     private JPanel bottomPanel;
     
     private JButton skipButton;
     private JButton[] keyButtons;
         
-    private String activeWord;
-    private String displayWord;
+    private String wordToFind; // The current word
+    private char[] wordFound; // Char array of found characters in the word
+    private int errors; // Number of incorrect letters guessed
+    private int guesses; // Number of all letters guessed
     
     /**
      * 
@@ -110,7 +115,8 @@ public class HangmanGamePanel extends JPanel{
             
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 
         }
-        
+        startGame();
+        topPanel.repaint(); // refresh top panel
     }
     
     /**
@@ -127,11 +133,16 @@ public class HangmanGamePanel extends JPanel{
      */
     public void startGame(){
        resetButtons();
-       
-       int r = (int) (Math.random() * (4));
-       activeWord = WORDBANK[r];
-       displayWord = ("_".repeat(activeWord.length()));
-   
+       guesses = 0;
+       errors = 0;
+       int r = (int) (Math.random() * (4)); 
+       wordToFind = WORDBANK[r];                // Choose random word
+       wordFound = new char[wordToFind.length()];
+       for (int i = 0; i < wordFound.length; i++) {
+               wordFound[i] = '_';
+       }
+       JLabel wordSpaces = new JLabel (wordFoundContent()); // Doesn't work but an attempt to display empty letters
+       add(wordSpaces);                                     // like this "_ _ _ _"
     }
     
     // This makes a stand for hanging the man but it appears behind the gray JPanel... i dont know how to bring it in front of the gray background
@@ -148,5 +159,17 @@ public class HangmanGamePanel extends JPanel{
                 g2.fillRect(180, 20, 5, 30);
                 
     } 
+    
+    private String wordFoundContent() {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < wordFound.length; i++) {
+            b.append(wordFound[i]);
+
+            if (i <wordFound.length - 1) {
+                b.append(" ");
+            }
+        }         
+        return b.toString();
+    }
     
 }
