@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 /**
  *
@@ -126,8 +129,21 @@ public class HangmanGamePanel extends JPanel{
        int r = (int) (Math.random() * (4));
        activeWord = WORDBANK[r];
        displayWord = ("_".repeat(activeWord.length()));
-       
-    
+   
     }
+    
+    /* This makes a stand for hanging the man but it appears behind the gray JPanel... i dont know how to bring it in front of the gray background
+    @Override
+    public void paintComponent(Graphics g){
+                super.paintComponent(g);
+                
+                Graphics2D g2 = (Graphics2D) g;
+                
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.fillRect(100, 20, 5, 200);
+                g2.fillRect(30, 220, 180, 5);
+                g2.fillRect(100, 20, 80, 5);
+                g2.fillRect(180, 20, 5, 30);
+    } */ 
     
 }
