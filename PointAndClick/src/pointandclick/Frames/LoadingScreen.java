@@ -43,7 +43,7 @@ public class LoadingScreen extends JPanel {
         g2.setFont(titleFont);
         //g2.setFont(MarkerFelt.deriveFont(25f)); //FONT FIX//
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.drawString("Point and Click Game", 60, 80);
+        g2.drawString("Point and Click Game", 40, 80);
         g2.setFont(teamFont);
         //g2.setFont(MarkerFelt.deriveFont(15f)); //FONT FIX//
         g2.drawString("Team Goofy Goobers", 175, 300);
