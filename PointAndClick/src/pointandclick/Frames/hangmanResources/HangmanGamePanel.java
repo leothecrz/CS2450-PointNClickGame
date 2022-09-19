@@ -10,16 +10,17 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 
 
 /**
+ *  
  *
- * @author LeothEcRz
  */
 public class HangmanGamePanel extends JPanel{
     
     private static final int ALPHABET_COUNT = 26;
-    private static final String KEYS = "qwertyuiopasdfghjklzxcvbnm";
+    private static final String KEYS = "abcdefghijklmnopqrstuvwxyz";
     private static final String[] WORDBANK = {
         "abstract", "cemetery", "nurse", "pharmacy", "climbing"
     };
@@ -29,74 +30,111 @@ public class HangmanGamePanel extends JPanel{
     private JPanel topPanel;
     private JPanel bottomPanel;
     
+    private JLabel wordSpaces;
+    
     private JButton skipButton;
     private JButton[] keyButtons;
         
     private String wordToFind; // The current word
     private char[] wordFound; // Char array of found characters in the word
     private int errors; // Number of incorrect letters guessed
-    private int guesses; // Number of all letters guessed
+    
+    private int playerScore;
     
     /**
      * 
-     * @param endAndSkip 
+     * @param skipAndEndListener 
      */
-    public HangmanGamePanel(ActionListener endAndSkip){
+    public HangmanGamePanel(ActionListener skipAndEndListener){
         super();
         setPreferredSize(new Dimension(600, 400));
         setBackground(Color.lightGray);
         
+        /**
+         * Action Listener. Handles all interaction with the keyboard on the bottom panel.
+         * Handles events that may occur from button presses such as a Game Loss or a Game Victory.
+         */
         ActionListener buttonsGameListener = evt -> { //Button Listener
-                      
-            /* //Either Works Unsure Which is safer...
-            if(evt.getSource() == skipButton){
-                System.out.println("SKIP BUTTON PRESSED");
-            }
-            */ 
-            if((evt.getActionCommand()).equals("Skip")){
                 
-                System.out.println("SKIP BUTTON PRESSED");
+            char pressedLetter = evt.getActionCommand().charAt(0);
+            int keynum = pressedLetter - 97; 
+            //System.out.println(keyButtons[keynum].getText());
+            keyButtons[keynum].setEnabled(false); // Disable each letter after it has been used.
+            
+            int index = wordToFind.indexOf(pressedLetter);
+            if( index != -1){
+              
+                do{
+                    wordFound[index] = pressedLetter;
+                    wordToFind = wordToFind.replaceFirst(String.valueOf(pressedLetter), "_");             
+                    index = wordToFind.indexOf(pressedLetter);
                 
+                }while(index != -1);
                 
-                  
+                System.out.println(wordFoundContent());
+                
+                boolean isWordFound = true;
+                for(int i=0; i<wordFound.length; i++){
+                    if(wordFound[i] == '_')
+                            isWordFound = false;
+                }
+                
+                if(isWordFound){
+                    
+                    Timer gameWinTimer = new Timer(0, skipAndEndListener); // A Timer with a 0 delay calls on skipListener
+                    gameWinTimer.setRepeats(false);
+                    gameWinTimer.setActionCommand("Word Found");
+                    gameWinTimer.start();
+                    
+                }
+                
             } else {
-
-                switch ((evt.getActionCommand()).charAt(0)) {
-                    case 'w':
-                        keyButtons[1].setEnabled(false); // Disable Button After Press
-                        break;
-
-                    case 'n':
-                        keyButtons[24].setEnabled(false); // Disable Button After Press
-                        break;
-
-                    default:
+                System.out.println("Not in Word");
+                if(errors == MAX_ERRORS-1){
+                    
+                    Timer gameLossTimer = new Timer(0, skipAndEndListener); // A Timer with a 0 delay calls on skipListener
+                    gameLossTimer.setRepeats(false);
+                    gameLossTimer.setActionCommand("Word Not Found");
+                    gameLossTimer.start();
+                    
+                } else{
+                    errors++;
                 }
-
-                // IF Statements or a Switch...
-                if(evt.getActionCommand().equals("q")){
-                    keyButtons[0].setEnabled(false); // Disable Button After Press
-                }
-                if(evt.getActionCommand().equals("m")){
-                    keyButtons[25].setEnabled(false); // Disable Button After Press
-                }
+                System.out.println("Errors: " + errors);
             }
+            
+            
+               
         };
         
-        skipButton = new JButton("Skip");
-        skipButton.addActionListener(endAndSkip);
-        skipButton.setActionCommand("Skip");
+        /**
+         * 
+         */
+        ActionListener ScreenUpdatesLister = evt -> { // Update Screen For Game start
+            
+        };
         
+        // TOP PANEL
         
         topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(600, (int)(400*0.6))); // HARD CODED PANEL SIZES
+        
+        topPanel.setLayout(null);
+        topPanel.setPreferredSize(new Dimension(600, (int)(400*0.55))); // HARD CODED PANEL SIZES
         topPanel.setBackground(Color.GRAY); // USED TO DIFFIRENTIATE
         topPanel.setOpaque(false);
+        
+        skipButton = new JButton("Skip");
+        skipButton.addActionListener(skipAndEndListener);
+        skipButton.setActionCommand("Skip");
+        skipButton.setBounds(500, 15, 70, 25);
+        
         topPanel.add(skipButton);
+        
         add(topPanel);
         
+        // BOTTOM PANEL
         bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(590, (int)(400*0.4))); // HARD CODED PANEL SIZES
+        bottomPanel.setPreferredSize(new Dimension(595, (int)(400*0.4))); // HARD CODED PANEL SIZES
         bottomPanel.setBackground(Color.DARK_GRAY); // USED TO DIFFIRENTIATE
         //bottomPanel.setLayout(new GridLayout(4, 26)); // GRID LAYOUT 2x13
         bottomPanel.setLayout(new FlowLayout());
@@ -112,11 +150,10 @@ public class HangmanGamePanel extends JPanel{
             keyButtons[i].setActionCommand(String.valueOf(KEYS.charAt(i))); // Buttons Have Action Command Correspondint To Its Letter. Key a has command "a".
             
             keyButtons[i].setFont(buttonFont);
+            keyButtons[i].setEnabled(true);
             
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 
         }
-        startGame();
-        topPanel.repaint(); // refresh top panel
     }
     
     /**
@@ -133,16 +170,19 @@ public class HangmanGamePanel extends JPanel{
      */
     public void startGame(){
        resetButtons();
-       guesses = 0;
+       playerScore = 100;
        errors = 0;
        int r = (int) (Math.random() * (4)); 
        wordToFind = WORDBANK[r];                // Choose random word
        wordFound = new char[wordToFind.length()];
+       
        for (int i = 0; i < wordFound.length; i++) {
                wordFound[i] = '_';
        }
-       JLabel wordSpaces = new JLabel (wordFoundContent()); // Doesn't work but an attempt to display empty letters
-       add(wordSpaces);                                     // like this "_ _ _ _"
+       
+       
+       //JLabel wordSpaces = new JLabel (wordFoundContent()); // Doesn't work but an attempt to display empty letters
+       //topPanel.add(wordSpaces);                                     // like this "_ _ _ _"
     }
     
     // This makes a stand for hanging the man but it appears behind the gray JPanel... i dont know how to bring it in front of the gray background
