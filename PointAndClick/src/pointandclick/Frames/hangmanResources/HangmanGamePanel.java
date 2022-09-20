@@ -1,6 +1,7 @@
 package pointandclick.Frames.hangmanResources;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,8 +15,11 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import javax.swing.border.Border;
+
 
 /**
  * 
@@ -102,15 +106,18 @@ public class HangmanGamePanel extends JPanel {
         skipButton = new JButton("Skip");
         skipButton.addActionListener(skipAndEndListener);
         skipButton.setActionCommand("Skip");
-        skipButton.setBounds(500, 15, 70, 25);
+        skipButton.setBounds(500, 70, 70, 25);
+        skipButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        skipButton.setBorder(new RoundedBorder(15));
+        skipButton.setContentAreaFilled(false);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
         ActionListener timeListener = evt -> {
             timeLabel.setText(formatter.format(new Date())); 
         };
         timeLabel = new JLabel("");
-        timeLabel.setBounds(335, 16, 200, 25);
-        timeLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        timeLabel.setBounds(400, 16, 200, 25);
+        timeLabel.setFont(new Font("Marker Felt", Font.BOLD, 15));
         timeListener.actionPerformed(null); // Set the label's initial text
         timeLabelTimer = new Timer(1000, timeListener);
         timeLabelTimer.start();
@@ -131,17 +138,21 @@ public class HangmanGamePanel extends JPanel {
         
         // Keyboard buttons
         keyButtons = new JButton[ALPHABET_COUNT];
-        Font buttonFont = new Font(null, Font.PLAIN, 15);
+        Font buttonFont = new Font("Marker Felt", Font.PLAIN, 15);
         for (int i = 0; i < ALPHABET_COUNT; i++){
             keyButtons[i] = new JButton(); 
             keyButtons[i].setText(String.valueOf(KEYS.charAt(i))); // Each Key Represents its letter
             keyButtons[i].addActionListener(buttonsGameListener); // AllButtons Connected To Same Listener
             keyButtons[i].setActionCommand(String.valueOf(KEYS.charAt(i))); // Buttons Have Action Command Correspondint To Its Letter. Key a has command "a".
             keyButtons[i].setFont(buttonFont);
+            keyButtons[i].setBackground(Color.LIGHT_GRAY);
+            keyButtons[i].setBorder(BorderFactory.createEmptyBorder(15, 15, 20,15));
             keyButtons[i].setEnabled(true);
             
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 
+            // bottomPanel.add(Box.createRigidArea(new Dimension(2, 2))); // Buffer between buttons
         }
+    
     }
 
     /**
@@ -180,8 +191,10 @@ public class HangmanGamePanel extends JPanel {
         g2.fillRect(30, 220, 180, 5);
         g2.fillRect(100, 20, 80, 5);
         g2.fillRect(180, 20, 5, 30);
-        g2.setFont(new Font("Marker Felt", Font.BOLD, 35));
+        g2.setFont(new Font("Marker Felt", Font.PLAIN, 35));
         g2.drawString(wordFoundContent(), 300, 220);
+        g2.setFont(new Font("Marker Felt", Font.BOLD, 25));
+        g2.drawString("Score: " + playerScore, 300, 100);
         
         
         if (errors >= 1) g2.fillOval(163, 53, 40, 40);
@@ -216,5 +229,31 @@ public class HangmanGamePanel extends JPanel {
         return this.playerScore;
     }
     
+    public class RoundedBorder implements Border {
 
+        public int radius;
+
+
+        RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+
+
+        @Override
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+        }
+
+
+        @Override
+        public boolean isBorderOpaque() {
+            return true;
+        }
+
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+        }
+    }
 }

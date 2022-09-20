@@ -38,7 +38,7 @@ public class LoadingScreen extends JPanel {
         
         Font titleFont = new Font("Marker Felt", Font.BOLD, 60);
         Font teamFont = new Font("Marker Felt", Font.PLAIN, 30);
-        Font gameFont = new Font("Marker Felt", Font.PLAIN, 50);
+        //Font gameFont = new Font("Marker Felt", Font.PLAIN, 50);
         Graphics2D g2 = (Graphics2D) g;
         g2.setFont(titleFont);
         //g2.setFont(MarkerFelt.deriveFont(25f)); //FONT FIX//
@@ -46,9 +46,9 @@ public class LoadingScreen extends JPanel {
         g2.drawString("Point and Click Game", 40, 80);
         g2.setFont(teamFont);
         //g2.setFont(MarkerFelt.deriveFont(15f)); //FONT FIX//
-        g2.drawString("Team Goofy Goobers", 175, 300);
-        g2.setFont(gameFont);
-        g2.drawString("Hangman", 200, 200);
+        g2.drawString("Team Goofy Goobers", 175, 320);
+        // g2.setFont(gameFont);
+        // g2.drawString("Hangman", 200, 200);
    
     }
 }
