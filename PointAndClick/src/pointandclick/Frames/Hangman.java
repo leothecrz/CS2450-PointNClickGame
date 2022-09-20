@@ -29,20 +29,30 @@ public class Hangman extends JPanel{
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         
-        ActionListener skipListener = evt -> {
+        //
+        ActionListener skipAndEndListener = evt -> {
+            
+            //Skip Button Pressed
             if(evt.getActionCommand().equals("Skip")){
-                panelLayout.show(face, "HangmanScorePanel");
+                
                 System.out.println("Skip Button Pressed");
+                scorePanel.setPlayerScore(0);
+                
             }
+            //Natural Game End
+            if(evt.getActionCommand().equals("Word Found") || evt.getActionCommand().equals("Word Not Found")){
+                
+                scorePanel.setPlayerScore(gamePanel.getPlayerScore());
+            }
+            
+            panelLayout.show(face, "HangmanScorePanel");
         };
         
         panelLayout = new CardLayout(0, 0);
         face = new JPanel(panelLayout);
-        gamePanel = new HangmanGamePanel(skipListener);
+        gamePanel = new HangmanGamePanel(skipAndEndListener);
         scorePanel = new HangmanScorePanel(listener);
-        System.out.println(scorePanel.getClass().getSimpleName());
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
-        System.out.println(gamePanel.getClass().getSimpleName());
         face.add(gamePanel, gamePanel.getClass().getSimpleName());
              
         add(face);

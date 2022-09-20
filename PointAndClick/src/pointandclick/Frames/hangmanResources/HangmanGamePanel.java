@@ -15,7 +15,12 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 
+/**
+ * 
+ *
+ */
 public class HangmanGamePanel extends JPanel {
     // Constants
     private static final int MAX_ERRORS = 6;
@@ -74,17 +79,17 @@ public class HangmanGamePanel extends JPanel {
                 }
                 
                 if (isWordFound) {
-                    skipAndEndListener.actionPerformed(evt);
+                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Word Found"));
                 }
             } else {
                 playerScore -= 10;
                 if (errors == MAX_ERRORS - 1) {
-                    skipAndEndListener.actionPerformed(evt);
+                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Word Not Found"));
                 } else {
                     errors++;
                 }
             }
-            repaint();
+            repaint(); 
         };
 
         // Top panel
@@ -139,11 +144,17 @@ public class HangmanGamePanel extends JPanel {
         }
     }
 
+    /**
+     * 
+     */
     public void resetButtons(){
         for (JButton keyButton : keyButtons)
             keyButton.setEnabled(true);
     }
 
+    /**
+     * 
+     */
     public void startGame() {
        resetButtons();
        playerScore = 100;
@@ -155,6 +166,10 @@ public class HangmanGamePanel extends JPanel {
        }
     }
     
+    /**
+     * 
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -177,6 +192,10 @@ public class HangmanGamePanel extends JPanel {
         if (errors >= 6) g2.drawLine(207, 206, 182, 165);
     }
     
+    /**
+     * 
+     * @return 
+     */
     private String wordFoundContent() {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < charsFound.length; i++) {
@@ -188,4 +207,14 @@ public class HangmanGamePanel extends JPanel {
         }         
         return b.toString();
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public int getPlayerScore(){
+        return this.playerScore;
+    }
+    
+
 }
