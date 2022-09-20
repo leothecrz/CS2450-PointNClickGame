@@ -63,7 +63,7 @@ public class HangmanGamePanel extends JPanel {
                     wordToFind = wordToFind.replaceFirst(String.valueOf(pressedLetter), "_");             
                     index = wordToFind.indexOf(pressedLetter);
                 } while(index != -1);
-                repaint();
+                
                 
                 boolean isWordFound = true;
                 for (int i = 0; i < charsFound.length; i++){
@@ -84,7 +84,7 @@ public class HangmanGamePanel extends JPanel {
                     errors++;
                 }
             }
-            System.out.println("Score: " + playerScore);
+            repaint();
         };
 
         // Top panel
