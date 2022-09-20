@@ -169,21 +169,12 @@ public class HangmanGamePanel extends JPanel {
         g2.drawString(wordFoundContent(), 300, 220);
         
         
-        /* havent checked if it works but the dimensions are correct to draw pieces
-        if(errors == 1) {
-                    g2.fillOval(163, 53, 40, 40);
-                } else if (errors == 2) {
-                    g2.fillRect(180, 50, 5, 120);
-                } else if (errors == 3) {
-                    g2.drawLine(160, 130, 180, 92);
-                } else if (errors == 4) {
-                    g2.drawLine(207, 130, 185, 92);
-                } else if (errors == 5) {
-                   g2.drawLine(160, 206, 180, 169);
-                } else if (errors == 6) {
-                    g2.drawLine(207, 206, 182, 165);
-                } */
-        
+        if (errors >= 1) g2.fillOval(163, 53, 40, 40);
+        if (errors >= 2) g2.fillRect(180, 50, 5, 120);
+        if (errors >= 3) g2.drawLine(160, 130, 180, 92);
+        if (errors >= 4) g2.drawLine(207, 130, 185, 92);
+        if (errors >= 5) g2.drawLine(160, 206, 180, 169);
+        if (errors >= 6) g2.drawLine(207, 206, 182, 165);
     }
     
     private String wordFoundContent() {
