@@ -18,6 +18,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 import javax.swing.border.Border;
 
 
@@ -170,7 +171,8 @@ public class HangmanGamePanel extends JPanel {
        resetButtons();
        playerScore = 100;
        errors = 0;
-       wordToFind = WORDBANK[(int) (Math.random() * WORDBANK.length)]; // Choose random word from wordbank
+       Random randomWord = new Random();
+       wordToFind = WORDBANK[randomWord.nextInt(WORDBANK.length)]; // Choose random word from wordbank
        charsFound = new char[wordToFind.length()];
        for (int i = 0; i < charsFound.length; i++) {
             charsFound[i] = '_';
