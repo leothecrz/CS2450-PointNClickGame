@@ -1,3 +1,16 @@
+
+/**
+ *      file: PointAncClick.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: Entry point into the program and the main JFrame.
+ *          Central Hub for handling interactions in the Menu Menu.
+ *          Sets the program size restrictions and spawn point.
+ */
+
 package pointandclick;
 
 import java.awt.*;
@@ -5,38 +18,32 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
-
 import pointandclick.Frames.*;
 
-/**
- *
- * 
- */
+
 public class PointAndClick extends JFrame {
     
     private CardLayout layout;
     private JPanel cards;
     
-    private Hangman hangman;
+    private Hangman hangman; // should rename to gamePanel for v1.1
 
-    private Font MarkerFelt;
+    private Font MarkerFelt; 
+
     
-    public static void main(String[] args) {
-        // Create a 600x400 window
-        PointAndClick pac = new PointAndClick("Point and Click Game");
-        pac.setSize(600, 400);
-        pac.setResizable(false); // Forces Window to ALWAYS remain 600x400
-        pac.setLocationRelativeTo(null); // Centers window on the screen
-        pac.setVisible(true); // Show window
-        
-    }
-
-    // Maybe keep all panel-switching logic in this class just to make things easier?
+    /**
+     * 
+     * Main JFrame constructor. Handles the loading screens 3 second delay before menu. 
+     * Handles the panel-switching logic for the main menu 
+     * and the associated back buttons.
+     * 
+     * @param title - tittle shown on the status bar of the JFrame.
+     */
     public PointAndClick(String title) {
         super(title); // Sets window title
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        //Font only needs to be registered once for entire program.
+        //Font Registration
         try{
            MarkerFelt = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf"));
            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -45,16 +52,17 @@ public class PointAndClick extends JFrame {
             System.err.println("Font not Found - HighScores Jpanel");
         }
         
-        ///region Event listeners
+        ///Event listeners
 
-        // Gets triggered after 3 seconds
+        // Splash screen listener
         ActionListener loadingScreenListener = evt -> {
             // Triggers after 3 seconds
             layout.show(cards, "MainMenu"); // Show the main menu
             ((Timer)evt.getSource()).stop(); // Stop the timer
+            
         };
 
-        // Gets triggered when a button in the main menu gets pressed
+        // Main menu listener
         ActionListener mainMenuListener = evt -> {
             // Show the frame specified in the action command (see MainMenu class)
             // Action command should be the name of a class/frame
@@ -66,14 +74,15 @@ public class PointAndClick extends JFrame {
             
             layout.show(cards, evt.getActionCommand());
         };
-
-        // Gets triggered when the back button in the high scores or credits screen gets pressed
+        
+        // Back button listener
+        // Gets triggered when the back button in the HIGHSCORES or CREDITS screen gets pressed
         ActionListener backButtonListener = evt -> {
             layout.show(cards, "MainMenu");
         };
-        ///endregion
         
-        // Gets triggered when hangman games ends. Post Showing Score.
+        
+        // Game end listener
         ActionListener gameEndListener = evt -> {
             layout.show(cards, "MainMenu");
             
@@ -84,19 +93,36 @@ public class PointAndClick extends JFrame {
         MainMenu mainMenu = new MainMenu(mainMenuListener);
         HighScores highScores = new HighScores(backButtonListener);
         Credits credits = new Credits(backButtonListener);
-        
-        //TEMP LISTENER
-        hangman = new Hangman(gameEndListener);
+        hangman = new Hangman(gameEndListener); // gamePanel
          
         // Create the panel that contains the other frames
         layout = new CardLayout();
         cards = new JPanel(layout);
+        
         cards.add(loadingScreen, loadingScreen.getClass().getSimpleName());
         cards.add(mainMenu, mainMenu.getClass().getSimpleName());
         cards.add(highScores, highScores.getClass().getSimpleName());
         cards.add(credits, credits.getClass().getSimpleName());
         cards.add(hangman, hangman.getClass().getSimpleName());
+        
         add(cards);
+        
+        setSize(600, 400); // sets window size to 600W x 400H
+        setResizable(false); // Forces Window to ALWAYS remain 600x400
+        setLocationRelativeTo(null); // Centers window on the screen
+        
+    }
+    
+    /**
+     * Entry Point of PointAndClick Program
+     * 
+     * @param args - main method default requirement
+     */
+    public static void main(String[] args) {
+        
+        
+        new PointAndClick("Point and Click Game").setVisible(true);
+        
     }
     
 }

@@ -1,3 +1,16 @@
+
+/**
+ *      file: HangmanGamePanel.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: Handles the logic and what should be displayed
+ *          during the hangman game. Random word is chosen at
+ *          the beginning of each game start.
+ */
+
 package pointandclick.Frames.hangmanResources;
 
 import java.awt.Color;
@@ -22,10 +35,6 @@ import java.util.Random;
 import javax.swing.border.Border;
 
 
-/**
- * 
- *
- */
 public class HangmanGamePanel extends JPanel {
     // Constants
     private static final int MAX_ERRORS = 6;
@@ -50,6 +59,8 @@ public class HangmanGamePanel extends JPanel {
     private int playerScore;
     
     /**
+     * Constructor for the HangmanGamePanel. Constructs actionListener 
+     * responsible for handling all on screen keyboard interactions.
      * 
      * @param skipAndEndListener 
      */
@@ -132,11 +143,7 @@ public class HangmanGamePanel extends JPanel {
         // bottomPanel.setLayout(new GridLayout(4, 26)); // Alternate layout: GRID LAYOUT 2x13
         bottomPanel.setPreferredSize(new Dimension(595, (int)(400*0.4))); // HARD CODED PANEL SIZES
         bottomPanel.setBackground(Color.DARK_GRAY); // USED TO DIFFIRENTIATE
-
-        // Add panels
-        add(topPanel);
-        add(bottomPanel);
-        
+ 
         // Keyboard buttons
         keyButtons = new JButton[ALPHABET_COUNT];
         Font buttonFont = new Font("Marker Felt", Font.PLAIN, 15);
@@ -153,11 +160,16 @@ public class HangmanGamePanel extends JPanel {
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 
             // bottomPanel.add(Box.createRigidArea(new Dimension(2, 2))); // Buffer between buttons
         }
+        
+        // Add panels
+        add(topPanel);
+        add(bottomPanel);
     
     }
 
     /**
-     * 
+     * Sets all disabled buttons to the
+     * enabled state.
      */
     public void resetButtons(){
         for (JButton keyButton : keyButtons)
@@ -165,7 +177,8 @@ public class HangmanGamePanel extends JPanel {
     }
 
     /**
-     * 
+     * Resets all necessary attributes and gets ready for game
+     * start. A word is chosen at random.
      */
     public void startGame() {
        resetButtons();
@@ -180,7 +193,8 @@ public class HangmanGamePanel extends JPanel {
     }
     
     /**
-     * 
+     * Displays the hangman according to the amount of errors that
+     * have been made.
      * @param g 
      */
     @Override
@@ -208,8 +222,8 @@ public class HangmanGamePanel extends JPanel {
     }
     
     /**
-     * 
-     * @return 
+     * Formats the contents of charsFound into a string.
+     * @return - String of the contents held in the charsFound character array. 
      */
     private String wordFoundContent() {
         StringBuilder b = new StringBuilder();

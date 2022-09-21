@@ -1,3 +1,16 @@
+
+/**
+ *      file: Hangman.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: Handles the events cause by the game ending.
+ *          Uses a JPanel with a cardLayout to swap the panel as
+ *          necessary.
+ */
+
 package pointandclick.Frames;
 
 import java.awt.CardLayout;
@@ -7,18 +20,15 @@ import javax.swing.*;
 import pointandclick.Frames.hangmanResources.HangmanGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanScorePanel;
 
-/**
- * The Hangman class is a modified JPanel with a card layout.
- * This JPanel holds two other JPanels that can be swapped as the face.
- * HangmanGamePanel holds the game UI
- * HangmanScorePanel holds the end screen UI
- */
+
 public class Hangman extends JPanel{
     
     private JPanel face;
     private HangmanGamePanel gamePanel;
     private HangmanScorePanel scorePanel;
     private CardLayout panelLayout;
+    
+    private int playerScore;
     
     /**
      * Hangman Constructor. Creates the JPanel 'face' with CardLayout. Adds panels hold.
@@ -29,23 +39,25 @@ public class Hangman extends JPanel{
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         
-        //
+        // Handles Hangman Game End Events
         ActionListener skipAndEndListener = evt -> {
             
             //Skip Button Pressed
             if(evt.getActionCommand().equals("Skip")){
                 
                 System.out.println("Skip Button Pressed");
-                scorePanel.setPlayerScore(0);
+                playerScore = 0;
+                scorePanel.setPlayerScore(playerScore);
                 
             }
             //Natural Game End
             if(evt.getActionCommand().equals("Word Found") || evt.getActionCommand().equals("Word Not Found")){
-                
-                scorePanel.setPlayerScore(gamePanel.getPlayerScore());
+                playerScore = gamePanel.getPlayerScore();
+                scorePanel.setPlayerScore(playerScore);
             }
             
             panelLayout.show(face, "HangmanScorePanel");
+            
         };
         
         panelLayout = new CardLayout(0, 0);

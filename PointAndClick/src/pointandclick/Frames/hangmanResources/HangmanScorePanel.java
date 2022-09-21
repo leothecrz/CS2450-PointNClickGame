@@ -1,3 +1,17 @@
+
+/**
+ *      file: HangmanScorePanel.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: End Screen of the hangman game.
+ *          Displays the score that was earned by the player
+ *          during the game. Displays end button to return to 
+ *          main menu.
+ */
+
 package pointandclick.Frames.hangmanResources;
 
 import java.awt.Dimension;
@@ -10,14 +24,14 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author LeothEcRz
  */
 public class HangmanScorePanel extends JPanel{
     
     private int playerScore;
     
     /**
-     * 
+     * Constructor of the panel. Sets ups the end button
+     * with the endAndSkip ActionListener.
      * @param endAndSkip
      */
     public HangmanScorePanel(ActionListener endAndSkip){
@@ -34,10 +48,18 @@ public class HangmanScorePanel extends JPanel{
         
     }
     
+    /**
+     * Allows outside classes to set the playerScore field.
+     * @param playerScore - score for the playerScore field.
+     */
     public void setPlayerScore(int playerScore) {
         this.playerScore = playerScore;
     }
     
+    /**
+     * Displays Score directly on the panel
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);

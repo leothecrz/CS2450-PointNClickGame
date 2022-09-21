@@ -1,3 +1,15 @@
+
+/**
+ *      file: HighScores.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: (WIP) Will display the high scores from the
+ *          game.
+ */
+
 package pointandclick.Frames;
 
 import java.awt.*;
@@ -10,6 +22,10 @@ public class HighScores extends JPanel {
     private String[] topFiveNames;
     private String[] topFiveScores;
     
+    /**
+     * Panel constructor. Initializes the leader board with the current top Scores 
+     * @param listener - listener for the backButton to connect with ActionListener
+     */
     public HighScores(ActionListener listener) {
         
         setLayout(null);
@@ -32,6 +48,10 @@ public class HighScores extends JPanel {
 
     }
 
+    /**
+     * 
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -39,7 +59,7 @@ public class HighScores extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         
         g2.setFont(MarkerFelt.deriveFont(40f));
-        g2.drawString("Highscore:", (this.getWidth()/2)-75, 60);
+        g2.drawString("Highscores:", (this.getWidth()/2)-75, 60);
         g2.setFont(MarkerFelt.deriveFont(20f));
         g2.drawString("Name:", (this.getWidth()/2)-120, 90);
         g2.drawString("Score:", (this.getWidth()/2)+75, 90);
@@ -58,10 +78,6 @@ public class HighScores extends JPanel {
             g2.drawString(scoreString, (this.getWidth()/2)+90, 120+(i*30));
 
         }
-        
-        
-
     }   
-    
     
 }

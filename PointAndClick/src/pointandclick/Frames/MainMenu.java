@@ -1,3 +1,15 @@
+
+/**
+ *      file: PointAncClick.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: The Main menu panel that is displayed.
+ *          Holds 3 action buttons. High scores. Credits. Play
+ */
+
 package pointandclick.Frames;
 
 import java.awt.*;
@@ -11,7 +23,7 @@ import javax.swing.border.Border;
 
 public class MainMenu extends JPanel {
 
-    private BufferedImage pic = null;
+    private BufferedImage pic;
     
     public MainMenu(ActionListener listener) {
         setLayout(null);
@@ -56,10 +68,12 @@ public class MainMenu extends JPanel {
         
         try {
             
-            pic = ImageIO.read(MainMenu.class.getResource("/icons/icon.png")); 
-        } catch (IOException e) {} 
-        g.drawImage(pic, 80, 20, 300, 310, this);
+            pic = ImageIO.read(new File("Images/menuIcon.png")); 
+            g.drawImage(pic, 80, 20, 300, 310, this);
+        } catch (IOException e) {System.err.println("Image Not Found - Main Menu");} 
+        
     } 
+    
     
     public class RoundedBorder implements Border {
 
