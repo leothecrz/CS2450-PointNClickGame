@@ -21,6 +21,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import pointandclick.Frames.commonResources.RoundedBorder;
+
 
 /**
  *
@@ -38,11 +40,16 @@ public class HangmanScorePanel extends JPanel{
         super();
         playerScore = 0;
         setPreferredSize(new Dimension(600, 400));
+        setLayout(null);
         
         JButton endButton = new JButton();
         endButton.setText("END");
+        endButton.setFont(new Font("Marker Felt", Font.PLAIN, 20));
+        endButton.setBorder(new RoundedBorder(15));
         endButton.addActionListener(endAndSkip);
         endButton.setActionCommand("End");
+        endButton.setSelected(true);
+        endButton.setBounds(480, 300, 100, 50);
         
         add(endButton);
         
@@ -66,7 +73,7 @@ public class HangmanScorePanel extends JPanel{
         Graphics2D g2 = (Graphics2D) g;
         
         g2.setFont(new Font("Marker Felt", Font.BOLD, 50));
-        g2.drawString(("Score: "+ String.valueOf(playerScore)), 200, 200);
+        g2.drawString(("Score: "+ String.valueOf(playerScore)), 210, 215);
         
     }
       

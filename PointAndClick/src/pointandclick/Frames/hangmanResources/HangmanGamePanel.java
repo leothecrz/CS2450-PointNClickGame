@@ -14,25 +14,21 @@
 package pointandclick.Frames.hangmanResources;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-
 import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.util.Random;
-import javax.swing.border.Border;
+import pointandclick.Frames.commonResources.RoundedBorder;
+
 
 
 public class HangmanGamePanel extends JPanel {
@@ -245,31 +241,4 @@ public class HangmanGamePanel extends JPanel {
         return this.playerScore;
     }
     
-    public class RoundedBorder implements Border {
-
-        public int radius;
-
-
-        RoundedBorder(int radius) {
-            this.radius = radius;
-        }
-
-
-        @Override
-        public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-        }
-
-
-        @Override
-        public boolean isBorderOpaque() {
-            return true;
-        }
-
-
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-        }
-    }
 }
