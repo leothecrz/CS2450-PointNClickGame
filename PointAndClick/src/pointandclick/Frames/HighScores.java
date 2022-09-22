@@ -15,6 +15,7 @@ package pointandclick.Frames;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import pointandclick.Frames.commonResources.RoundedBorder;
 
 public class HighScores extends JPanel {
     
@@ -32,7 +33,10 @@ public class HighScores extends JPanel {
                     
         JButton backButton = new JButton("Back");
         backButton.addActionListener(listener);
+        backButton.setFont(new Font("Marker Felt", Font.PLAIN, 20));
         backButton.setBounds(480,310,80,30);
+        backButton.setBorder(new RoundedBorder(15));
+        backButton.setContentAreaFilled(false);
         
         add(backButton);
         
