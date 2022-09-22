@@ -49,7 +49,7 @@ public class Credits extends JPanel {
         g2.drawString("Leonardo Davalos, #", 165, 100);
         g2.drawString("Matthew Finerty, #", 165, 160);
         g2.drawString("Jasroop Singh, #", 165, 220);
-        g2.drawString("Noris Tang, #", 165, 280);
+        g2.drawString("Noris Tang, 4234", 165, 280);
         g2.drawString("Vivian Trieu, #", 165, 340);
     }
 }
