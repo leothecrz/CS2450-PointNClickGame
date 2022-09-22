@@ -46,6 +46,7 @@ public class HangmanScorePanel extends JPanel{
         endButton.setText("END");
         endButton.setFont(new Font("Marker Felt", Font.PLAIN, 20));
         endButton.setBorder(new RoundedBorder(15));
+        endButton.setContentAreaFilled(false);
         endButton.addActionListener(endAndSkip);
         endButton.setActionCommand("End");
         endButton.setSelected(true);
