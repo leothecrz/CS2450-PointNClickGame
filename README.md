@@ -18,4 +18,22 @@ abstract,
 cemetery, 
 nurse, 
 pharmacy, 
-climbing 
+climbing
+
+Version 1.1:
+
+0. Implement highscore functionallity.
+1. If game ends or skip(0 points) is pressed swich to Color Buttons Game. Do not share score screen.
+2. 5 buttons of a color from the COLOR LIST should be randomly placed.
+3. A word matching the text for the name of one of the colors from the COLOR LIST.
+4. The word would also be given a color at random from the COLOR LIST. 
+5. The player is to click the button matching the text's COLOR. 100 points for correct and 0 for incorrect.
+6. 5 Rounds then the end screen with score 
+7. If the player score if bigger than the worst save score in the highscore allow them to save their score and input name or initials.
+
+Color List:
+Red,
+Yellow,
+Green,
+Blue,
+Purple
