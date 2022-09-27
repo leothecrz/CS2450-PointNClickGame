@@ -6,38 +6,47 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
-public class ScoreTable {
+public final class ScoreTable {
     
     private final String filePath;
     private Score[] scoreList;
     
-    
+    /**
+     * 
+     * @param filePath 
+     */
     public ScoreTable(String filePath){
         
         this.filePath = filePath;
         
         this.scoreList = new Score[5];
         for (int i=0; i<scoreList.length; i++) {
-            scoreList[i] = new Score(i+1, "-", "-"); // Actual will have 0 and 2 blanks
+            scoreList[i] = new Score(0, "-", "-"); // Actual will have 0 and 2 blanks
         }
         
         loadScores(); // Pull Scores after construction
     }
     
+    /**
+     * 
+     */
     public void saveScores(){
         
         File scoresFile = new File(filePath);
-        
-        
+        scoresFile.delete();
+        try {
+            writeMemoryToFile();
+        } catch (IOException ex) {
+            
+        }
         
     }
     
     /**
-     * Pull Scores from the highscore.txt file. If the file does not exist 
+     * Pull Scores from the 'highscore.txt ' file. If the file does not exist 
      * a default will be created and loaded.
      */
-    private void loadScores(){
+    public void loadScores(){
         
         File scoresFile = new File(filePath);
         
@@ -55,13 +64,8 @@ public class ScoreTable {
         // File is not found make a default
             
             try {
-                FileWriter writer;
-                scoresFile.createNewFile();
-                writer = new FileWriter(scoresFile);
-                for (var activeScore : this.scoreList) {
-                    writer.write(activeScore.toString() + "\n");
-                 }
-                writer.close();
+                
+                writeMemoryToFile();
 
             } catch (IOException ex1) {
                 System.err.println("default highscore table could not be created");
@@ -70,19 +74,43 @@ public class ScoreTable {
         } // Catch end
     }
     
-    public boolean isHighscore(int playerScore){
+    /**
+     * The file held at the path stored in filePath must not exist
+     * or it will throw Exception. Will write the contents of the
+     * table onto the file.
+     * @throws IOException 
+     */
+    private void writeMemoryToFile() throws IOException{
+        
+        File scoresFile = new File(filePath);
+        FileWriter writer;
+        scoresFile.createNewFile();
+        writer = new FileWriter(scoresFile);
+        for (var activeScore : this.scoreList) {
+            writer.write(activeScore.toString() + "\n");
+         }
+        writer.close();
+
+    }
+    
+    /**
+     * 
+     * @param playerScore
+     * @return 
+     */
+    public boolean checkIfHighscore(int playerScore){
     
         return false;
     }
     
-    
-    
-    //Test only
-    public static void main(String[] args){
-        ScoreTable test = new ScoreTable("Data/highscore.txt");
-        test.saveScores();
+    @Override
+    public String toString() {
+        StringBuilder SB = new StringBuilder();
+        
+        for(int i=0; i<scoreList.length; i++){
+            SB.append(scoreList[i].getName()).append(" ").append(String.valueOf(scoreList[i].getScore())).append("\n");
+        }
+        return SB.toString();
     }
-    
-    
     
 }

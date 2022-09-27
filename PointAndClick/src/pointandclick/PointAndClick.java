@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
 import pointandclick.Frames.*;
+import pointandclick.Frames.highscoreResources.ScoreTable;
 
 
 public class PointAndClick extends JFrame {
@@ -29,6 +30,8 @@ public class PointAndClick extends JFrame {
     private Hangman hangman; // should rename to gamePanel for v1.1
 
     private Font MarkerFelt; 
+    
+    private ScoreTable highscoreTable;
 
     
     /**
@@ -41,6 +44,9 @@ public class PointAndClick extends JFrame {
      */
     public PointAndClick(String title) {
         super(title); // Sets window title
+        
+        highscoreTable = new ScoreTable("Data/highscore.txt"); // Creates a Score array 
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         //Font Registration

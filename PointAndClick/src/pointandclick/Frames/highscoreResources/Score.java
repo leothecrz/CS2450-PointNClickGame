@@ -1,7 +1,7 @@
 package pointandclick.Frames.highscoreResources;
 
 
-public class Score {
+public final class Score {
     private String initials;
     private String name;
     private int score;
