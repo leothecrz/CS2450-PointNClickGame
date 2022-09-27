@@ -67,16 +67,17 @@ public class HighScores extends JPanel {
         g2.setFont(MarkerFelt.deriveFont(20f));
         for(int i=0; i<5; i++){
             String drawString = new String();
-            drawString = drawString.concat(String.valueOf(i+1) + ". "); 
-            drawString = drawString.concat(scores[i].getName());
+            drawString = drawString.concat(String.valueOf(i+1) + ". "); //Rank
+            drawString = drawString.concat(scores[i].getName()); //Name
             
-            String scoreString = String.valueOf(scores[i].getScore());
+            String scoreString = String.valueOf(scores[i].getScore()); //Score
             
             
             g2.drawString(drawString, (this.getWidth()/2)-120, 120+(i*30));
             g2.drawString(scoreString, (this.getWidth()/2)+90, 120+(i*30));
 
         }
+        
     }   
     
 }

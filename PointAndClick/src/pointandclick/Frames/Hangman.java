@@ -17,6 +17,7 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
+import pointandclick.Frames.hangmanResources.ButtonGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanScorePanel;
 
@@ -26,6 +27,7 @@ public class Hangman extends JPanel{
     private JPanel face;
     private HangmanGamePanel gamePanel;
     private HangmanScorePanel scorePanel;
+    private ButtonGamePanel buttonGamePanel;
     private CardLayout panelLayout;
     
     private int playerScore;
@@ -56,16 +58,25 @@ public class Hangman extends JPanel{
                 scorePanel.setPlayerScore(playerScore);
             }
             
-            panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
+            if(!evt.getSource().equals(buttonGamePanel)){
+                panelLayout.show(face, "ButtonGamePanel");
+            }
             
+            if(evt.getActionCommand().equals("SwitchToScore"))
+                panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
+
         };
         
         panelLayout = new CardLayout(0, 0);
         face = new JPanel(panelLayout);
         gamePanel = new HangmanGamePanel(skipAndEndListener);
         scorePanel = new HangmanScorePanel(listener);
+        
+        buttonGamePanel = new ButtonGamePanel(skipAndEndListener);
+        
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
         face.add(gamePanel, gamePanel.getClass().getSimpleName());
+        face.add(buttonGamePanel, buttonGamePanel.getClass().getSimpleName());
              
         add(face);
     }
