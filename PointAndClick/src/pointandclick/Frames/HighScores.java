@@ -16,21 +16,24 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import pointandclick.Frames.commonResources.RoundedBorder;
+import pointandclick.Frames.highscoreResources.Score;
+import pointandclick.Frames.highscoreResources.ScoreTable;
+import pointandclick.PointAndClick;
 
 public class HighScores extends JPanel {
     
     private Font MarkerFelt;
-    private String[] topFiveNames;
-    private String[] topFiveScores;
-    
+   
     /**
-     * Panel constructor. Initializes the leader board with the current top Scores 
+     * Panel constructor.Initializes the leader board with the current top Scores 
      * @param listener - listener for the backButton to connect with ActionListener
+     * @param path
      */
     public HighScores(ActionListener listener) {
         
+        MarkerFelt = new Font("Marker Felt", Font.PLAIN, 20); // font set
         setLayout(null);
-                    
+        
         JButton backButton = new JButton("Back");
         backButton.addActionListener(listener);
         backButton.setFont(new Font("Marker Felt", Font.PLAIN, 20));
@@ -39,16 +42,6 @@ public class HighScores extends JPanel {
         backButton.setContentAreaFilled(false);
         
         add(backButton);
-        
-        //Null Strings
-        topFiveNames = new String[5];
-        topFiveScores = new String[5];
-        for(int i=0; i<5; i++){
-            topFiveNames[i] = "";
-            topFiveScores[i] = "0";
-        }
-        
-        MarkerFelt = new Font("Marker Felt", Font.PLAIN, 20); // font set
 
     }
 
@@ -59,6 +52,8 @@ public class HighScores extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        
+        Score[] scores = new ScoreTable(PointAndClick.SCOREFILEPATH).getScoreArray();
         
         Graphics2D g2 = (Graphics2D) g;
         
@@ -73,9 +68,9 @@ public class HighScores extends JPanel {
         for(int i=0; i<5; i++){
             String drawString = new String();
             drawString = drawString.concat(String.valueOf(i+1) + ". "); 
-            drawString = drawString.concat(topFiveNames[i]);
+            drawString = drawString.concat(scores[i].getName());
             
-            String scoreString = topFiveScores[i];
+            String scoreString = String.valueOf(scores[i].getScore());
             
             
             g2.drawString(drawString, (this.getWidth()/2)-120, 120+(i*30));

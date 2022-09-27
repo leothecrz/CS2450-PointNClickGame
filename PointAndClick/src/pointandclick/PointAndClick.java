@@ -24,14 +24,16 @@ import pointandclick.Frames.highscoreResources.ScoreTable;
 
 public class PointAndClick extends JFrame {
     
+    public static final String SCOREFILEPATH = "Data/highscore.txt"; 
+    
     private CardLayout layout;
     private JPanel cards;
     
     private Hangman hangman; // should rename to gamePanel for v1.1
+    private HighScores highScores;
 
     private Font MarkerFelt; 
     
-    private ScoreTable highscoreTable;
 
     
     /**
@@ -45,7 +47,7 @@ public class PointAndClick extends JFrame {
     public PointAndClick(String title) {
         super(title); // Sets window title
         
-        highscoreTable = new ScoreTable("Data/highscore.txt"); // Creates a Score array 
+        new ScoreTable(SCOREFILEPATH); // file is created if not there already
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -79,6 +81,10 @@ public class PointAndClick extends JFrame {
                 hangman.startGame();
             }
             
+            if(evt.getActionCommand().equals("HighScores")){ // update highscore table to latest
+            
+            }
+            
             
             layout.show(cards, evt.getActionCommand());
         };
@@ -99,7 +105,7 @@ public class PointAndClick extends JFrame {
         // Create components
         LoadingScreen loadingScreen = new LoadingScreen(loadingScreenListener);
         MainMenu mainMenu = new MainMenu(mainMenuListener);
-        HighScores highScores = new HighScores(backButtonListener);
+        highScores = new HighScores(backButtonListener);
         Credits credits = new Credits(backButtonListener);
         hangman = new Hangman(gameEndListener); // gamePanel
          
@@ -121,6 +127,7 @@ public class PointAndClick extends JFrame {
         
     }
     
+
     /**
      * Entry Point of PointAndClick Program
      * 

@@ -12,8 +12,9 @@ public final class ScoreTable {
     private Score[] scoreList;
     
     /**
-     * 
-     * @param filePath 
+     * Array of Score of size 5. Can write and load
+     * high scores to and from a file. 
+     * @param filePath - path to txt file used to store data.
      */
     public ScoreTable(String filePath){
         
@@ -91,6 +92,10 @@ public final class ScoreTable {
          }
         writer.close();
 
+    }
+    
+    public Score[] getScoreArray(){
+        return this.scoreList;
     }
     
     /**

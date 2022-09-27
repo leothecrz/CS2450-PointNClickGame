@@ -56,7 +56,7 @@ public class Hangman extends JPanel{
                 scorePanel.setPlayerScore(playerScore);
             }
             
-            panelLayout.show(face, "HangmanScorePanel");
+            panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
             
         };
         
