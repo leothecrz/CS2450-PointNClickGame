@@ -52,6 +52,8 @@ public class PointAndClick extends JFrame {
             System.err.println("Font not Found - HighScores Jpanel");
         }
         
+        //
+        
         ///Event listeners
 
         // Splash screen listener
