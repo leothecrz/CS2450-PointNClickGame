@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
-
+import pointandclick.Frames.commonResources.RoundedBorder;
 
 /**
  *
@@ -27,11 +27,13 @@ public class ButtonGamePanel extends JPanel{
     //Constructor
     public ButtonGamePanel(ActionListener listener) {
         super();
+        setLayout(null);
         setPreferredSize(new Dimension(600, 400));
         
         JLabel tittleLabel = new JLabel();
         tittleLabel.setText("Button Game Screen");
         JButton endButton = new JButton();
+        endButton.setBounds(500, 320, 70, 25);
         endButton.setText("END");
         endButton.setActionCommand("SwitchToScore");
         endButton.addActionListener(listener);
@@ -54,29 +56,33 @@ public class ButtonGamePanel extends JPanel{
         
         add(timeLabel);
         
-        /* Buttons added but need action command
+        // hardcoded the buttons in specifc places 
         JButton button1 = new JButton();
-        button1.setBorder(new RoundedBorder(50));
+        button1.setBorder(new RoundedBorder(120));
         button1.addActionListener(listener);
+        button1.setBounds(450, 50, 120, 120);
         JButton button2 = new JButton();
-        button2.setBorder(new RoundedBorder(50));
+        button2.setBorder(new RoundedBorder(120));
         button2.addActionListener(listener);
+        button2.setBounds(380, 180, 120, 120);
         JButton button3 = new JButton();
-        button3.setBorder(new RoundedBorder(50));
+        button3.setBorder(new RoundedBorder(120));
         button3.addActionListener(listener);
+        button3.setBounds(250, 180, 120, 120);
         JButton button4 = new JButton();
-        button4.setBorder(new RoundedBorder(50));
+        button4.setBorder(new RoundedBorder(120));
         button4.addActionListener(listener);
+        button4.setBounds(120, 180, 120, 120);
         JButton button5 = new JButton();
-        button5.setBorder(new RoundedBorder(50));
+        button5.setBorder(new RoundedBorder(120));
         button5.addActionListener(listener);
+        button5.setBounds(50, 50, 120, 120);
         
         add(button1);
         add(button2);
         add(button3);
         add(button4);
-        add(button5); */
-        
+        add(button5);
     }
     
     
