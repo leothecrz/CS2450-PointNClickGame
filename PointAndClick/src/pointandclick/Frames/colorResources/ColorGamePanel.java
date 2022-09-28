@@ -18,11 +18,11 @@ public class ColorGamePanel extends JPanel {
     private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
     private static final String[] COLOR_NAMES = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE"};
     private static final int[][] BUTTON_POSITIONS = {
-        {450, 50},
-        {380, 180},
-        {250, 180},
-        {120, 180},
-        {50, 50}
+        {440, 50},
+        {370, 180},
+        {240, 180},
+        {110, 180},
+        {40, 50}
     };
     private JLabel timeLabel;
     private JLabel colorLabel;
