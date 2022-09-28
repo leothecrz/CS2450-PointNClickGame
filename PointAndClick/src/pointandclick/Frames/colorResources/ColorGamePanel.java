@@ -50,35 +50,21 @@ public class ColorGamePanel extends JPanel{
         add(timeLabel);
         
         // hardcoded the buttons in specifc places 
-        JButton button1 = new JButton();
-        button1.setBorder(new RoundedBorder(120));
-        button1.addActionListener(listener);
-        button1.setBounds(450, 50, 120, 120);
-        JButton button2 = new JButton();
-        button2.setBorder(new RoundedBorder(120));
-        button2.addActionListener(listener);
-        button2.setBounds(380, 180, 120, 120);
-        JButton button3 = new JButton();
-        button3.setBorder(new RoundedBorder(120));
-        button3.addActionListener(listener);
-        button3.setBounds(250, 180, 120, 120);
-        JButton button4 = new JButton();
-        button4.setBorder(new RoundedBorder(120));
-        button4.addActionListener(listener);
-        button4.setBounds(120, 180, 120, 120);
-        JButton button5 = new JButton();
-        button5.setBorder(new RoundedBorder(120));
-        button5.addActionListener(listener);
-        button5.setBounds(50, 50, 120, 120);
+        ColorButton redButton = new ColorButton(Color.RED, listener);
+        redButton.setBounds(450, 50, 120, 120);
+        ColorButton yellowButton = new ColorButton(Color.YELLOW, listener);
+        yellowButton.setBounds(380, 180, 120, 120);
+        ColorButton greenButton = new ColorButton(Color.GREEN, listener);
+        greenButton.setBounds(250, 180, 120, 120);
+        ColorButton blueButton = new ColorButton(Color.BLUE, listener);
+        blueButton.setBounds(120, 180, 120, 120);
+        ColorButton purpleButton = new ColorButton(Color.MAGENTA, listener);
+        purpleButton.setBounds(50, 50, 120, 120);
         
-        add(button1);
-        add(button2);
-        add(button3);
-        add(button4);
-        add(button5);
+        add(redButton);
+        add(yellowButton);
+        add(greenButton);
+        add(blueButton);
+        add(purpleButton);
     }
-    
-    
-    
-    
 }
