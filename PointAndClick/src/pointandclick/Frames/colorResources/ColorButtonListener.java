@@ -1,5 +1,6 @@
 package pointandclick.Frames.colorResources;
+import java.awt.Color;
 
 public interface ColorButtonListener {
-    void buttonPressed(String color);
+    void buttonPressed(Color color);
 }

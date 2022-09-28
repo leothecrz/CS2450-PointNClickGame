@@ -21,7 +21,7 @@ public class ColorButton extends JComponent implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        listener.buttonPressed(colorName);
+        listener.buttonPressed(color);
     }
 
     @Override
