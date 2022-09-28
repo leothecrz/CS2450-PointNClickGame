@@ -6,11 +6,22 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import javax.swing.*;
 import java.awt.*;
 
 public class ColorGamePanel extends JPanel {
+    private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
+    private static final String[] COLOR_NAMES = {"RED", "YELLOW", "GREEN", "BLUE", "MAGENTA"};
+    private static final int[][] BUTTON_POSITIONS = {
+        {450, 50},
+        {380, 180},
+        {250, 180},
+        {120, 180},
+        {50, 50}
+    };
     private JLabel timeLabel;
     private Timer timeLabelTimer;
 
@@ -45,23 +56,19 @@ public class ColorGamePanel extends JPanel {
         timeLabelTimer.start();
         
         add(timeLabel);
+
+        ColorButtonListener buttonListener = color -> {
+
+        };
         
-        // hardcoded the buttons in specifc places 
-        ColorButton redButton = new ColorButton(Color.RED, listener);
-        redButton.setBounds(450, 50, 120, 120);
-        ColorButton yellowButton = new ColorButton(Color.YELLOW, listener);
-        yellowButton.setBounds(380, 180, 120, 120);
-        ColorButton greenButton = new ColorButton(Color.GREEN, listener);
-        greenButton.setBounds(250, 180, 120, 120);
-        ColorButton blueButton = new ColorButton(Color.BLUE, listener);
-        blueButton.setBounds(120, 180, 120, 120);
-        ColorButton purpleButton = new ColorButton(Color.MAGENTA, listener);
-        purpleButton.setBounds(50, 50, 120, 120);
-        
-        add(redButton);
-        add(yellowButton);
-        add(greenButton);
-        add(blueButton);
-        add(purpleButton);
+        java.util.List<int[]> positions = Arrays.asList(BUTTON_POSITIONS); 
+        Collections.shuffle(positions);
+        int i = 0;
+        for (int[] position : positions) {
+            int index = i++;
+            ColorButton button = new ColorButton(COLORS[index], COLOR_NAMES[index], buttonListener);
+            button.setBounds(position[0], position[1], 120, 120);
+            add(button);
+        }
     }
 }

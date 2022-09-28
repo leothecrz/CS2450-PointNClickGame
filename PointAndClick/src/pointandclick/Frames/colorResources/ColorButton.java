@@ -7,18 +7,21 @@ import javax.swing.event.MouseInputListener;
 
 public class ColorButton extends JComponent implements MouseInputListener {
     private Color color;
+    private String colorName;
     private boolean highlight;
+    private ColorButtonListener listener;
 
-    public ColorButton(Color color, ActionListener listener) {
+    public ColorButton(Color color, String colorName, ColorButtonListener listener) {
         this.color = color;
+        this.colorName = colorName;
+        this.listener = listener;
         highlight = false;
         addMouseListener(this);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        listener.buttonPressed(colorName);
     }
 
     @Override
