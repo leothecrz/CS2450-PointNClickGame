@@ -155,18 +155,19 @@ public final class ScoreTable {
         return SB.toString();
     }
     
-    //** Example Usage
+    /** Example Usage
     public static void main(String[] args){
         
         ScoreTable ST = new ScoreTable(pointandclick.PointAndClick.SCOREFILEPATH);
         
         int points = 404;
         if( ST.checkIfHighscore(points) != -1 ){
+            // ask for name to feed to secureAdd Method
             System.out.println(ST.checkIfHighscore(points));
             System.out.println(ST.secureAdd(points, "Top001"));
         }
         
     }
-    //**/
+    **/
     
 }
