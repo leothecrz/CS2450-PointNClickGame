@@ -94,6 +94,10 @@ public final class ScoreTable {
 
     }
     
+    /**
+     * 
+     * @return A Score Array of size 5. 
+     */
     public Score[] getScoreArray(){
         return this.scoreList;
     }
@@ -103,19 +107,66 @@ public final class ScoreTable {
      * @param playerScore
      * @return 
      */
-    public boolean checkIfHighscore(int playerScore){
+    public int checkIfHighscore(int playerScore){
+        
+        int i = -1;
+        for(int j=4; j>-1; j--){
+            if(playerScore > scoreList[j].getScore()){
+                i = j;
+                
+            }
+        }
+        
+        return i;
+    }
     
-        return false;
+    /**
+     * 
+     * @param playerScore
+     * @param name
+     * @return 
+     */
+    public boolean secureAdd(int playerScore, String name){
+        
+        int biggerThanPos = checkIfHighscore(playerScore);
+        if(biggerThanPos == -1) return false;
+        
+        
+        for(int i=(scoreList.length-1); i>biggerThanPos; i--){
+            scoreList[i].setScore(scoreList[i-1].getScore());
+            scoreList[i].setName(scoreList[i-1].getName());
+            
+        }
+        scoreList[biggerThanPos].setScore(playerScore);
+        scoreList[biggerThanPos].setName(name);
+        
+        saveScores();
+        
+        return true;
     }
     
     @Override
     public String toString() {
         StringBuilder SB = new StringBuilder();
         
-        for(int i=0; i<scoreList.length; i++){
-            SB.append(scoreList[i].getName()).append(" ").append(String.valueOf(scoreList[i].getScore())).append("\n");
+        for (Score s0 : scoreList) {
+            SB.append(s0.getName()).append(" ").append(String.valueOf(s0.getScore())).append("\n");
         }
         return SB.toString();
     }
+    
+    //** Example Usage
+    public static void main(String[] args){
+        
+        ScoreTable ST = new ScoreTable(pointandclick.PointAndClick.SCOREFILEPATH);
+        
+        int points = 404;
+        if( ST.checkIfHighscore(points) != -1 ){
+            System.out.println(ST.checkIfHighscore(points));
+            System.out.println(ST.secureAdd(points, "Top001"));
+        }
+        
+    }
+    //**/
     
 }

@@ -7,6 +7,7 @@ public final class Score {
     private int score;
     
     /**
+     * Score Data Type. The data type can hold both identifiers.
      * 
      * @param score
      * @param initial
@@ -19,6 +20,8 @@ public final class Score {
     }
     
     /**
+     * Score Data Type must have at least one of the strings to
+     * identify who owns the score.
      * 
      * @param score
      * @param initials 
@@ -28,6 +31,8 @@ public final class Score {
     }
     
     /**
+     * Score Data Type must have at least one of the strings to
+     * identify who owns the score.
      * 
      * @param name
      * @param score 
@@ -38,14 +43,14 @@ public final class Score {
     
     /**
      * 
-     * @return 
+     * @return Integer score value.
      */
     public int getScore(){
         return this.score;
     }
     
     /**
-     * 
+     * Sets the score of the class
      * @param score 
      */
     public void setScore(int score){
@@ -54,14 +59,14 @@ public final class Score {
     
     /**
      * 
-     * @return 
+     * @return String name value
      */
     public String getName(){
         return this.name;
     }
     
     /**
-     * 
+     * Sets the name of the class
      * @param name 
      */
     public void setName(String name){
@@ -70,14 +75,14 @@ public final class Score {
     
     /**
      * 
-     * @return 
+     * @return String initials
      */
     public String getInitials(){
         return this.initials;
     }
     
     /**
-     * 
+     * Sets the initials of the class
      * @param initials 
      */
     public void setInitials(String initials){
@@ -85,7 +90,8 @@ public final class Score {
     }
     
     /**
-     * 
+     * A formatted String in the style of:
+     * "NAME,\nSCORE".
      * @return 
      */
     @Override
