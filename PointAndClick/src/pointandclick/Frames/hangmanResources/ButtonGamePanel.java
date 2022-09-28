@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
+import java.awt.*;
 import pointandclick.Frames.commonResources.RoundedBorder;
 
 /**
