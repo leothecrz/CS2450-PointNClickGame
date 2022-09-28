@@ -9,14 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
 import java.awt.*;
-import pointandclick.Frames.commonResources.RoundedBorder;
 
-public class ColorGamePanel extends JPanel{
-
+public class ColorGamePanel extends JPanel {
     private JLabel timeLabel;
     private Timer timeLabelTimer;
-    
-    
+
     //Constructor
     public ColorGamePanel(ActionListener listener) {
         super();
@@ -41,7 +38,7 @@ public class ColorGamePanel extends JPanel{
         
         // timer
         timeLabel = new JLabel("");
-        timeLabel.setBounds(400, 40, 200, 25);
+        timeLabel.setBounds(400, 16, 200, 25);
         timeLabel.setFont(new Font("Marker Felt", Font.BOLD, 15));
         timeListener.actionPerformed(null);
         timeLabelTimer = new Timer(1000, timeListener);
