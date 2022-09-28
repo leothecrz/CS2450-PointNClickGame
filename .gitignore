@@ -24,8 +24,6 @@ hs_err_pid*
 /PointAndClick/nbproject/private/
 /PointAndClick/build/
 
-PointAndClick/Data/*
-
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
