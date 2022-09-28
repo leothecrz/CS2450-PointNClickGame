@@ -53,6 +53,30 @@ public class ButtonGamePanel extends JPanel{
         timeLabelTimer.start();
         
         add(timeLabel);
+        
+        /* Buttons added but need action command
+        JButton button1 = new JButton();
+        button1.setBorder(new RoundedBorder(50));
+        button1.addActionListener(listener);
+        JButton button2 = new JButton();
+        button2.setBorder(new RoundedBorder(50));
+        button2.addActionListener(listener);
+        JButton button3 = new JButton();
+        button3.setBorder(new RoundedBorder(50));
+        button3.addActionListener(listener);
+        JButton button4 = new JButton();
+        button4.setBorder(new RoundedBorder(50));
+        button4.addActionListener(listener);
+        JButton button5 = new JButton();
+        button5.setBorder(new RoundedBorder(50));
+        button5.addActionListener(listener);
+        
+        add(button1);
+        add(button2);
+        add(button3);
+        add(button4);
+        add(button5); */
+        
     }
     
     
