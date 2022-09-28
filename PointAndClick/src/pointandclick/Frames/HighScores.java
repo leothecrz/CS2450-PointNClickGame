@@ -23,6 +23,8 @@ import pointandclick.PointAndClick;
 public class HighScores extends JPanel {
     
     private Font MarkerFelt;
+    
+    private ScoreTable highScoreTable;
    
     /**
      * Panel constructor.Initializes the leader board with the current top Scores 
@@ -30,6 +32,8 @@ public class HighScores extends JPanel {
      * @param path
      */
     public HighScores(ActionListener listener) {
+        
+        highScoreTable = new ScoreTable(PointAndClick.SCOREFILEPATH);
         
         MarkerFelt = new Font("Marker Felt", Font.PLAIN, 20); // font set
         setLayout(null);
@@ -53,7 +57,8 @@ public class HighScores extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         
-        Score[] scores = new ScoreTable(PointAndClick.SCOREFILEPATH).getScoreArray();
+        highScoreTable.loadScores();
+        Score[] scores = highScoreTable.getScoreArray();
         
         Graphics2D g2 = (Graphics2D) g;
         

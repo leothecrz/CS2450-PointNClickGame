@@ -36,7 +36,14 @@ public final class ScoreTable {
     public void saveScores(){
         
         File scoresFile = new File(filePath);
-        scoresFile.delete();
+        try {
+            new FileWriter(scoresFile, false).close();
+            
+            //scoresFile.delete();
+        } catch (IOException ex) {
+        }
+        
+        
         try {
             writeMemoryToFile();
         } catch (IOException ex) {
@@ -70,6 +77,7 @@ public final class ScoreTable {
             
             try {
                 
+                scoresFile.createNewFile();
                 writeMemoryToFile();
 
             } catch (IOException ex1) {
@@ -90,7 +98,6 @@ public final class ScoreTable {
         
         File scoresFile = new File(filePath);
         FileWriter writer;
-        scoresFile.createNewFile();
         writer = new FileWriter(scoresFile);
         for (var activeScore : this.scoreList) {
             writer.write(activeScore.toString() + "\n"); //USes the Score Class To String Method
