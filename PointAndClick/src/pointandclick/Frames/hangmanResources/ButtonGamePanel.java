@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.*;
+
 
 /**
  *
@@ -16,6 +20,11 @@ import javax.swing.JPanel;
  */
 public class ButtonGamePanel extends JPanel{
 
+    private JLabel timeLabel;
+    private Timer timeLabelTimer;
+    
+    
+    //Constructor
     public ButtonGamePanel(ActionListener listener) {
         super();
         setPreferredSize(new Dimension(600, 400));
@@ -30,6 +39,20 @@ public class ButtonGamePanel extends JPanel{
         add(tittleLabel);
         add(endButton);
         
+        SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+        ActionListener timeListener = evt -> {
+            timeLabel.setText(formatt.format(new Date())); 
+        };
+        
+        // timer
+        timeLabel = new JLabel("");
+        timeLabel.setBounds(400, 40, 200, 25);
+        timeLabel.setFont(new Font("Marker Felt", Font.BOLD, 15));
+        timeListener.actionPerformed(null);
+        timeLabelTimer = new Timer(1000, timeListener);
+        timeLabelTimer.start();
+        
+        add(timeLabel);
     }
     
     
