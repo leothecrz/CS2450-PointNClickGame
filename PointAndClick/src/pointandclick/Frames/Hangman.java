@@ -17,7 +17,8 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
-import pointandclick.Frames.hangmanResources.ButtonGamePanel;
+
+import pointandclick.Frames.colorResources.ColorGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanScorePanel;
 
@@ -27,7 +28,7 @@ public class Hangman extends JPanel{
     private JPanel face;
     private HangmanGamePanel gamePanel;
     private HangmanScorePanel scorePanel;
-    private ButtonGamePanel buttonGamePanel;
+    private ColorGamePanel colorGamePanel;
     private CardLayout panelLayout;
     
     private int playerScore;
@@ -58,8 +59,8 @@ public class Hangman extends JPanel{
                 scorePanel.setPlayerScore(playerScore);
             }
             
-            if(!evt.getSource().equals(buttonGamePanel)){
-                panelLayout.show(face, "ButtonGamePanel");
+            if(!evt.getSource().equals(colorGamePanel)){
+                panelLayout.show(face, "ColorGamePanel");
             }
             
             if(evt.getActionCommand().equals("SwitchToScore"))
@@ -72,11 +73,11 @@ public class Hangman extends JPanel{
         gamePanel = new HangmanGamePanel(skipAndEndListener);
         scorePanel = new HangmanScorePanel(listener);
         
-        buttonGamePanel = new ButtonGamePanel(skipAndEndListener);
+        colorGamePanel = new ColorGamePanel(skipAndEndListener);
         
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
         face.add(gamePanel, gamePanel.getClass().getSimpleName());
-        face.add(buttonGamePanel, buttonGamePanel.getClass().getSimpleName());
+        face.add(colorGamePanel, colorGamePanel.getClass().getSimpleName());
              
         add(face);
     }

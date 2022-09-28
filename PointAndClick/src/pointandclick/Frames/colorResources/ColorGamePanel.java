@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pointandclick.Frames.hangmanResources;
+package pointandclick.Frames.colorResources;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -15,18 +11,14 @@ import javax.swing.*;
 import java.awt.*;
 import pointandclick.Frames.commonResources.RoundedBorder;
 
-/**
- *
- * @author LeothEcRz
- */
-public class ButtonGamePanel extends JPanel{
+public class ColorGamePanel extends JPanel{
 
     private JLabel timeLabel;
     private Timer timeLabelTimer;
     
     
     //Constructor
-    public ButtonGamePanel(ActionListener listener) {
+    public ColorGamePanel(ActionListener listener) {
         super();
         setLayout(null);
         setPreferredSize(new Dimension(600, 400));
