@@ -31,8 +31,6 @@ public class Hangman extends JPanel{
     private ColorGamePanel colorGamePanel;
     private CardLayout panelLayout;
     
-    private int playerScore;
-    
     /**
      * Hangman Constructor. Creates the JPanel 'face' with CardLayout. Adds panels hold.
      * Creates an ActionListener to listen for the skip button to swap to next JPanel.
@@ -49,14 +47,11 @@ public class Hangman extends JPanel{
             if(evt.getActionCommand().equals("Skip")){
                 
                 System.out.println("Skip Button Pressed");
-                playerScore = 0;
-                scorePanel.setPlayerScore(playerScore);
-                
+                scorePanel.resetPlayerScore();
             }
             //Natural Game End
             if(evt.getActionCommand().equals("Word Found") || evt.getActionCommand().equals("Word Not Found")){
-                playerScore = gamePanel.getPlayerScore();
-                scorePanel.setPlayerScore(playerScore);
+                scorePanel.addPlayerScore(gamePanel.getPlayerScore()); // add score from Hangman
             }
             
             if(!evt.getSource().equals(colorGamePanel)){
@@ -65,7 +60,7 @@ public class Hangman extends JPanel{
             
             if(evt.getActionCommand().equals("SwitchToScore"))
                 panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
-                scorePanel.setPlayerScore(colorGamePanel.playerScore);// set newScore in ColorGamePanel to the score in scorePanel
+                scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
                 gamePanel.getPlayerScore();                           // get score from hangman game panel
         };
         
@@ -89,6 +84,7 @@ public class Hangman extends JPanel{
      * Sets the face JPanel to display the HangmanGamePanel.
      */
     public void startGame(){
+       scorePanel.resetPlayerScore();
        gamePanel.startGame();
        panelLayout.show(face, "HangmanGamePanel");
        
