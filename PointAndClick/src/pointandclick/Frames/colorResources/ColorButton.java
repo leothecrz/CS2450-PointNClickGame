@@ -63,7 +63,7 @@ public class ColorButton extends JComponent implements MouseInputListener {
         super.paintComponent(g);
 
         g.setColor(highlight ? color.darker() : color);
-        g.fillOval(0, 0, 120, 120);
+        g.fillOval(0, 0, 100, 100);
     }
     
 }
