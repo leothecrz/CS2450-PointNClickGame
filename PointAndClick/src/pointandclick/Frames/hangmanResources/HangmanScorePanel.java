@@ -76,7 +76,7 @@ public class HangmanScorePanel extends JPanel{
         gotHSNameField.setEditable(true);
         gotHSNameField.addActionListener(gotHStextFieldListener);
         gotHSNameField.setBounds(220, 90, 150, 25);
-        gotHSNameField.setVisible(true);
+        gotHSNameField.setVisible(false);
         
         add(gotHSNameField);
         
@@ -116,6 +116,20 @@ public class HangmanScorePanel extends JPanel{
      */
     public int getPlayerScore() {
         return playerScore;
+    }
+    
+    public ScoreTable getScoreTable(){
+        return this.scoreTable;
+    }
+    
+    public void setHSState(boolean state){
+        gotHSLabel.setVisible(state);
+        gotHSNameField.setVisible(state);
+        
+        if(state){
+            gotHSNameField.setText("");
+            gotHSNameField.setEnabled(state);
+        }
     }
     
     /**
