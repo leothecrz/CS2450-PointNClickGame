@@ -21,11 +21,11 @@ public class ColorGamePanel extends JPanel {
     private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
     private static final String[] COLOR_NAMES = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE"};
     private static final int[][] BUTTON_POSITIONS = {
-        {440, 50},
+        {490, 180},
         {370, 180},
         {240, 180},
-        {110, 180},
-        {40, 50}
+        {130, 180},
+        {10, 180}
     };
     private JLabel timeLabel;
     private JLabel colorLabel;
@@ -111,7 +111,7 @@ public class ColorGamePanel extends JPanel {
         Collections.shuffle(positions);
         int i = 0;
         for (int[] position : positions) {
-            colorButtons[i++].setBounds(position[0] + (random.nextInt(31) - 15), position[1] + (random.nextInt(91) - 45), 120, 120);
+            colorButtons[i++].setBounds(position[0] + (random.nextInt(21) - 10), position[1] + (random.nextInt(101) - 50), 100, 100);
         }
     }
 }
