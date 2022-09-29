@@ -103,7 +103,7 @@ public class HangmanScorePanel extends JPanel{
      * @param playerScore - score for the playerScore field.
      */
     public void resetPlayerScore() {
-        this.playerScore = 0;
+        this.playerScore = 100;
     }
 
     /**
