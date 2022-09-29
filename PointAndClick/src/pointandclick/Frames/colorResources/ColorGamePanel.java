@@ -49,13 +49,7 @@ public class ColorGamePanel extends JPanel {
         titleLabel.setText("Color Game Screen");
         add(titleLabel);
 
-        // End
-        JButton endButton = new JButton();
-        endButton.setBounds(500, 320, 70, 25);
-        endButton.setText("END");
-        endButton.setActionCommand("SwitchToScore");
-        endButton.addActionListener(listener);
-        add(endButton);
+       
         
         // Time
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
