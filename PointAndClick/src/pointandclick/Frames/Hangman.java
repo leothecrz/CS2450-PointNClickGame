@@ -21,6 +21,7 @@ import javax.swing.*;
 import pointandclick.Frames.colorResources.ColorGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanGamePanel;
 import pointandclick.Frames.hangmanResources.HangmanScorePanel;
+import pointandclick.Frames.highscoreResources.Score;
 
 
 public class Hangman extends JPanel{
@@ -58,10 +59,20 @@ public class Hangman extends JPanel{
                 panelLayout.show(face, "ColorGamePanel");
             }
             
-            if(evt.getActionCommand().equals("SwitchToScore"))
-                panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
+            if(evt.getActionCommand().equals("SwitchToScore")){
                 scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
-                gamePanel.getPlayerScore();                           // get score from hangman game panel
+                
+                scorePanel.getScoreTable().loadScores();
+                if(scorePanel.getScoreTable().checkIfHighscoreBoolean(scorePanel.getPlayerScore())){
+                    scorePanel.setHSState(true);
+                } else {
+                    scorePanel.setHSState(false);
+                }
+                
+                panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
+                
+                
+            }
         };
         
         panelLayout = new CardLayout(0, 0);

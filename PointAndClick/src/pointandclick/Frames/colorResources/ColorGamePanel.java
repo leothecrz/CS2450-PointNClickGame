@@ -29,6 +29,7 @@ public class ColorGamePanel extends JPanel {
     };
     private JLabel timeLabel;
     private JLabel colorLabel;
+    private ColorButton[] colorButtons;
     private Timer timeLabelTimer;
     private Random random;
     private static final int MAX_ROUNDS = 5;
@@ -79,6 +80,7 @@ public class ColorGamePanel extends JPanel {
                 System.out.println("User selected the incorrect color");
             }
             updateColor();
+            shuffleButtons();
             
             if (++rounds == MAX_ROUNDS){
                 rounds = 0;
@@ -87,15 +89,15 @@ public class ColorGamePanel extends JPanel {
             }
          };
         
-        java.util.List<int[]> positions = Arrays.asList(BUTTON_POSITIONS); 
-        Collections.shuffle(positions);
+        colorButtons = new ColorButton[5];
         int i = 0;
-        for (int[] position : positions) {
-            int index = i++;
-            ColorButton button = new ColorButton(COLORS[index], COLOR_NAMES[index], buttonListener);
-            button.setBounds(position[0], position[1], 120, 120);
+        for (Color color : COLORS) {
+            ColorButton button = new ColorButton(color, buttonListener);
+            colorButtons[i++] = button;
             add(button);
         }
+        shuffleButtons();
+        
 
         // Color label
         colorLabel = new JLabel("", SwingConstants.CENTER);
@@ -108,5 +110,14 @@ public class ColorGamePanel extends JPanel {
     private void updateColor() {
         colorLabel.setText(COLOR_NAMES[random.nextInt(COLOR_NAMES.length)]);
         colorLabel.setForeground(COLORS[random.nextInt(COLORS.length)]);
+    }
+
+    private void shuffleButtons() {
+        java.util.List<int[]> positions = Arrays.asList(BUTTON_POSITIONS); 
+        Collections.shuffle(positions);
+        int i = 0;
+        for (int[] position : positions) {
+            colorButtons[i++].setBounds(position[0], position[1], 120, 120);
+        }
     }
 }
