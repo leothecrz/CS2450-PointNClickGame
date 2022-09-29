@@ -36,16 +36,10 @@ public final class ScoreTable {
     public void saveScores(){
         
         File scoresFile = new File(filePath);
+        
         try {
             new FileWriter(scoresFile, false).close();
-            
-            //scoresFile.delete();
-        } catch (IOException ex) {
-        }
-        
-        
-        try {
-            writeMemoryToFile();
+            writeMemoryToFile(scoresFile);
         } catch (IOException ex) {
             System.err.println("Failed to save memory to disk");
             ex.printStackTrace();
@@ -78,7 +72,7 @@ public final class ScoreTable {
             try {
                 
                 scoresFile.createNewFile();
-                writeMemoryToFile();
+                writeMemoryToFile(scoresFile);
 
             } catch (IOException ex1) {
                 System.err.println("\n The Default Highscore table could not be created\n");
@@ -94,11 +88,11 @@ public final class ScoreTable {
      * table onto the file.
      * @throws IOException 
      */
-    private void writeMemoryToFile() throws IOException{
+    private void writeMemoryToFile(File file) throws IOException{
         
-        File scoresFile = new File(filePath);
+        //File scoresFile = new File(filePath);
         FileWriter writer;
-        writer = new FileWriter(scoresFile);
+        writer = new FileWriter(file);
         for (var activeScore : this.scoreList) {
             writer.write(activeScore.toString() + "\n"); //USes the Score Class To String Method
          }
