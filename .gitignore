@@ -33,3 +33,7 @@ dist/
 nbdist/
 .nb-gradle/
 
+PointAndClick/nbproject/build-impl.xml
+PointAndClick/nbproject/genfiles.properties
+PointAndClick/nbproject/project.properties
+PointAndClick/nbproject/project.xml
