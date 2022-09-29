@@ -18,10 +18,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import pointandclick.Frames.commonResources.RoundedBorder;
+import pointandclick.Frames.highscoreResources.ScoreTable;
 
 
 /**
@@ -30,6 +34,10 @@ import pointandclick.Frames.commonResources.RoundedBorder;
 public class HangmanScorePanel extends JPanel{
     
     private int playerScore;
+    private ScoreTable scoreTable;
+    
+    private JLabel gotHSLabel;
+    private JTextField gotHSNameField;
     
     /**
      * Constructor of the panel. Sets ups the end button
@@ -38,14 +46,40 @@ public class HangmanScorePanel extends JPanel{
      */
     public HangmanScorePanel(ActionListener endAndSkip){
         super();
+        
         playerScore = 0;
+        scoreTable = new ScoreTable(pointandclick.PointAndClick.SCOREFILEPATH);
+        
         setPreferredSize(new Dimension(600, 400));
         setLayout(null);
         
+        Font MarkerFelt = new Font("Marker Felt", Font.BOLD, 15);
+        
+        gotHSLabel = new JLabel();
+        gotHSLabel.setText(" You Set a High Score!! Sumbit Your Name. ");
+        gotHSLabel.setFont(MarkerFelt);
+        gotHSLabel.setBounds(170, 50, 300, 25);
+        gotHSLabel.setVisible(true);
+        
+        add(gotHSLabel);
+        
+        ActionListener gotHStextFieldListener = evt -> {
+            
+        };
+        
+        gotHSNameField = new JTextField(14);
+        gotHSNameField.setEnabled(true);
+        gotHSNameField.setEditable(true);
+        gotHSNameField.addActionListener(gotHStextFieldListener);
+        gotHSNameField.setBounds(220, 90, 150, 25);
+        gotHSNameField.setVisible(true);
+        
+        add(gotHSNameField);
+        
         JButton endButton = new JButton();
         endButton.setText("END");
-        endButton.setFont(new Font("Marker Felt", Font.PLAIN, 20));
-        endButton.setBorder(new RoundedBorder(15));
+        endButton.setFont(MarkerFelt.deriveFont(Font.PLAIN, 25f));
+        endButton.setBorder(new RoundedBorder(18));
         endButton.setContentAreaFilled(false);
         endButton.addActionListener(endAndSkip);
         endButton.setActionCommand("End");
@@ -77,5 +111,5 @@ public class HangmanScorePanel extends JPanel{
         g2.drawString(("Score: "+ String.valueOf(playerScore)), 210, 215);
         
     }
-      
+    
 }
