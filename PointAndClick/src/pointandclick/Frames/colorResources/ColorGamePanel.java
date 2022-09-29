@@ -33,7 +33,7 @@ public class ColorGamePanel extends JPanel {
     private Random random;
     private static final int MAX_ROUNDS = 5;
     private int rounds;
-    public int newScore; // score to be used in color game, should come from hangman game
+    public int playerScore; // score to be used in color game, should come from hangman game
     
     //Constructor
     public ColorGamePanel(ActionListener listener) {
@@ -41,6 +41,7 @@ public class ColorGamePanel extends JPanel {
         setLayout(null);
         setPreferredSize(new Dimension(600, 400));
         random = new Random();
+        
         
         // Title
         JLabel titleLabel = new JLabel();
@@ -73,13 +74,14 @@ public class ColorGamePanel extends JPanel {
         ColorButtonListener buttonListener = color -> {
             if (color.equals(colorLabel.getForeground())) {
                     System.out.println("User selected the correct color");
-                    newScore += 100; // for each correct round add 100 to score
+                    playerScore += 100; // for each correct round add 100 to score
                 } else {
                     System.out.println("User selected the incorrect color");
                 }
             updateColor();
             
             if (++rounds == MAX_ROUNDS){
+                rounds = 0;
                 listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "SwitchToScore")); // Should go to score screen
             }
          };

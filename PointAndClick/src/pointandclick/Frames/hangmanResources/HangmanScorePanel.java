@@ -60,8 +60,8 @@ public class HangmanScorePanel extends JPanel{
      * Allows outside classes to set the playerScore field.
      * @param playerScore - score for the playerScore field.
      */
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
+    public void setPlayerScore(int pScore) {
+        this.playerScore += pScore;
     }
 
     /**
