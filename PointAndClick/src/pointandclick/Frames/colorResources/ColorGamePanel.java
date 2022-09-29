@@ -73,16 +73,17 @@ public class ColorGamePanel extends JPanel {
         // Color buttons
         ColorButtonListener buttonListener = color -> {
             if (color.equals(colorLabel.getForeground())) {
-                    System.out.println("User selected the correct color");
-                    playerScore += 100; // for each correct round add 100 to score
-                } else {
-                    System.out.println("User selected the incorrect color");
-                }
+                System.out.println("User selected the correct color");
+                playerScore += 100; // for each correct round add 100 to score
+            } else {
+                System.out.println("User selected the incorrect color");
+            }
             updateColor();
             
             if (++rounds == MAX_ROUNDS){
                 rounds = 0;
                 listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "SwitchToScore")); // Should go to score screen
+                playerScore = 0;
             }
          };
         
