@@ -65,6 +65,8 @@ public class Hangman extends JPanel{
             
             if(evt.getActionCommand().equals("SwitchToScore"))
                 panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
+                scorePanel.setPlayerScore(colorGamePanel.newScore);  // set newScore in ColorGamePanel to the score in scorePanel
+                gamePanel.getPlayerScore();                                    // get score from hangman game panel
 
         };
         
@@ -74,7 +76,7 @@ public class Hangman extends JPanel{
         scorePanel = new HangmanScorePanel(listener);
         
         colorGamePanel = new ColorGamePanel(skipAndEndListener);
-        
+        colorGamePanel.newScore = scorePanel.getPlayerScore();                 // get score from scorePanel to store in int newScore from ColorGamePanel class (theoretically at least) 
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
         face.add(gamePanel, gamePanel.getClass().getSimpleName());
         face.add(colorGamePanel, colorGamePanel.getClass().getSimpleName());

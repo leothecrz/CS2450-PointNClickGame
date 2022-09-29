@@ -14,6 +14,8 @@ import java.util.Random;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import pointandclick.Frames.hangmanResources.HangmanGamePanel;
+import pointandclick.Frames.hangmanResources.HangmanScorePanel;
 
 public class ColorGamePanel extends JPanel {
     private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
@@ -31,7 +33,8 @@ public class ColorGamePanel extends JPanel {
     private Random random;
     private static final int MAX_ROUNDS = 5;
     private int rounds;
-
+    public int newScore; // score to be used in color game, should come from hangman game
+    
     //Constructor
     public ColorGamePanel(ActionListener listener) {
         super();
@@ -70,6 +73,7 @@ public class ColorGamePanel extends JPanel {
         ColorButtonListener buttonListener = color -> {
             if (color.equals(colorLabel.getForeground())) {
                     System.out.println("User selected the correct color");
+                    newScore += 100; // for each correct round add 100 to score
                 } else {
                     System.out.println("User selected the incorrect color");
                 }

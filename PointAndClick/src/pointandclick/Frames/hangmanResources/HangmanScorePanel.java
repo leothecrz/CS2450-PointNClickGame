@@ -97,6 +97,14 @@ public class HangmanScorePanel extends JPanel{
     public void setPlayerScore(int playerScore) {
         this.playerScore = playerScore;
     }
+
+    /**
+     * Allows outside classes to get the playerScore field.
+     * @return The value of the playerScore field
+     */
+    public int getPlayerScore() {
+        return playerScore;
+    }
     
     /**
      * Displays Score directly on the panel
