@@ -111,7 +111,7 @@ public class ColorGamePanel extends JPanel {
         Collections.shuffle(positions);
         int i = 0;
         for (int[] position : positions) {
-            colorButtons[i++].setBounds(position[0], position[1], 120, 120);
+            colorButtons[i++].setBounds(position[0] + (random.nextInt(31) - 15), position[1] + (random.nextInt(91) - 45), 120, 120);
         }
     }
 }
