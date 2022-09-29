@@ -64,7 +64,11 @@ public class HangmanScorePanel extends JPanel{
         add(gotHSLabel);
         
         ActionListener gotHStextFieldListener = evt -> {
+            String userName = gotHSNameField.getText();
+            System.out.print(userName);
+            gotHSNameField.setEnabled(false);
             
+            scoreTable.secureAdd(playerScore, userName);
         };
         
         gotHSNameField = new JTextField(14);
