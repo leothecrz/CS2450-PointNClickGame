@@ -13,6 +13,7 @@ import java.util.Random;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class ColorGamePanel extends JPanel {
     private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
@@ -28,6 +29,8 @@ public class ColorGamePanel extends JPanel {
     private JLabel colorLabel;
     private Timer timeLabelTimer;
     private Random random;
+    private static final int MAX_ROUNDS = 5;
+    private int rounds;
 
     //Constructor
     public ColorGamePanel(ActionListener listener) {
@@ -66,12 +69,16 @@ public class ColorGamePanel extends JPanel {
         // Color buttons
         ColorButtonListener buttonListener = color -> {
             if (color.equals(colorLabel.getForeground())) {
-                System.out.println("User selected the correct color");
-            } else {
-                System.out.println("User selected the incorrect color");
-            }
+                    System.out.println("User selected the correct color");
+                } else {
+                    System.out.println("User selected the incorrect color");
+                }
             updateColor();
-        };
+            
+            if (++rounds == MAX_ROUNDS){
+                listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "SwitchToScore")); // Should go to score screen
+            }
+         };
         
         java.util.List<int[]> positions = Arrays.asList(BUTTON_POSITIONS); 
         Collections.shuffle(positions);
