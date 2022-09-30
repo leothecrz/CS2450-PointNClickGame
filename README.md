@@ -37,3 +37,16 @@ Yellow,
 Green,
 Blue,
 Purple
+
+Version 1.3:
+
+1. Tooltips for every component.
+2. F1 key opens pop up display. Shows Names, Bronco #'s, Project Name, and the term name.
+3. ESC key quits program.
+4. Color Button Game leads to sudoku puzzle.
+5. Sudoku puzzle panel will have the buttons SUMBIT and QUIT. Will display Time. Will display 'Sudoku' tittle.
+6. The puzzle will use the same solution. 54 Empty boxes.
+7. On submit 10 points will be loss for every incorrect box. Only once.
+8. Subsequent submissions will only check if correct.
+9. Alert the user if their submission is inccorect.
+10. User input method. If using a text field inform the user of incorrect character use.
