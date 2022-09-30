@@ -38,7 +38,7 @@ Green,
 Blue,
 Purple
 
-Version 1.3:
+Version 1.2:
 
 1. Tooltips for every component.
 2. F1 key opens pop up display. Shows Names, Bronco #'s, Project Name, and the term name.
