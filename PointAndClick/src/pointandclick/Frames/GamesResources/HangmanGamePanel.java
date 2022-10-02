@@ -11,7 +11,7 @@
  *          the beginning of each game start.
  */
 
-package pointandclick.Frames.hangmanResources;
+package pointandclick.Frames.GamesResources;
 
 import java.awt.Color;
 import java.awt.Dimension;

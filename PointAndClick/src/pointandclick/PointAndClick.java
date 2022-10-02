@@ -29,12 +29,10 @@ public class PointAndClick extends JFrame {
     private CardLayout layout;
     private JPanel cards;
     
-    private Hangman hangman; // should rename to gamePanel for v1.1
+    private GameHandler gameHandler; 
     private HighScores highScores;
 
     private Font MarkerFelt; 
-    
-
     
     /**
      * 
@@ -46,10 +44,9 @@ public class PointAndClick extends JFrame {
      */
     public PointAndClick(String title) {
         super(title); // Sets window title
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         new ScoreTable(SCOREFILEPATH); // file is created if not there already
-        
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         //Font Registration
         try{
@@ -59,8 +56,6 @@ public class PointAndClick extends JFrame {
         }catch(FontFormatException | IOException ex){
             System.err.println("Font not Found - HighScores Jpanel");
         }
-        
-        //
         
         ///Event listeners
 
@@ -77,16 +72,16 @@ public class PointAndClick extends JFrame {
             // Show the frame specified in the action command (see MainMenu class)
             // Action command should be the name of a class/frame
             
-            if(evt.getActionCommand().equals("Hangman")){
-                hangman.startGame();
+            if(evt.getActionCommand().equals(gameHandler.getClass().getSimpleName())){
+                gameHandler.startGame();
             }
             
-            if(evt.getActionCommand().equals("HighScores")){ // update highscore table to latest
-            
+            if(evt.getActionCommand().equals(highScores.getClass().getSimpleName())){ // update highscore table to latest
+                highScores.getScoreTable().loadScores();
             }
-            
             
             layout.show(cards, evt.getActionCommand());
+            
         };
         
         // Back button listener
@@ -94,20 +89,14 @@ public class PointAndClick extends JFrame {
         ActionListener backButtonListener = evt -> {
             layout.show(cards, "MainMenu");
         };
-        
-        
-        // Game end listener
-        ActionListener gameEndListener = evt -> {
-            layout.show(cards, "MainMenu");
-            
-        };
+       
 
         // Create components
         LoadingScreen loadingScreen = new LoadingScreen(loadingScreenListener);
         MainMenu mainMenu = new MainMenu(mainMenuListener);
         highScores = new HighScores(backButtonListener);
         Credits credits = new Credits(backButtonListener);
-        hangman = new Hangman(gameEndListener); // gamePanel
+        gameHandler = new GameHandler(backButtonListener); // gamePanel
          
         // Create the panel that contains the other frames
         layout = new CardLayout();
@@ -117,7 +106,7 @@ public class PointAndClick extends JFrame {
         cards.add(mainMenu, mainMenu.getClass().getSimpleName());
         cards.add(highScores, highScores.getClass().getSimpleName());
         cards.add(credits, credits.getClass().getSimpleName());
-        cards.add(hangman, hangman.getClass().getSimpleName());
+        cards.add(gameHandler, gameHandler.getClass().getSimpleName());
         
         add(cards);
         
@@ -134,7 +123,6 @@ public class PointAndClick extends JFrame {
      * @param args - main method default requirement
      */
     public static void main(String[] args) {
-        
         
         new PointAndClick("Point and Click Game").setVisible(true);
         

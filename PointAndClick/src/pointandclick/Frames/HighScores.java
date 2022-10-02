@@ -28,10 +28,9 @@ public class HighScores extends JPanel {
    
     /**
      * Panel constructor.Initializes the leader board with the current top Scores 
-     * @param listener - listener for the backButton to connect with ActionListener
-     * @param path
+     * @param backButtonListener - listener for the backButton to connect with ActionListener
      */
-    public HighScores(ActionListener listener) {
+    public HighScores(ActionListener backButtonListener) {
         
         highScoreTable = new ScoreTable(PointAndClick.SCOREFILEPATH);
         
@@ -39,7 +38,7 @@ public class HighScores extends JPanel {
         setLayout(null);
         
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(listener);
+        backButton.addActionListener(backButtonListener);
         backButton.setFont(new Font("Marker Felt", Font.PLAIN, 20));
         backButton.setBounds(480,310,80,30);
         backButton.setBorder(new RoundedBorder(15));
@@ -57,9 +56,7 @@ public class HighScores extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         
-        highScoreTable.loadScores();
         Score[] scores = highScoreTable.getScoreArray();
-        
         Graphics2D g2 = (Graphics2D) g;
         
         g2.setFont(MarkerFelt.deriveFont(40f));
@@ -67,9 +64,7 @@ public class HighScores extends JPanel {
         g2.setFont(MarkerFelt.deriveFont(20f));
         g2.drawString("Name:", (this.getWidth()/2)-120, 90);
         g2.drawString("Score:", (this.getWidth()/2)+75, 90);
-
         
-        g2.setFont(MarkerFelt.deriveFont(20f));
         for(int i=0; i<5; i++){
             String drawString = new String();
             drawString = drawString.concat(String.valueOf(i+1) + ". "); //Rank
@@ -84,5 +79,9 @@ public class HighScores extends JPanel {
         }
         
     }   
+    
+    public ScoreTable getScoreTable(){
+        return this.highScoreTable;
+    }
     
 }

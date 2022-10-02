@@ -12,24 +12,27 @@
 
 package pointandclick.Frames;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class LoadingScreen extends JPanel {
     
     /**
      * Sets up a JPanel with a Java Swing Timer to notify
      * PointAndClick to swap to menu.
-     * @param listener 
+     * @param loadingScreenListener
      */
-    public LoadingScreen(ActionListener listener) {
+    public LoadingScreen(ActionListener loadingScreenListener) {
         setLayout(new FlowLayout());
         
-        
         // Set up timer
-        Timer timer = new Timer(3000, listener);
+        Timer timer = new Timer(3000, loadingScreenListener);
         timer.setInitialDelay(3000); // Trigger timer after 3 seconds
         timer.setRepeats(false);
         timer.start();
@@ -45,15 +48,12 @@ public class LoadingScreen extends JPanel {
         
         Font titleFont = new Font("Marker Felt", Font.BOLD, 60);
         Font teamFont = new Font("Marker Felt", Font.PLAIN, 30);
-        //Font gameFont = new Font("Marker Felt", Font.PLAIN, 50);
+        
         Graphics2D g2 = (Graphics2D) g;
-        g2.setFont(titleFont);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setFont(titleFont);
         g2.drawString("Point and Click Game", 40, 80);
         g2.setFont(teamFont);
         g2.drawString("Team Goofy Goobers", 175, 320);
-        // g2.setFont(gameFont);
-        // g2.drawString("Hangman", 200, 200);
-   
     }
 }

@@ -25,11 +25,11 @@ public class MainMenu extends JPanel {
 
     private BufferedImage pic;
     
-    public MainMenu(ActionListener listener) {
+    public MainMenu(ActionListener mainMenuListener) {
         setLayout(null);
         
         JButton highScoresButton = new JButton("High Scores");
-        highScoresButton.addActionListener(listener);
+        highScoresButton.addActionListener(mainMenuListener);
         highScoresButton.setActionCommand("HighScores");
         highScoresButton.setBounds(450, 180, 120, 40);
         highScoresButton.setBorder(new RoundedBorder(15));
@@ -38,7 +38,7 @@ public class MainMenu extends JPanel {
         add(highScoresButton);
         
         JButton creditsButton = new JButton("Credits");
-        creditsButton.addActionListener(listener);
+        creditsButton.addActionListener(mainMenuListener);
         creditsButton.setActionCommand("Credits");
         creditsButton.setBorder(new RoundedBorder(15));
         creditsButton.setContentAreaFilled(false);
@@ -47,8 +47,8 @@ public class MainMenu extends JPanel {
         add(creditsButton);
         
         JButton playButton = new JButton("Play");
-        playButton.addActionListener(listener);
-        playButton.setActionCommand("Hangman");
+        playButton.addActionListener(mainMenuListener);
+        playButton.setActionCommand("GameHandler");
         playButton.setBounds(450, 300, 120, 40);
         playButton.setBorder(new RoundedBorder(15));
         playButton.setContentAreaFilled(false);

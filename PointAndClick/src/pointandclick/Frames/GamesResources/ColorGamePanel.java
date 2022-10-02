@@ -1,5 +1,7 @@
-package pointandclick.Frames.colorResources;
+package pointandclick.Frames.GamesResources;
 
+import pointandclick.Frames.GamesResources.ColorGameResources.ColorButtonListener;
+import pointandclick.Frames.GamesResources.ColorGameResources.ColorButton;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -14,8 +16,8 @@ import java.util.Random;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import pointandclick.Frames.hangmanResources.HangmanGamePanel;
-import pointandclick.Frames.hangmanResources.HangmanScorePanel;
+import pointandclick.Frames.GamesResources.HangmanGamePanel;
+import pointandclick.Frames.GamesResources.ScorePanel;
 
 public class ColorGamePanel extends JPanel {
     private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};

@@ -12,13 +12,12 @@
  *          main menu.
  */
 
-package pointandclick.Frames.hangmanResources;
+package pointandclick.Frames.GamesResources;
 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,11 +26,10 @@ import javax.swing.JTextField;
 import pointandclick.Frames.commonResources.RoundedBorder;
 import pointandclick.Frames.highscoreResources.ScoreTable;
 
-
 /**
  *
  */
-public class HangmanScorePanel extends JPanel{
+public class ScorePanel extends JPanel{
     
     private int playerScore;
     private ScoreTable scoreTable;
@@ -44,7 +42,7 @@ public class HangmanScorePanel extends JPanel{
      * with the endAndSkip ActionListener.
      * @param endAndSkip
      */
-    public HangmanScorePanel(ActionListener endAndSkip){
+    public ScorePanel(ActionListener endAndSkip){
         super();
         
         playerScore = 0;

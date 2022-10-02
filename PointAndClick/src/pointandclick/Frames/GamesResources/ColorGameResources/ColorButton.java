@@ -1,4 +1,4 @@
-package pointandclick.Frames.colorResources;
+package pointandclick.Frames.GamesResources.ColorGameResources;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public final class ScoreTable {
@@ -79,7 +81,17 @@ public final class ScoreTable {
                 ex1.printStackTrace();
             }
         
-        } // Catch end
+        } catch (NoSuchElementException ex1){
+            
+            System.err.println("Highscore file has an error");
+            scoresFile.delete();
+            try {
+                writeMemoryToFile(scoresFile);
+                scoresFile.createNewFile();
+            } catch (IOException ex) {
+            }
+            
+        }// Catch end
     }
     
     /**
@@ -92,7 +104,7 @@ public final class ScoreTable {
         
         //File scoresFile = new File(filePath);
         FileWriter writer;
-        writer = new FileWriter(file);
+        writer = new FileWriter(file, false);
         for (var activeScore : this.scoreList) {
             writer.write(activeScore.toString() + "\n"); //USes the Score Class To String Method
          }
@@ -189,20 +201,21 @@ public final class ScoreTable {
         return SB.toString();
     }
     
-    /** Example Usage
+    //** Example Usage
     public static void main(String[] args){
         
         ScoreTable ST = new ScoreTable(pointandclick.PointAndClick.SCOREFILEPATH);
         
         int points = 404;
-        if( ST.checkIfHighscore(points) != -1 ){
-            // ask for name to feed to secureAdd Method
-            System.out.println(ST.checkIfHighscore(points));
+        //if( ST.checkIfHighscore(points) != -1 ){
+            // ask for name to feed to secureAdd Method){
+
+            //System.out.println(ST.checkIfHighscore(points));
             System.out.println(ST.secureAdd(points, "Top001"));
-        }
+        //}
         
     }
-    **/
+    //**/
     
     
     

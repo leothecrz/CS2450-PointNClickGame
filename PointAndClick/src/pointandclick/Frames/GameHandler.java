@@ -18,47 +18,52 @@ import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
 
-import pointandclick.Frames.colorResources.ColorGamePanel;
-import pointandclick.Frames.hangmanResources.HangmanGamePanel;
-import pointandclick.Frames.hangmanResources.HangmanScorePanel;
-import pointandclick.Frames.highscoreResources.Score;
+import pointandclick.Frames.GamesResources.ColorGamePanel;
+import pointandclick.Frames.GamesResources.HangmanGamePanel;
+import pointandclick.Frames.GamesResources.ScorePanel;
 
 
-public class Hangman extends JPanel{
+public class GameHandler extends JPanel{
     
     private JPanel face;
     private HangmanGamePanel gamePanel;
-    private HangmanScorePanel scorePanel;
+    private ScorePanel scorePanel;
     private ColorGamePanel colorGamePanel;
     private CardLayout panelLayout;
     
     /**
-     * Hangman Constructor. Creates the JPanel 'face' with CardLayout. Adds panels hold.
+     * Hangman Constructor.Creates the JPanel 'face' with CardLayout. Adds panels hold.
      * Creates an ActionListener to listen for the skip button to swap to next JPanel.
-     * @param listener 
+     * @param backButtonListener
      */
-    public Hangman(ActionListener listener) {
+    public GameHandler(ActionListener backButtonListener) {
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         
-        // Handles Hangman Game End Events
-        ActionListener skipAndEndListener = evt -> {
+        // Handles Game End Events
+        ActionListener endOfGameListener = evt -> {
             
-            //Skip Button Pressed
+            //Hangman SKIP Button Pressed
             if(evt.getActionCommand().equals("Skip")){
-                
                 System.out.println("Skip Button Pressed");
-                scorePanel.resetPlayerScore();
-            }
-            //Natural Game End
+                scorePanel.addPlayerScore(0);
+                                
+                panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
+                return;
+
+            } 
+            //Hangman Natural Game End
             if(evt.getActionCommand().equals("Word Found") || evt.getActionCommand().equals("Word Not Found")){
                 scorePanel.addPlayerScore(gamePanel.getPlayerScore()); // add score from Hangman
+
+                panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
+                return;
             }
-            
-            if(!evt.getSource().equals(colorGamePanel)){
-                panelLayout.show(face, "ColorGamePanel");
+            //
+            if(evt.getActionCommand().equals("")){
+                
             }
-            
+            //Swtich to Score Panel
             if(evt.getActionCommand().equals("SwitchToScore")){
                 scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
                 
@@ -69,18 +74,18 @@ public class Hangman extends JPanel{
                     scorePanel.setHSState(false);
                 }
                 
-                panelLayout.show(face, "HangmanScorePanel"); // Should Switch to next game
-                
-                
+                panelLayout.show(face, scorePanel.getClass().getSimpleName());
+                return;
             }
-        };
+            
+        }; // Action Listener End
         
         panelLayout = new CardLayout(0, 0);
         face = new JPanel(panelLayout);
-        gamePanel = new HangmanGamePanel(skipAndEndListener);
-        scorePanel = new HangmanScorePanel(listener);
+        gamePanel = new HangmanGamePanel(endOfGameListener);
+        scorePanel = new ScorePanel(backButtonListener);
         
-        colorGamePanel = new ColorGamePanel(skipAndEndListener);
+        colorGamePanel = new ColorGamePanel(endOfGameListener);
         colorGamePanel.playerScore = scorePanel.getPlayerScore();                 // get score from scorePanel to store in int newScore from ColorGamePanel class (theoretically at least) 
         
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
@@ -98,7 +103,6 @@ public class Hangman extends JPanel{
        scorePanel.resetPlayerScore();
        gamePanel.startGame();
        panelLayout.show(face, "HangmanGamePanel");
-       
     }
   
 }
