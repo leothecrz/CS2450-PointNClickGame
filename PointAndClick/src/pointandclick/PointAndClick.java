@@ -20,6 +20,7 @@ import java.io.IOException;
 import javax.swing.*;
 import pointandclick.Frames.*;
 import pointandclick.Frames.highscoreResources.ScoreTable;
+import pointandclick.Resources.ExitDiolog;
 
 
 public class PointAndClick extends JFrame {
@@ -113,6 +114,21 @@ public class PointAndClick extends JFrame {
         setSize(600, 400); // sets window size to 600W x 400H
         setResizable(false); // Forces Window to ALWAYS remain 600x400
         setLocationRelativeTo(null); // Centers window on the screen
+        
+        //Keybinds
+        Action escapeKeyAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //System.out.println("ESCAPE KEY PRESSED");
+                ExitDiolog exitPopUp = new ExitDiolog();
+                if(exitPopUp.getUserChoice() == 0){
+                    dispose();
+                    System.exit(0); // Will Brute Force Close regardless of what other threads are doing.
+                }
+            }
+        };
+        cards.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "escapeKeyAction");
+        cards.getActionMap().put("escapeKeyAction", escapeKeyAction);
         
     }
     
