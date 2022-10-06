@@ -21,6 +21,7 @@ import javax.swing.*;
 import pointandclick.Frames.*;
 import pointandclick.Frames.highscoreResources.ScoreTable;
 import pointandclick.Resources.ExitDiolog;
+import pointandclick.Resources.TeamInfoDialog;
 
 
 public class PointAndClick extends JFrame {
@@ -36,7 +37,6 @@ public class PointAndClick extends JFrame {
     private Font MarkerFelt; 
     
     /**
-     * 
      * Main JFrame constructor. Handles the loading screens 3 second delay before menu. 
      * Handles the panel-switching logic for the main menu 
      * and the associated back buttons.
@@ -59,7 +59,6 @@ public class PointAndClick extends JFrame {
         }
         
         ///Event listeners
-
         // Splash screen listener
         ActionListener loadingScreenListener = evt -> {
             // Triggers after 3 seconds
@@ -91,7 +90,6 @@ public class PointAndClick extends JFrame {
             layout.show(cards, "MainMenu");
         };
        
-
         // Create components
         LoadingScreen loadingScreen = new LoadingScreen(loadingScreenListener);
         MainMenu mainMenu = new MainMenu(mainMenuListener);
@@ -129,6 +127,18 @@ public class PointAndClick extends JFrame {
         };
         cards.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "escapeKeyAction");
         cards.getActionMap().put("escapeKeyAction", escapeKeyAction);
+        
+        Action f1KeyAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("The F1 Key was pressed");
+                TeamInfoDialog TID = new TeamInfoDialog(null);
+                TID.setVisible(true);
+            }
+        };
+        cards.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F1"), "f1KeyAction");
+        cards.getActionMap().put("f1KeyAction", f1KeyAction);
+        
         
     }
     
