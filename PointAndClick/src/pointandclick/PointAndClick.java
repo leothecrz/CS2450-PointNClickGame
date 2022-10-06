@@ -132,7 +132,7 @@ public class PointAndClick extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("The F1 Key was pressed");
-                TeamInfoDialog TID = new TeamInfoDialog(null);
+                TeamInfoDialog TID = new TeamInfoDialog(getX(), getY());
                 TID.setVisible(true);
             }
         };
