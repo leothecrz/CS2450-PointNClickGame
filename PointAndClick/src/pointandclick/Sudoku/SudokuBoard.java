@@ -37,8 +37,7 @@ public class SudokuBoard extends JComponent implements ActionListener {
 
     public SudokuBoard() {
         setLayout(new GridLayout(9, 9));
-
-        setupBoard();
+        
         Action numberAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if (selectedRow != -1 && selectedColumn != -1)

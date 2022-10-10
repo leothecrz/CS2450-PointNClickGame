@@ -97,6 +97,7 @@ public class GameHandler extends JPanel {
     public void startGame(){
        scorePanel.resetPlayerScore();
        hangmanPanel.startGame();
+       sudokuPanel.reset();
        panelLayout.show(face, hangmanPanel.getClass().getSimpleName());
     }
   

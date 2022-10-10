@@ -38,4 +38,8 @@ public class SudokuPanel extends JPanel {
     public int calculateScore() {
         return sudokuBoard.calculateScore();
     }
+
+    public void reset() {
+        sudokuBoard.setupBoard();
+    }
 }
