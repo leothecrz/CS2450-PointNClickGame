@@ -82,6 +82,8 @@ public class SudokuBoard extends JComponent implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         SudokuCell cell = (SudokuCell) e.getSource(); // Get the cell that was clicked
+        if (cell.given) // Don't select cells that were given
+            return;
         if (selectedRow != -1 && selectedColumn != -1)
             cells[selectedRow][selectedColumn].setSelected(false); // Set the selected field of the previously selected cell to false
         selectedRow = cell.row;
