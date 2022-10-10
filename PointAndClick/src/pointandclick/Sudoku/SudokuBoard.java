@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class SudokuBoard extends JComponent {
+public class SudokuBoard extends JComponent implements ActionListener {
     private static final int[][] NUMBERS = new int[][]
     {
         {8, 3, 5, 4, 1, 6, 9, 2, 7},
@@ -32,17 +32,50 @@ public class SudokuBoard extends JComponent {
     };
 
     private SudokuCell[][] cells;
+    private int selectedRow;
+    private int selectedColumn;
 
     public SudokuBoard() {
         setLayout(new GridLayout(9, 9));
 
+        setupBoard();
+        Action numberAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (selectedRow != -1 && selectedColumn != -1)
+                    cells[selectedRow][selectedColumn].setUserAnswer(Integer.parseInt(e.getActionCommand()));
+            }
+        };
+
+        for (int i = 0; i <= 9; i++) {
+            getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(String.valueOf(i)), String.valueOf(i));
+            getActionMap().put(String.valueOf(i), numberAction);
+        }
+    }
+
+    public void setupBoard() {
         cells = new SudokuCell[9][9];
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-               cells[row][col] = new SudokuCell(row, col, NUMBERS[row][col], GIVEN[row][col]);
+               cells[row][col] = new SudokuCell(row, col, NUMBERS[row][col], GIVEN[row][col], this);
                add(cells[row][col]);
             }
         }
-        // setPreferredSize(new Dimension(9 * 40, 9 * 40));
+
+        selectedRow = -1;
+        selectedColumn = -1;
+    }
+
+    public int calculateScore() {
+        return 0;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        SudokuCell cell = (SudokuCell) e.getSource(); // Get the cell that was clicked
+        if (selectedRow != -1 && selectedColumn != -1)
+            cells[selectedRow][selectedColumn].setSelected(false); // Set the selected field of the previously selected cell to false
+        selectedRow = cell.row;
+        selectedColumn = cell.column;
+        cell.setSelected(true);
     }
 }
