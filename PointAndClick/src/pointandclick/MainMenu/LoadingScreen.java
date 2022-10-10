@@ -10,7 +10,7 @@
  *          at the start of the program.
  */
 
-package pointandclick.Frames;
+package pointandclick.MainMenu;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

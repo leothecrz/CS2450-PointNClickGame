@@ -1,10 +1,9 @@
-package pointandclick.Frames.highscoreResources;
+package pointandclick.MainMenu;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 

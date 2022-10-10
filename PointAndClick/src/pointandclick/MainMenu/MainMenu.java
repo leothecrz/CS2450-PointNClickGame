@@ -10,7 +10,7 @@
  *          Holds 3 action buttons. High scores. Credits. Play
  */
 
-package pointandclick.Frames;
+package pointandclick.MainMenu;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -18,8 +18,10 @@ import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
+
+import pointandclick.Common.RoundedBorder;
+
 import java.io.IOException;
-import pointandclick.Frames.commonResources.RoundedBorder;
 
 public class MainMenu extends JPanel {
 

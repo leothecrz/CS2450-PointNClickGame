@@ -1,5 +1,5 @@
 
-package pointandclick.Resources;
+package pointandclick.Common;
 
 import javax.swing.JOptionPane;
 

@@ -11,7 +11,7 @@
  *          the beginning of each game start.
  */
 
-package pointandclick.Frames.GamesResources;
+package pointandclick.Hangman;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,12 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.JPanel;
+
+import pointandclick.Common.RoundedBorder;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.util.Random;
-import pointandclick.Frames.commonResources.RoundedBorder;
 
 
 

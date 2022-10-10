@@ -12,7 +12,7 @@
  *          main menu.
  */
 
-package pointandclick.Frames.GamesResources;
+package pointandclick.MainMenu;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,8 +23,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import pointandclick.Frames.commonResources.RoundedBorder;
-import pointandclick.Frames.highscoreResources.ScoreTable;
+
+import pointandclick.Common.RoundedBorder;
 
 /**
  *

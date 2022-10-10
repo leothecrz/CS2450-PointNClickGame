@@ -1,5 +1,5 @@
 
-package pointandclick.Frames.commonResources;
+package pointandclick.Common;
 
 import java.awt.Component;
 import java.awt.Graphics;

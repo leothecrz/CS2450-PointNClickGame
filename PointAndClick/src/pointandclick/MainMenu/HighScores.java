@@ -10,15 +10,14 @@
  *          game.
  */
 
-package pointandclick.Frames;
+package pointandclick.MainMenu;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import pointandclick.Frames.commonResources.RoundedBorder;
-import pointandclick.Frames.highscoreResources.Score;
-import pointandclick.Frames.highscoreResources.ScoreTable;
+
 import pointandclick.PointAndClick;
+import pointandclick.Common.RoundedBorder;
 
 public class HighScores extends JPanel {
     

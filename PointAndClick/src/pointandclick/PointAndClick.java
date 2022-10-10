@@ -18,10 +18,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
-import pointandclick.Frames.*;
-import pointandclick.Frames.highscoreResources.ScoreTable;
-import pointandclick.Resources.ExitDiolog;
-import pointandclick.Resources.TeamInfoDialog;
+
+import pointandclick.Common.*;
+import pointandclick.MainMenu.*;
 
 
 public class PointAndClick extends JFrame {

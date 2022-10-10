@@ -1,4 +1,4 @@
-package pointandclick.Frames.highscoreResources;
+package pointandclick.MainMenu;
 
 
 public final class Score {

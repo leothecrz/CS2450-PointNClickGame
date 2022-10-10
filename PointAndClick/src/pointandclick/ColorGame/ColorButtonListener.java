@@ -1,4 +1,4 @@
-package pointandclick.Frames.GamesResources.ColorGameResources;
+package pointandclick.ColorGame;
 import java.awt.Color;
 
 public interface ColorButtonListener {

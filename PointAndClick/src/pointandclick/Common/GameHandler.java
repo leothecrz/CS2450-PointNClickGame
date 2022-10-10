@@ -11,16 +11,16 @@
  *          necessary.
  */
 
-package pointandclick.Frames;
+package pointandclick.Common;
 
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
 
-import pointandclick.Frames.GamesResources.ColorGamePanel;
-import pointandclick.Frames.GamesResources.HangmanGamePanel;
-import pointandclick.Frames.GamesResources.ScorePanel;
+import pointandclick.ColorGame.ColorGamePanel;
+import pointandclick.Hangman.HangmanGamePanel;
+import pointandclick.MainMenu.ScorePanel;
 
 
 public class GameHandler extends JPanel{

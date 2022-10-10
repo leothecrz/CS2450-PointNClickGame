@@ -11,12 +11,13 @@
  *          software.
  */
 
-package pointandclick.Frames;
+package pointandclick.MainMenu;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import pointandclick.Frames.commonResources.RoundedBorder;
+
+import pointandclick.Common.RoundedBorder;
 
 public class Credits extends JPanel {
     

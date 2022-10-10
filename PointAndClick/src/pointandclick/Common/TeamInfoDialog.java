@@ -1,4 +1,4 @@
-package pointandclick.Resources;
+package pointandclick.Common;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
