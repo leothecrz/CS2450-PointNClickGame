@@ -21,7 +21,7 @@ public class RoundedBorder implements Border {
 
     @Override
     public boolean isBorderOpaque() {
-        return true;
+        return true; 
     }
 
     @Override
