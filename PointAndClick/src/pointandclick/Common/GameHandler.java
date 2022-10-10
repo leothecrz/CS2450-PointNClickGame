@@ -56,6 +56,8 @@ public class GameHandler extends JPanel {
                     panelLayout.show(face, sudokuPanel.getClass().getSimpleName());
                     break;
                 case "SudokuEnd":
+                    scorePanel.addPlayerScore(sudokuPanel.calculateScore());
+
                     // Switch to scores panel
                     scorePanel.getScoreTable().loadScores();
                     if (scorePanel.getScoreTable().checkIfHighscoreBoolean(scorePanel.getPlayerScore())) {

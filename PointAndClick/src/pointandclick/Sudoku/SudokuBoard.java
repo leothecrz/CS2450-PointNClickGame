@@ -56,8 +56,8 @@ public class SudokuBoard extends JComponent implements ActionListener {
         cells = new SudokuCell[9][9];
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-               cells[row][col] = new SudokuCell(row, col, NUMBERS[row][col], GIVEN[row][col], this);
-               add(cells[row][col]);
+                cells[row][col] = new SudokuCell(row, col, NUMBERS[row][col], GIVEN[row][col], this);
+                add(cells[row][col]);
             }
         }
 
@@ -66,7 +66,17 @@ public class SudokuBoard extends JComponent implements ActionListener {
     }
 
     public int calculateScore() {
-        return 0;
+        int score = 540;
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                SudokuCell cell = cells[row][col];
+                if (cell.given)
+                    continue;
+                if (!cell.isCorrect())
+                    score -= 10;
+            }
+        }
+        return score;
     }
 
     @Override
