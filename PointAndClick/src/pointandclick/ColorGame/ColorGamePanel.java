@@ -1,11 +1,7 @@
 package pointandclick.ColorGame;
 
-import pointandclick.Hangman.HangmanGamePanel;
-import pointandclick.MainMenu.ScorePanel;
-
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.text.SimpleDateFormat;
@@ -44,13 +40,10 @@ public class ColorGamePanel extends JPanel {
         setPreferredSize(new Dimension(600, 400));
         random = new Random();
         
-        
         // Title
         JLabel titleLabel = new JLabel();
         titleLabel.setText("Color Game Screen");
         add(titleLabel);
-
-       
         
         // Time
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
@@ -69,20 +62,17 @@ public class ColorGamePanel extends JPanel {
         // Color buttons
         ColorButtonListener buttonListener = color -> {
             if (color.equals(colorLabel.getForeground())) {
-                System.out.println("User selected the correct color");
                 playerScore += 100; // for each correct round add 100 to score
-            } else {
-                System.out.println("User selected the incorrect color");
             }
             updateColor();
             shuffleButtons();
             
             if (++rounds == MAX_ROUNDS){
                 rounds = 0;
-                listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "SwitchToScore")); // Should go to score screen
+                listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "ColorGameEnd"));
                 playerScore = 0;
             }
-         };
+        };
         
         colorButtons = new ColorButton[5];
         int i = 0;

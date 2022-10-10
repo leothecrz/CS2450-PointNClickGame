@@ -115,9 +115,8 @@ public final class ScoreTable {
      * @return True if it should be added.
      */
     public boolean checkIfHighscoreBoolean(int playerScore){
-        
-        for(var s1 : scoreList ){
-            if(playerScore > s1.getScore())
+        for (var s1 : scoreList ){
+            if (playerScore > s1.getScore())
                 return true;
         }
         
@@ -133,10 +132,9 @@ public final class ScoreTable {
      */
     private int checkIfHighscore(int playerScore){
         int i = -1;
-        for(int j=4; j>-1; j--){
-            if(playerScore > scoreList[j].getScore()){
+        for (int j = 4; j > -1; j--){
+            if (playerScore > scoreList[j].getScore()){
                 i = j;
-                
             }
         }
         return i;

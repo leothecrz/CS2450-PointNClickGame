@@ -23,18 +23,6 @@ public class ColorButton extends JComponent implements MouseInputListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void mouseEntered(MouseEvent e) {
         highlight = true;
         repaint();
@@ -47,16 +35,16 @@ public class ColorButton extends JComponent implements MouseInputListener {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseDragged(MouseEvent e) {}
+
+    @Override
+    public void mouseMoved(MouseEvent e) {}
 
     @Override
     protected void paintComponent(Graphics g) {

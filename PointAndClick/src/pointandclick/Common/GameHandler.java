@@ -19,14 +19,17 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import pointandclick.ColorGame.ColorGamePanel;
-import pointandclick.Hangman.HangmanGamePanel;
+import pointandclick.Hangman.HangmanPanel;
 import pointandclick.MainMenu.ScorePanel;
+import pointandclick.Sudoku.SudokuPanel;
 
 public class GameHandler extends JPanel {
     private JPanel face;
-    private HangmanGamePanel gamePanel;
-    private ScorePanel scorePanel;
+    private HangmanPanel hangmanPanel;
     private ColorGamePanel colorGamePanel;
+    private SudokuPanel sudokuPanel;
+    private ScorePanel scorePanel;
+    
     private CardLayout panelLayout;
     
     /**
@@ -39,55 +42,48 @@ public class GameHandler extends JPanel {
         
         // Handles Game End Events
         ActionListener endOfGameListener = evt -> {
-            
-            //Hangman SKIP Button Pressed
-            if(evt.getActionCommand().equals("Skip")){
-                System.out.println("Skip Button Pressed");
-                scorePanel.addPlayerScore(0);
-                                
-                panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
-                return;
-
-            } 
-            //Hangman Natural Game End
-            if(evt.getActionCommand().equals("Word Found") || evt.getActionCommand().equals("Word Not Found")){
-                scorePanel.addPlayerScore(gamePanel.getPlayerScore()); // add score from Hangman
-
-                panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
-                return;
+            switch(evt.getActionCommand()) {
+                case "HangmanSkip":
+                    scorePanel.addPlayerScore(0);     
+                    panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
+                    break;
+                case "HangmanEnd":
+                    scorePanel.addPlayerScore(hangmanPanel.getPlayerScore()); // add score from Hangman
+                    panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
+                    break;
+                case "ColorGameEnd":
+                    scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
+                    panelLayout.show(face, sudokuPanel.getClass().getSimpleName());
+                    break;
+                case "SudokuEnd":
+                    // Switch to scores panel
+                    scorePanel.getScoreTable().loadScores();
+                    if (scorePanel.getScoreTable().checkIfHighscoreBoolean(scorePanel.getPlayerScore())) {
+                        scorePanel.setState(true);
+                    } else {
+                        scorePanel.setState(false);
+                    }
+                    break;
+                default:
+                    System.err.println("GameHandler: unknown command " + evt.getActionCommand());
+                    break;
             }
-            //
-            if(evt.getActionCommand().equals("")){
-                
-            }
-            //Swtich to Score Panel
-            if(evt.getActionCommand().equals("SwitchToScore")){
-                scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
-                
-                scorePanel.getScoreTable().loadScores();
-                if(scorePanel.getScoreTable().checkIfHighscoreBoolean(scorePanel.getPlayerScore())){
-                    scorePanel.setHSState(true);
-                } else {
-                    scorePanel.setHSState(false);
-                }
-                
-                panelLayout.show(face, scorePanel.getClass().getSimpleName());
-                return;
-            }
-            
-        }; // Action Listener End
+        };
         
         panelLayout = new CardLayout(0, 0);
         face = new JPanel(panelLayout);
-        gamePanel = new HangmanGamePanel(endOfGameListener);
+        hangmanPanel = new HangmanPanel(endOfGameListener);
         scorePanel = new ScorePanel(backButtonListener);
         
         colorGamePanel = new ColorGamePanel(endOfGameListener);
         colorGamePanel.playerScore = scorePanel.getPlayerScore();                 // get score from scorePanel to store in int newScore from ColorGamePanel class (theoretically at least) 
+
+        sudokuPanel = new SudokuPanel(endOfGameListener);
         
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
-        face.add(gamePanel, gamePanel.getClass().getSimpleName());
+        face.add(hangmanPanel, hangmanPanel.getClass().getSimpleName());
         face.add(colorGamePanel, colorGamePanel.getClass().getSimpleName());
+        face.add(sudokuPanel, sudokuPanel.getClass().getSimpleName());
              
         add(face);
     }
@@ -98,8 +94,8 @@ public class GameHandler extends JPanel {
      */
     public void startGame(){
        scorePanel.resetPlayerScore();
-       gamePanel.startGame();
-       panelLayout.show(face, "HangmanGamePanel");
+       hangmanPanel.startGame();
+       panelLayout.show(face, hangmanPanel.getClass().getSimpleName());
     }
   
 }

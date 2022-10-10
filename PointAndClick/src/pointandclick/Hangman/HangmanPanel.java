@@ -30,7 +30,7 @@ import java.util.Random;
 
 import pointandclick.Common.RoundedBorder;
 
-public class HangmanGamePanel extends JPanel {
+public class HangmanPanel extends JPanel {
     // Constants
     private static final int MAX_ERRORS = 6;
     private static final String KEYS = "abcdefghijklmnopqrstuvwxyz";
@@ -58,7 +58,7 @@ public class HangmanGamePanel extends JPanel {
      * 
      * @param skipAndEndListener 
      */
-    public HangmanGamePanel(ActionListener skipAndEndListener){
+    public HangmanPanel(ActionListener skipAndEndListener){
         super();
         setPreferredSize(new Dimension(600, 400));
         setBackground(Color.lightGray);
@@ -89,12 +89,12 @@ public class HangmanGamePanel extends JPanel {
                 }
                 
                 if (isWordFound) {
-                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Word Found"));
+                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "HangmanEnd"));
                 }
             } else {
                 playerScore -= 10;
                 if (errors == MAX_ERRORS - 1) {
-                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Word Not Found"));
+                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "HangmanEnd"));
                 } else {
                     errors++;
                 }
@@ -111,7 +111,7 @@ public class HangmanGamePanel extends JPanel {
 
         skipButton = new JButton("Skip");
         skipButton.addActionListener(skipAndEndListener);
-        skipButton.setActionCommand("Skip");
+        skipButton.setActionCommand("HangmanSkip");
         skipButton.setBounds(500, 70, 70, 25);
         skipButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
         skipButton.setBorder(new RoundedBorder(15));

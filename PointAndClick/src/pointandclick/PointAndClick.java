@@ -22,7 +22,6 @@ import javax.swing.*;
 import pointandclick.Common.*;
 import pointandclick.MainMenu.*;
 
-
 public class PointAndClick extends JFrame {
     public static final String SCORE_FILE_PATH = "Data/highscore.txt"; 
     public static ActionListener panelSwitcher;
@@ -89,7 +88,7 @@ public class PointAndClick extends JFrame {
         highScores = new HighScores(backButtonListener);
         Credits credits = new Credits(backButtonListener);
         gameHandler = new GameHandler(backButtonListener); // gamePanel
-         
+
         // Create the panel that contains the other frames
         layout = new CardLayout();
         cards = new JPanel(layout);
@@ -131,8 +130,6 @@ public class PointAndClick extends JFrame {
         };
         cards.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F1"), "f1KeyAction");
         cards.getActionMap().put("f1KeyAction", f1KeyAction);
-        
-        
     }
     
 

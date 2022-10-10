@@ -120,7 +120,7 @@ public class ScorePanel extends JPanel{
         return this.scoreTable;
     }
     
-    public void setHSState(boolean state){
+    public void setState(boolean state){
         gotHSLabel.setVisible(state);
         gotHSNameField.setVisible(state);
         
