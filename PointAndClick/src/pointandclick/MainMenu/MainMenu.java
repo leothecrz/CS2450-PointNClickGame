@@ -19,6 +19,7 @@ import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
 
+import pointandclick.PointAndClick;
 import pointandclick.Common.RoundedBorder;
 
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class MainMenu extends JPanel {
         super.paintComponent(g);
         
         try {
-            pic = ImageIO.read(new File("Images/menuIcon.png")); 
+            pic = ImageIO.read(new File(PointAndClick.fixFilePath("Images/menuIcon.png"))); 
             g.drawImage(pic, 80, 20, 300, 310, this);
         } catch (IOException e) {System.err.println("Image Not Found - Main Menu");} 
         

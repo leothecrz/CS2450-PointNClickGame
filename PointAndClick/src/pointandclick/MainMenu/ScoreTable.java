@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import pointandclick.PointAndClick;
+
 public final class ScoreTable {
     private final String filePath;
     private Score[] scoreList;
@@ -31,7 +33,7 @@ public final class ScoreTable {
      * Deletes the file on disk and replaces file 
      */
     public void saveScores(){
-        File scoresFile = new File(filePath);
+        File scoresFile = new File(PointAndClick.fixFilePath(filePath));
         
         try {
             new FileWriter(scoresFile, false).close();
@@ -48,7 +50,7 @@ public final class ScoreTable {
      * a default will be created and loaded.
      */
     public void loadScores(){
-        File scoresFile = new File(filePath);
+        File scoresFile = new File(PointAndClick.fixFilePath(filePath));
         try {
             Scanner reader = new Scanner(scoresFile); // Throws FileNotFoundExeception
             // High score file format is:

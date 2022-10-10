@@ -46,8 +46,8 @@ public class PointAndClick extends JFrame {
         // Font Registration
         try {
            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-           ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf")));
-        } catch(FontFormatException | IOException ex){
+           ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(fixFilePath("Fonts/MarkerFelt.ttf"))));
+        } catch (FontFormatException | IOException ex){
             System.err.println("Font not found: MarkerFelt");
         }
         
@@ -141,6 +141,11 @@ public class PointAndClick extends JFrame {
     public static void main(String[] args) {
         new ScoreTable(SCORE_FILE_PATH); // file is created if not there already
         new PointAndClick("Point and Click Game").setVisible(true);
+    }
+
+    // Fixes relative file paths when running this program in Visual Studio Code
+    public static String fixFilePath(String path) {
+        return !(new File(path)).getAbsolutePath().contains("PointAndClick") ? ("PointAndClick/" + path) : path;
     }
     
 }
