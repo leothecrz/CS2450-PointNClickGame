@@ -21,7 +21,7 @@ import pointandclick.Common.RoundedBorder;
 
 public class HighScores extends JPanel {
     
-    private Font MarkerFelt;
+    private Font markerFeltFont;
     
     private ScoreTable highScoreTable;
    
@@ -30,10 +30,8 @@ public class HighScores extends JPanel {
      * @param backButtonListener - listener for the backButton to connect with ActionListener
      */
     public HighScores(ActionListener backButtonListener) {
-        
-        highScoreTable = new ScoreTable(PointAndClick.SCOREFILEPATH);
-        
-        MarkerFelt = new Font("Marker Felt", Font.PLAIN, 20); // font set
+        highScoreTable = new ScoreTable(PointAndClick.SCORE_FILE_PATH);
+        markerFeltFont = new Font("Marker Felt", Font.PLAIN, 20); // font set
         setLayout(null);
         
         JButton backButton = new JButton("Back");
@@ -58,25 +56,21 @@ public class HighScores extends JPanel {
         Score[] scores = highScoreTable.getScoreArray();
         Graphics2D g2 = (Graphics2D) g;
         
-        g2.setFont(MarkerFelt.deriveFont(40f));
+        g2.setFont(markerFeltFont.deriveFont(40f));
         g2.drawString("Highscores:", (this.getWidth()/2)-75, 60);
-        g2.setFont(MarkerFelt.deriveFont(20f));
+        g2.setFont(markerFeltFont.deriveFont(20f));
         g2.drawString("Name:", (this.getWidth()/2)-120, 90);
         g2.drawString("Score:", (this.getWidth()/2)+75, 90);
         
-        for(int i=0; i<5; i++){
+        for(int i = 0; i < 5; i++){
             String drawString = new String();
             drawString = drawString.concat(String.valueOf(i+1) + ". "); //Rank
             drawString = drawString.concat(scores[i].getName()); //Name
-            
             String scoreString = String.valueOf(scores[i].getScore()); //Score
-            
-            
             g2.drawString(drawString, (this.getWidth()/2)-120, 120+(i*30));
             g2.drawString(scoreString, (this.getWidth()/2)+90, 120+(i*30));
 
         }
-        
     }   
     
     public ScoreTable getScoreTable(){

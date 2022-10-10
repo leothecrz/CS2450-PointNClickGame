@@ -24,16 +24,14 @@ import pointandclick.MainMenu.*;
 
 
 public class PointAndClick extends JFrame {
-    
-    public static final String SCOREFILEPATH = "Data/highscore.txt"; 
+    public static final String SCORE_FILE_PATH = "Data/highscore.txt"; 
+    public static ActionListener panelSwitcher;
     
     private CardLayout layout;
     private JPanel cards;
     
     private GameHandler gameHandler; 
     private HighScores highScores;
-
-    private Font MarkerFelt; 
     
     /**
      * Main JFrame constructor. Handles the loading screens 3 second delay before menu. 
@@ -46,24 +44,20 @@ public class PointAndClick extends JFrame {
         super(title); // Sets window title
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        new ScoreTable(SCOREFILEPATH); // file is created if not there already
-        
-        //Font Registration
-        try{
-           MarkerFelt = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf"));
+        // Font Registration
+        try {
            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-           ge.registerFont(MarkerFelt);
-        }catch(FontFormatException | IOException ex){
-            System.err.println("Font not Found - HighScores Jpanel");
+           ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/MarkerFelt.ttf")));
+        } catch(FontFormatException | IOException ex){
+            System.err.println("Font not found: MarkerFelt");
         }
         
-        ///Event listeners
+        /// Event listeners
         // Splash screen listener
         ActionListener loadingScreenListener = evt -> {
             // Triggers after 3 seconds
             layout.show(cards, "MainMenu"); // Show the main menu
             ((Timer)evt.getSource()).stop(); // Stop the timer
-            
         };
 
         // Main menu listener
@@ -117,8 +111,8 @@ public class PointAndClick extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("ESCAPE KEY PRESSED");
-                ExitDiolog exitPopUp = new ExitDiolog();
-                if(exitPopUp.getUserChoice() == 0){
+                ExitDialog exitPopUp = new ExitDialog();
+                if (exitPopUp.shouldExit()) {
                     dispose();
                     System.exit(0); // Will Brute Force Close regardless of what other threads are doing.
                 }
@@ -148,9 +142,8 @@ public class PointAndClick extends JFrame {
      * @param args - main method default requirement
      */
     public static void main(String[] args) {
-        
+        new ScoreTable(SCORE_FILE_PATH); // file is created if not there already
         new PointAndClick("Point and Click Game").setVisible(true);
-        
     }
     
 }

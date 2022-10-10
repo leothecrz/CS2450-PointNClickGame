@@ -8,10 +8,9 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public final class ScoreTable {
-    
     private final String filePath;
     private Score[] scoreList;
-    private final int MAXHIGHSCORESSTORED = 5;
+    private final int HIGH_SCORES_COUNT = 5;
     
     /**
      * Array of Score of size 5. Can write and load
@@ -19,15 +18,12 @@ public final class ScoreTable {
      * @param filePath - path to txt file used to store data.
      */
     public ScoreTable(String filePath){
-        
         this.filePath = filePath;
-        
-        this.scoreList = new Score[MAXHIGHSCORESSTORED];
-        for (int i=0; i<scoreList.length; i++) {
+        this.scoreList = new Score[HIGH_SCORES_COUNT];
+        for (int i = 0; i < scoreList.length; i++) {
             scoreList[i] = new Score(0, "-", "-");
         }
-        
-        loadScores(); // Pull Scores after construction
+        loadScores(); // Pull scores after construction
     }
     
     /**
@@ -35,7 +31,6 @@ public final class ScoreTable {
      * Deletes the file on disk and replaces file 
      */
     public void saveScores(){
-        
         File scoresFile = new File(filePath);
         
         try {
@@ -53,44 +48,40 @@ public final class ScoreTable {
      * a default will be created and loaded.
      */
     public void loadScores(){
-        
         File scoresFile = new File(filePath);
-        
         try {
-        //load the scores
-        
-            Scanner reader = new Scanner(scoresFile); // trows FileNotFoundExeception
-            // highscore file format is Name\n Score\n Name\n Score\n
+            Scanner reader = new Scanner(scoresFile); // Throws FileNotFoundExeception
+            // High score file format is:
+            // Name
+            // Score
+            // Name
+            // Score
+            // ...
             for (Score s1 : scoreList) {
                 s1.setName(String.valueOf(reader.nextLine()));
                 s1.setScore(reader.nextInt());
                 reader.nextLine(); // eats the lone '\n'
             }
-    
+            reader.close();
         } catch (FileNotFoundException ex) { 
-        // File is not found make a default
-            
+            // File is not found; make a default
             try {
-                
                 scoresFile.createNewFile();
                 writeMemoryToFile(scoresFile);
-
             } catch (IOException ex1) {
-                System.err.println("\n The Default Highscore table could not be created\n");
+                System.err.println("\nThe default high score table could not be created\n");
                 ex1.printStackTrace();
             }
         
         } catch (NoSuchElementException ex1){
-            
-            System.err.println("Highscore file has an error");
+            System.err.println("High score file has an error");
             scoresFile.delete();
             try {
                 writeMemoryToFile(scoresFile);
                 scoresFile.createNewFile();
             } catch (IOException ex) {
             }
-            
-        }// Catch end
+        } // Catch end
     }
     
     /**
@@ -100,15 +91,12 @@ public final class ScoreTable {
      * @throws IOException 
      */
     private void writeMemoryToFile(File file) throws IOException{
-        
         //File scoresFile = new File(filePath);
-        FileWriter writer;
-        writer = new FileWriter(file, false);
+        FileWriter writer = new FileWriter(file, false);
         for (var activeScore : this.scoreList) {
-            writer.write(activeScore.toString() + "\n"); //USes the Score Class To String Method
+            writer.write(activeScore.toString() + "\n"); // Uses the Score class toString Method
          }
         writer.close();
-
     }
     
     /**
@@ -144,7 +132,6 @@ public final class ScoreTable {
      * @return the position where the score should be placed in.
      */
     private int checkIfHighscore(int playerScore){
-        
         int i = -1;
         for(int j=4; j>-1; j--){
             if(playerScore > scoreList[j].getScore()){
@@ -152,7 +139,6 @@ public final class ScoreTable {
                 
             }
         }
-        
         return i;
     }
     
@@ -168,15 +154,12 @@ public final class ScoreTable {
      * @return True if addition was successful
      */
     public boolean secureAdd(int playerScore, String name){
-        
         int biggerThanPos = checkIfHighscore(playerScore);
-        if(biggerThanPos == -1) return false;
-        
-        
-        for(int i=(scoreList.length-1); i>biggerThanPos; i--){
+        if (biggerThanPos == -1) return false;
+
+        for(int i = (scoreList.length - 1); i > biggerThanPos; i--){
             scoreList[i].setScore(scoreList[i-1].getScore());
             scoreList[i].setName(scoreList[i-1].getName());
-            
         }
         scoreList[biggerThanPos].setScore(playerScore);
         scoreList[biggerThanPos].setName(name);
@@ -193,7 +176,6 @@ public final class ScoreTable {
     @Override
     public String toString() {
         StringBuilder SB = new StringBuilder();
-        
         for (Score s0 : scoreList) {
             SB.append(s0.getName()).append(" ").append(String.valueOf(s0.getScore())).append("\n");
         }
@@ -201,19 +183,18 @@ public final class ScoreTable {
     }
     
     //** Example Usage
-    public static void main(String[] args){
-        
-        ScoreTable ST = new ScoreTable(pointandclick.PointAndClick.SCOREFILEPATH);
-        
-        int points = 404;
-        //if( ST.checkIfHighscore(points) != -1 ){
-            // ask for name to feed to secureAdd Method){
+    // public static void main(String[] args){
+    //     ScoreTable ST = new ScoreTable(pointandclick.PointAndClick.SCORE_FILE_PATH);
+    //     int points = 404;
+    //     System.out.println(ST.secureAdd(points, "Top001"));
+    //     //if( ST.checkIfHighscore(points) != -1 ){
+    //         // ask for name to feed to secureAdd Method){
 
-            //System.out.println(ST.checkIfHighscore(points));
-            System.out.println(ST.secureAdd(points, "Top001"));
-        //}
+    //         //System.out.println(ST.checkIfHighscore(points));
+    //         // System.out.println(ST.secureAdd(points, "Top001"));
+    //     //}
         
-    }
+    // }
     //**/
     
     

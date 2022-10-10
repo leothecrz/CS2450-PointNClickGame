@@ -1,4 +1,3 @@
-
 package pointandclick.Common;
 
 import javax.swing.JOptionPane;
@@ -8,13 +7,12 @@ import javax.swing.JOptionPane;
  * exit question dialog. Uses saved string to format the
  *  dialog box. 0 is Yes. 1 is No.
  */
-public final class ExitDiolog extends JOptionPane{
-
+public final class ExitDialog extends JOptionPane {
     private final static Object[] CHOICES = { "Yes", "No" };
-    private final static String DIOLOGMESSAGE = "Exit the Game?";
-    private final static String DIOLOGTITTLE = "Exit Diolog";
+    private final static String DIALOG_MESSAGE = "Exit the game?";
+    private final static String DIALOG_TITLE = "Exit Game";
     
-    public ExitDiolog() {
+    public ExitDialog() {
         super();
     }
     
@@ -22,8 +20,8 @@ public final class ExitDiolog extends JOptionPane{
      * Display the dialog box. 
      * @return 0 is Yes, 1 is No
      */
-    public int getUserChoice(){
-        return showOptionDialog(this, DIOLOGMESSAGE, DIOLOGTITTLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, CHOICES, CHOICES[0]);
+    public boolean shouldExit() {
+        return showOptionDialog(this, DIALOG_MESSAGE, DIALOG_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, CHOICES, CHOICES[0]) == 0;
     }
     
 }

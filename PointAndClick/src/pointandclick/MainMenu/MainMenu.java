@@ -69,7 +69,6 @@ public class MainMenu extends JPanel {
         super.paintComponent(g);
         
         try {
-            
             pic = ImageIO.read(new File("Images/menuIcon.png")); 
             g.drawImage(pic, 80, 20, 300, 310, this);
         } catch (IOException e) {System.err.println("Image Not Found - Main Menu");} 

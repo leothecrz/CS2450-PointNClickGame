@@ -22,9 +22,7 @@ import pointandclick.ColorGame.ColorGamePanel;
 import pointandclick.Hangman.HangmanGamePanel;
 import pointandclick.MainMenu.ScorePanel;
 
-
-public class GameHandler extends JPanel{
-    
+public class GameHandler extends JPanel {
     private JPanel face;
     private HangmanGamePanel gamePanel;
     private ScorePanel scorePanel;
@@ -37,7 +35,6 @@ public class GameHandler extends JPanel{
      * @param backButtonListener
      */
     public GameHandler(ActionListener backButtonListener) {
-        
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         
         // Handles Game End Events

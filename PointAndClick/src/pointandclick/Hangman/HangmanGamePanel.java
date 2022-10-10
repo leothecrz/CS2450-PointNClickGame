@@ -22,21 +22,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.JPanel;
-
-import pointandclick.Common.RoundedBorder;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
-
+import pointandclick.Common.RoundedBorder;
 
 public class HangmanGamePanel extends JPanel {
     // Constants
     private static final int MAX_ERRORS = 6;
-    private static final int ALPHABET_COUNT = 26;
     private static final String KEYS = "abcdefghijklmnopqrstuvwxyz";
     private static final String[] WORDBANK = {
         "abstract", "cemetery", "nurse", "pharmacy", "climbing"
@@ -143,9 +139,9 @@ public class HangmanGamePanel extends JPanel {
         bottomPanel.setBackground(Color.DARK_GRAY); // USED TO DIFFIRENTIATE
  
         // Keyboard buttons
-        keyButtons = new JButton[ALPHABET_COUNT];
+        keyButtons = new JButton[KEYS.length()];
         Font buttonFont = new Font("Marker Felt", Font.PLAIN, 15);
-        for (int i = 0; i < ALPHABET_COUNT; i++){
+        for (int i = 0; i < KEYS.length(); i++){
             keyButtons[i] = new JButton(); 
             keyButtons[i].setText(String.valueOf(KEYS.charAt(i))); // Each Key Represents its letter
             keyButtons[i].addActionListener(buttonsGameListener); // AllButtons Connected To Same Listener
