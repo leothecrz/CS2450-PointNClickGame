@@ -29,6 +29,14 @@ public class SudokuCell extends JComponent implements MouseListener {
 
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, 35, 35);
+
+        // Center text
+        FontMetrics metric = g.getFontMetrics();
+        String text = String.valueOf(number);
+        int x = (35 - metric.stringWidth(text)) / 2;
+        int y = (35 - metric.getHeight()) / 2 + metric.getAscent();
+        g.setColor(given ? Color.BLACK : Color.BLUE);
+        g.drawString(text, x, y);
     }
 
     @Override
@@ -50,7 +58,7 @@ public class SudokuCell extends JComponent implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.printf("%d %d\n", row, column);
+        System.out.printf("%d %d - %d\n", row, column, number);
     }
 
     @Override
