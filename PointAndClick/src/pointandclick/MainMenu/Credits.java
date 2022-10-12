@@ -29,6 +29,7 @@ public class Credits extends JPanel {
         backButton.setBounds(480,310,80,30);
         backButton.setBorder(new RoundedBorder(15));
         backButton.setContentAreaFilled(false);
+        backButton.setToolTipText("Return to the main menu.");
         add(backButton);
     }
     

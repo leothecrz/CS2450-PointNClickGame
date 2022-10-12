@@ -22,7 +22,6 @@ import pointandclick.Common.RoundedBorder;
 public class HighScores extends JPanel {
     
     private Font markerFeltFont;
-    
     private ScoreTable highScoreTable;
    
     /**
@@ -40,6 +39,7 @@ public class HighScores extends JPanel {
         backButton.setBounds(480,310,80,30);
         backButton.setBorder(new RoundedBorder(15));
         backButton.setContentAreaFilled(false);
+        backButton.setToolTipText("Return to the main menu.");
         
         add(backButton);
 

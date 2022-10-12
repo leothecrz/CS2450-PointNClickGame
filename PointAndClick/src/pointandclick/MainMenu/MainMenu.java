@@ -38,6 +38,7 @@ public class MainMenu extends JPanel {
         highScoresButton.setBorder(new RoundedBorder(15));
         highScoresButton.setContentAreaFilled(false);
         highScoresButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        highScoresButton.setToolTipText("Go to the highscore panel.");
         add(highScoresButton);
         
         JButton creditsButton = new JButton("Credits");
@@ -47,6 +48,7 @@ public class MainMenu extends JPanel {
         creditsButton.setContentAreaFilled(false);
         creditsButton.setBounds(450, 240, 120, 40);
         creditsButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        creditsButton.setToolTipText("Go to the credits panel.");
         add(creditsButton);
         
         JButton playButton = new JButton("Play");
@@ -56,6 +58,7 @@ public class MainMenu extends JPanel {
         playButton.setBorder(new RoundedBorder(15));
         playButton.setContentAreaFilled(false);
         playButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        playButton.setToolTipText("Start the minigames.");
         add(playButton);
 
         add(highScoresButton);
