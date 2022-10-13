@@ -43,7 +43,7 @@ public class SudokuPanel extends JPanel {
                         if (calculateScore() == 540){
                             listener.actionPerformed(endGame);
                         } else {
-                            //Inform the player that they made an error in the puzzle.
+                            JOptionPane.showMessageDialog(this, "Answer is incorrect.", "Try Again", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -61,6 +61,7 @@ public class SudokuPanel extends JPanel {
         quitButton.setContentAreaFilled(false);
         quitButton.setBounds(450, 240, 120, 40);
         quitButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        quitButton.setToolTipText("End Sudoku Game.");
         add(quitButton);
 
         JButton submitButton = new JButton("Submit");
@@ -70,6 +71,7 @@ public class SudokuPanel extends JPanel {
         submitButton.setBorder(new RoundedBorder(15));
         submitButton.setContentAreaFilled(false);
         submitButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        submitButton.setToolTipText("Submit answer.");
         add(submitButton);
     }
     

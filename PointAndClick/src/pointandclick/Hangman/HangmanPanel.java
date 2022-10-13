@@ -116,6 +116,7 @@ public class HangmanPanel extends JPanel {
         skipButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
         skipButton.setBorder(new RoundedBorder(15));
         skipButton.setContentAreaFilled(false);
+        skipButton.setToolTipText("Skip Hangman Game.");
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
         ActionListener timeListener = evt -> {
