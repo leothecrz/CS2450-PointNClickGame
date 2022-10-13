@@ -56,16 +56,16 @@ public class GameHandler extends JPanel {
                     panelLayout.show(face, sudokuPanel.getClass().getSimpleName());
                     break;
                 case "SudokuEnd":
-                    scorePanel.addPlayerScore(sudokuPanel.calculateScore());
-
-                    // Switch to scores panel
+                    scorePanel.addPlayerScore(sudokuPanel.getGameScore());
                     scorePanel.getScoreTable().loadScores();
                     if (scorePanel.getScoreTable().checkIfHighscoreBoolean(scorePanel.getPlayerScore())) {
                         scorePanel.setState(true);
                     } else {
                         scorePanel.setState(false);
                     }
+                    panelLayout.show(face, scorePanel.getClass().getSimpleName());
                     break;
+                    
                 default:
                     System.err.println("GameHandler: unknown command " + evt.getActionCommand());
                     break;

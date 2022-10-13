@@ -25,7 +25,13 @@ public final class ScoreTable {
         for (int i = 0; i < scoreList.length; i++) {
             scoreList[i] = new Score(0, "-", "-");
         }
-        loadScores(); // Pull scores after construction
+        
+        if(fileExist()){
+            loadScores();
+        } else {
+            createNewFile();
+        }
+        
     }
     
     /**
@@ -40,7 +46,6 @@ public final class ScoreTable {
             writeMemoryToFile(scoresFile);
         } catch (IOException ex) {
             System.err.println("Failed to save memory to disk");
-            ex.printStackTrace();
         }
         
     }
@@ -65,40 +70,13 @@ public final class ScoreTable {
                 reader.nextLine(); // eats the lone '\n'
             }
             reader.close();
-        } catch (FileNotFoundException ex) { 
-            // File is not found; make a default
-            try {
-                scoresFile.createNewFile();
-                writeMemoryToFile(scoresFile);
-            } catch (IOException ex1) {
-                System.err.println("\nThe default high score table could not be created\n");
-                ex1.printStackTrace();
-            }
-        
-        } catch (NoSuchElementException ex1){
+        } 
+        catch (FileNotFoundException ex) { System.err.println("File Not Found Error Not Handled"); } 
+        catch (NoSuchElementException ex1){
             System.err.println("High score file has an error");
             scoresFile.delete();
-            try {
-                writeMemoryToFile(scoresFile);
-                scoresFile.createNewFile();
-            } catch (IOException ex) {
-            }
+            createNewFile();
         } // Catch end
-    }
-    
-    /**
-     * The file held at the path stored in filePath must not exist
-     * or it will throw Exception. Will write the contents of the
-     * table onto the file.
-     * @throws IOException 
-     */
-    private void writeMemoryToFile(File file) throws IOException{
-        //File scoresFile = new File(filePath);
-        FileWriter writer = new FileWriter(file, false);
-        for (var activeScore : this.scoreList) {
-            writer.write(activeScore.toString() + "\n"); // Uses the Score class toString Method
-         }
-        writer.close();
     }
     
     /**
@@ -123,23 +101,6 @@ public final class ScoreTable {
         }
         
         return false;
-    }
-    
-    /**
-     * Checks if the int playerScore is bigger than any of the 
-     * high scores starting from the lowest. Will keep track of what position it is bigger
-     * than.
-     * @param playerScore - Score to be checked
-     * @return the position where the score should be placed in.
-     */
-    private int checkIfHighscore(int playerScore){
-        int i = -1;
-        for (int j = 4; j > -1; j--){
-            if (playerScore > scoreList[j].getScore()){
-                i = j;
-            }
-        }
-        return i;
     }
     
     /**
@@ -169,6 +130,53 @@ public final class ScoreTable {
         return true;
     }
     
+    private boolean fileExist(){
+        File testFile = new File(filePath);
+        return testFile.exists();
+    }
+    
+    private void createNewFile(){
+        File testFile = new File(filePath);
+        try {
+            
+            testFile.createNewFile();
+            new FileWriter(testFile, false).close();
+            writeMemoryToFile(testFile);
+
+        } catch (IOException ex) {} 
+    }
+    
+    /**
+     * Checks if the int playerScore is bigger than any of the 
+     * high scores starting from the lowest. Will keep track of what position it is bigger
+     * than.
+     * @param playerScore - Score to be checked
+     * @return the position where the score should be placed in.
+     */
+    private int checkIfHighscore(int playerScore){
+        int i = -1;
+        for (int j = 4; j > -1; j--){
+            if (playerScore > scoreList[j].getScore()){
+                i = j;
+            }
+        }
+        return i;
+    }
+    
+    /**
+     * The file held at the path stored in filePath must not exist
+     * or it will throw Exception. Will write the contents of the
+     * table onto the file.
+     * @throws IOException 
+     */
+    private void writeMemoryToFile(File file) throws IOException{
+        FileWriter writer = new FileWriter(file, false);
+        for (var activeScore : this.scoreList) {
+            writer.write(activeScore.toString() + "\n"); // Uses the Score class toString Method
+         }
+        writer.close();
+    }
+    
     /**
      * Formats a string in the style of "NAME SCORE\nNAME SCORE\n" 
      * @return The formatted string
@@ -181,22 +189,5 @@ public final class ScoreTable {
         }
         return SB.toString();
     }
-    
-    //** Example Usage
-    // public static void main(String[] args){
-    //     ScoreTable ST = new ScoreTable(pointandclick.PointAndClick.SCORE_FILE_PATH);
-    //     int points = 404;
-    //     System.out.println(ST.secureAdd(points, "Top001"));
-    //     //if( ST.checkIfHighscore(points) != -1 ){
-    //         // ask for name to feed to secureAdd Method){
-
-    //         //System.out.println(ST.checkIfHighscore(points));
-    //         // System.out.println(ST.secureAdd(points, "Top001"));
-    //     //}
-        
-    // }
-    //**/
-    
-    
     
 }
