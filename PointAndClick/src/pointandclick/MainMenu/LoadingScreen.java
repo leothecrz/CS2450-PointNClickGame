@@ -46,14 +46,11 @@ public class LoadingScreen extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        g2.setColor(new Color(145, 145, 145));
-        g2.fillRect(25, 50, 550, 250);
-        
         g2.setColor(new Color(0,0,0));
         g2.setFont(new Font("Marker Felt", Font.BOLD, 60));
         g2.drawString("Point and Click Game", 40, 150);
         
         g2.setFont(new Font("Marker Felt", Font.PLAIN, 30));
-        g2.drawString("Team Goofy Goobers", 175, 250);
+        g2.drawString("- Team Goofy Goobers -", 175, 250);
     }
 }
