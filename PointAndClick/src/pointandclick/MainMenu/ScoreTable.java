@@ -10,6 +10,7 @@ import java.util.Scanner;
 import pointandclick.PointAndClick;
 
 public final class ScoreTable {
+    public static final String SCORE_FILE_PATH = "Data/highscore.txt"; 
     private final String filePath;
     private Score[] scoreList;
     private final int HIGH_SCORES_COUNT = 5;
@@ -19,8 +20,8 @@ public final class ScoreTable {
      * high scores to and from a file. 
      * @param filePath - path to txt file used to store data.
      */
-    public ScoreTable(String filePath){
-        this.filePath = filePath;
+    public ScoreTable(){
+        this.filePath = SCORE_FILE_PATH;
         this.scoreList = new Score[HIGH_SCORES_COUNT];
         for (int i = 0; i < scoreList.length; i++) {
             scoreList[i] = new Score(0, "-", "-");
@@ -33,6 +34,7 @@ public final class ScoreTable {
         }
         
     }
+    
     
     /**
      * Save the current highs cores in memory to file on disk.

@@ -34,9 +34,11 @@ public class SudokuBoard extends JComponent implements ActionListener {
     private SudokuCell[][] cells;
     private int selectedRow;
     private int selectedColumn;
+    private boolean boardMade;
 
     public SudokuBoard() {
         setLayout(new GridLayout(9, 9));
+        boardMade = false;
         
         Action numberAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -50,6 +52,17 @@ public class SudokuBoard extends JComponent implements ActionListener {
             getActionMap().put(String.valueOf(i), numberAction);
         }
     }
+    
+    public void resetBoard(){
+        for(var activeRow: cells){
+            for(var activeCell: activeRow){
+                if(!activeCell.given)
+                activeCell.setUserAnswer(0);
+            }
+        }
+        selectedRow = -1;
+        selectedColumn = -1;
+    }
 
     public void setupBoard() {
         cells = new SudokuCell[9][9];
@@ -62,6 +75,7 @@ public class SudokuBoard extends JComponent implements ActionListener {
 
         selectedRow = -1;
         selectedColumn = -1;
+        boardMade = true;
     }
 
     public int calculateScore() {
@@ -88,5 +102,9 @@ public class SudokuBoard extends JComponent implements ActionListener {
         selectedRow = cell.row;
         selectedColumn = cell.column;
         cell.setSelected(true);
+    }
+    
+    public boolean getBoardMade(){
+        return this.boardMade;
     }
 }

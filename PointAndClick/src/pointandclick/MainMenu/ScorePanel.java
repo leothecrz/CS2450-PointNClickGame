@@ -46,7 +46,7 @@ public class ScorePanel extends JPanel{
         super();
         
         playerScore = 0;
-        scoreTable = new ScoreTable(pointandclick.PointAndClick.SCORE_FILE_PATH);
+        scoreTable = new ScoreTable();
         
         setPreferredSize(new Dimension(600, 400));
         setLayout(null);

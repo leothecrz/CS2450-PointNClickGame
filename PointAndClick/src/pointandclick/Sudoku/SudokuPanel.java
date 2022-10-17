@@ -101,7 +101,11 @@ public class SudokuPanel extends JPanel {
     }
 
     public void reset() {
-        sudokuBoard.setupBoard();
+        if(sudokuBoard.getBoardMade()){
+            sudokuBoard.resetBoard();
+        } else {
+            sudokuBoard.setupBoard();
+        }
         hasBeenSubmitted = false;
     }
 }

@@ -23,7 +23,6 @@ import pointandclick.Common.*;
 import pointandclick.MainMenu.*;
 
 public class PointAndClick extends JFrame {
-    public static final String SCORE_FILE_PATH = "Data/highscore.txt"; 
     public static ActionListener panelSwitcher;
     
     private CardLayout layout;
@@ -139,7 +138,6 @@ public class PointAndClick extends JFrame {
      * @param args - main method default requirement
      */
     public static void main(String[] args) {
-        new ScoreTable(SCORE_FILE_PATH); // file is created if not there already
         new PointAndClick("Point and Click Game").setVisible(true);
     }
 

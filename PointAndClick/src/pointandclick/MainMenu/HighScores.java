@@ -29,7 +29,7 @@ public class HighScores extends JPanel {
      * @param backButtonListener - listener for the backButton to connect with ActionListener
      */
     public HighScores(ActionListener backButtonListener) {
-        highScoreTable = new ScoreTable(PointAndClick.SCORE_FILE_PATH);
+        highScoreTable = new ScoreTable();
         markerFeltFont = new Font("Marker Felt", Font.PLAIN, 20); // font set
         setLayout(null);
         
