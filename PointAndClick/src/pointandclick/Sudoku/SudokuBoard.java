@@ -113,13 +113,15 @@ public class SudokuBoard extends JComponent implements ActionListener {
     }
     
     public void resetBoard() {
-        for (var activeRow: cells) {
-            for (var activeCell: activeRow) {
-                if (!activeCell.given) {
-                    activeCell.setUserAnswer(0);
+        for (SudokuCell[] row : cells) {
+            for (SudokuCell cell : row) {
+                cell.setSelected(false);
+                if (!cell.given) {
+                    cell.setUserAnswer(0);
                 }
             }
         }
+
         selectedRow = 0;
         selectedColumn = 0;
     }
