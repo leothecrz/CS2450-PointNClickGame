@@ -40,15 +40,12 @@ public class ColorGamePanel extends JPanel {
         setPreferredSize(new Dimension(600, 400));
         random = new Random();
         
-        // Title
-        JLabel titleLabel = new JLabel();
-        titleLabel.setText("Color Game Screen");
-        add(titleLabel);
-        
         // Time
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
         ActionListener timeListener = evt -> {
-            timeLabel.setText(format.format(new Date())); 
+            String date = format.format(new Date());
+            timeLabel.setText(date); 
+            timeLabel.setToolTipText("Current time: " + date);
         };
         
         timeLabel = new JLabel("");
@@ -78,6 +75,7 @@ public class ColorGamePanel extends JPanel {
         int i = 0;
         for (Color color : COLORS) {
             ColorButton button = new ColorButton(color, buttonListener);
+            button.setToolTipText("Select color: " + COLOR_NAMES[i]);
             colorButtons[i++] = button;
             add(button);
         }
@@ -93,7 +91,9 @@ public class ColorGamePanel extends JPanel {
     }
 
     private void updateColor() {
-        colorLabel.setText(COLOR_NAMES[random.nextInt(COLOR_NAMES.length)]);
+        String colorName = COLOR_NAMES[random.nextInt(COLOR_NAMES.length)];
+        colorLabel.setText(colorName);
+        colorLabel.setToolTipText(colorName);
         colorLabel.setForeground(COLORS[random.nextInt(COLORS.length)]);
     }
 

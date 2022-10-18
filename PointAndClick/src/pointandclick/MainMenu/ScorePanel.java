@@ -54,7 +54,8 @@ public class ScorePanel extends JPanel{
         Font MarkerFelt = new Font("Marker Felt", Font.BOLD, 15);
         
         gotHSLabel = new JLabel();
-        gotHSLabel.setText(" You Set a High Score!! Sumbit Your Name. ");
+        gotHSLabel.setText(" You set a high score!! Sumbit your name: ");
+        gotHSLabel.setToolTipText("You set a high score!! Sumbit your name:");
         gotHSLabel.setFont(MarkerFelt);
         gotHSLabel.setBounds(170, 50, 300, 25);
         gotHSLabel.setVisible(true);
@@ -75,6 +76,7 @@ public class ScorePanel extends JPanel{
         gotHSNameField.addActionListener(gotHStextFieldListener);
         gotHSNameField.setBounds(220, 90, 150, 25);
         gotHSNameField.setVisible(false);
+        gotHSNameField.setToolTipText("Enter your name here.");
         
         add(gotHSNameField);
         
@@ -85,6 +87,7 @@ public class ScorePanel extends JPanel{
         endButton.setContentAreaFilled(false);
         endButton.addActionListener(endAndSkip);
         endButton.setActionCommand("End");
+        endButton.setToolTipText("End game/Continue");
         endButton.setSelected(true);
         endButton.setBounds(480, 300, 100, 50);
         
@@ -124,7 +127,7 @@ public class ScorePanel extends JPanel{
         gotHSLabel.setVisible(state);
         gotHSNameField.setVisible(state);
         
-        if(state){
+        if (state) {
             gotHSNameField.setText("");
             gotHSNameField.setEnabled(state);
         }

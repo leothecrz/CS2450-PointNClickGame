@@ -150,6 +150,7 @@ public class HangmanPanel extends JPanel {
             keyButtons[i].setFont(buttonFont);
             keyButtons[i].setBackground(Color.LIGHT_GRAY);
             keyButtons[i].setBorder(BorderFactory.createEmptyBorder(15, 15, 20,15));
+            keyButtons[i].setToolTipText("Input the letter '" + KEYS.charAt(i) + "'.");
             keyButtons[i].setEnabled(true);
             
             bottomPanel.add(keyButtons[i]); // Add keyButtons to bottomPanel's grid. 

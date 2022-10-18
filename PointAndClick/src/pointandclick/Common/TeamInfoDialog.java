@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
  */
 public final class TeamInfoDialog extends JDialog implements ActionListener{
     private static final String[] NAMES = {"   Leonardo #0000   ", "   Matthew #1111   ", "   Jasroop #2222   ", "   Noris #3333   ", "   Vivian #4444   "}; // 3 space padding
-    private static final String DISPLAY_TITTLE = "   Point And Click   ";
+    private static final String DISPLAY_TITLE = "   Point And Click   ";
     private static final String TERM_DISPLAY = "- Term: Fall 2022 -";
     private static final String WINDOW_TITLE = "Dev Team Information";
         
@@ -29,15 +29,15 @@ public final class TeamInfoDialog extends JDialog implements ActionListener{
         GridBagConstraints constraints = new GridBagConstraints();
         //this.setPreferredSize(new Dimension(375, 175));
         
-        JLabel tittle = new JLabel();
-        tittle.setText(DISPLAY_TITTLE);
-        tittle.setFont(new Font("Marker Felt", Font.PLAIN, 35));
+        JLabel title = new JLabel();
+        title.setText(DISPLAY_TITLE);
+        title.setFont(new Font("Marker Felt", Font.PLAIN, 35));
         constraints.fill = GridBagConstraints.CENTER;
         constraints.weightx = 0.3;
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 7;
-        add(tittle, constraints);
+        add(title, constraints);
         
         JLabel term = new JLabel();
         term.setText(TERM_DISPLAY);

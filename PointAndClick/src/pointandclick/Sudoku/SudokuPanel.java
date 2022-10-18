@@ -18,9 +18,10 @@ public class SudokuPanel extends JPanel {
     public SudokuPanel(ActionListener listener) {
         setLayout(null);
         setPreferredSize(new Dimension(600, 400));
-        this.sudokuScore = 0;
-        this.sudokuBoard = new SudokuBoard();
+        sudokuScore = 0;
+        sudokuBoard = new SudokuBoard();
         sudokuBoard.setBounds(20, 10, 342, 342);
+        sudokuBoard.setToolTipText("Sudoku Board");
         add(sudokuBoard);
         
         ActionListener sudokuListener = evt -> {
@@ -70,7 +71,9 @@ public class SudokuPanel extends JPanel {
         
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
         ActionListener timeListener = evt -> {
-            timeLabel.setText(format.format(new Date())); 
+            String date = format.format(new Date());
+            timeLabel.setText(date); 
+            timeLabel.setToolTipText("Current time: " + date);
         };
         
         timeLabel = new JLabel("");
