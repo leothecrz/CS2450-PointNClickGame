@@ -116,6 +116,7 @@ public class SudokuBoard extends JComponent implements ActionListener {
         for (SudokuCell[] row : cells) {
             for (SudokuCell cell : row) {
                 cell.setSelected(false);
+                cell.resetIncorrect();
                 if (!cell.given) {
                     cell.setUserAnswer(0);
                 }
@@ -140,6 +141,21 @@ public class SudokuBoard extends JComponent implements ActionListener {
         boardMade = true;
     }
 
+    public boolean isCorrect() {
+        boolean correct = true;
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                SudokuCell cell = cells[row][col];
+                if (!cell.isCorrect()) {
+                    correct = false;
+                    break;
+                }
+            }
+            if (!correct) break;
+        }
+        return correct;
+    }
+
     public int calculateScore() {
         int score = 540;
         for (int row = 0; row < 9; row++) {
@@ -147,7 +163,7 @@ public class SudokuBoard extends JComponent implements ActionListener {
                 SudokuCell cell = cells[row][col];
                 if (cell.given)
                     continue;
-                if (!cell.isCorrect())
+                if (!cell.isCorrect() || cell.getIncorrect())
                     score -= 10;
             }
         }

@@ -17,6 +17,7 @@ public class SudokuCell extends JComponent implements MouseListener {
     public boolean given;
     private int userAnswer;
     private boolean selected;
+    private boolean incorrect;
     private ActionListener listener;
 
     public SudokuCell(int row, int column, int number, boolean given, ActionListener listener) {
@@ -25,6 +26,7 @@ public class SudokuCell extends JComponent implements MouseListener {
         this.number = number;
         this.given = given;
         this.listener = listener;
+        this.incorrect = false;
         this.userAnswer = given ? number : 0;
 
         markerFeltFont = new Font("Marker Felt", Font.PLAIN, 12);
@@ -45,7 +47,17 @@ public class SudokuCell extends JComponent implements MouseListener {
     }
 
     public boolean isCorrect() {
-        return userAnswer == number;
+        boolean correct = userAnswer == number;
+        if (!correct && !incorrect) incorrect = true;
+        return correct;
+    }
+
+    public void resetIncorrect() {
+        incorrect = false;
+    }
+
+    public boolean getIncorrect() {
+        return incorrect;
     }
 
     @Override

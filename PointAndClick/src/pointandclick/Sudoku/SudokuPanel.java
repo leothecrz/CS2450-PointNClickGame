@@ -34,8 +34,8 @@ public class SudokuPanel extends JPanel {
                     break;
                 }
                 case "SudokuSubmit" -> {
-                    if (calculateScore() == 540) {
-                        this.sudokuScore = 540;
+                    if (sudokuBoard.isCorrect()) {
+                        this.sudokuScore = sudokuBoard.calculateScore();
                         listener.actionPerformed(endGame);
                     } else {
                         JOptionPane.showMessageDialog(this, "Your answer is incorrect. Please try again.", "Try Again", JOptionPane.ERROR_MESSAGE);
@@ -87,10 +87,6 @@ public class SudokuPanel extends JPanel {
     
     public int getScore() {
         return this.sudokuScore;
-    }
-
-    private int calculateScore() {
-        return sudokuBoard.calculateScore();
     }
 
     public void reset() {
