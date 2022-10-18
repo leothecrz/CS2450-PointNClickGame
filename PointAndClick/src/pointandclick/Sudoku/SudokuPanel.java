@@ -40,7 +40,9 @@ public class SudokuPanel extends JPanel {
                         hasBeenSubmitted = true;
                         this.sudokuScore = calculateScore();
                         if(sudokuScore < 540){
-                            // Inform the player that they made an error in the puzzle.
+                            JOptionPane.showMessageDialog(this, "Answer is incorrect.", "Try Again", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            listener.actionPerformed(endGame);
                         }
                     } else {
                         if (calculateScore() == 540){

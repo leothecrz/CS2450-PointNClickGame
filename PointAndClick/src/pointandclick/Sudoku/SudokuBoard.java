@@ -51,6 +51,64 @@ public class SudokuBoard extends JComponent implements ActionListener {
             getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(String.valueOf(i)), String.valueOf(i));
             getActionMap().put(String.valueOf(i), numberAction);
         }
+        
+        
+        // Sudoku Key Select Moves UP
+        Action moveUP = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                cells[selectedRow][selectedColumn].setSelected(false);
+                if(selectedRow > 0){
+                    selectedRow -= 1;
+                }
+                cells[selectedRow][selectedColumn].setSelected(true);
+            }
+        };
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UPKEY");
+        getActionMap().put("UPKEY", moveUP);
+        
+        // Sudoku Key Select Moves Down
+        Action moveDown = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                cells[selectedRow][selectedColumn].setSelected(false);
+                if(selectedRow < 8){
+                    selectedRow += 1;
+                }
+                cells[selectedRow][selectedColumn].setSelected(true);
+
+            }
+        };
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWNKEY");
+        getActionMap().put("DOWNKEY", moveDown);
+        
+        // Sudouku Key Select Moves Left
+        Action moveLeft = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                cells[selectedRow][selectedColumn].setSelected(false);
+                if(selectedColumn > 0){
+                    selectedColumn -= 1;
+                }
+                cells[selectedRow][selectedColumn].setSelected(true);
+
+            }
+        };
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LEFTKEY");
+        getActionMap().put("LEFTKEY", moveLeft);
+        
+        // Sudoku Key Select Moves Right
+        Action moveRight = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                cells[selectedRow][selectedColumn].setSelected(false);
+                if(selectedColumn < 8){
+                    selectedColumn += 1;
+                }
+                cells[selectedRow][selectedColumn].setSelected(true);
+
+            }
+        };
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHTKEY");
+        getActionMap().put("RIGHTKEY", moveRight);
+        
+        
     }
     
     public void resetBoard(){
@@ -60,8 +118,8 @@ public class SudokuBoard extends JComponent implements ActionListener {
                 activeCell.setUserAnswer(0);
             }
         }
-        selectedRow = -1;
-        selectedColumn = -1;
+        selectedRow = 0;
+        selectedColumn = 0;
     }
 
     public void setupBoard() {
@@ -73,8 +131,8 @@ public class SudokuBoard extends JComponent implements ActionListener {
             }
         }
 
-        selectedRow = -1;
-        selectedColumn = -1;
+        selectedRow = 0;
+        selectedColumn = 0;
         boardMade = true;
     }
 

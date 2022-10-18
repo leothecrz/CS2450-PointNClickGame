@@ -38,8 +38,10 @@ public class SudokuCell extends JComponent implements MouseListener {
     }
 
     public void setUserAnswer(int answer) {
-        this.userAnswer = answer;
-        repaint();
+        if(!given) {
+            this.userAnswer = answer;
+            repaint();
+        }
     }
 
     public boolean isCorrect() {
@@ -51,6 +53,8 @@ public class SudokuCell extends JComponent implements MouseListener {
         super.paintComponent(g);
 
         g.setColor(selected ? Color.GRAY : Color.WHITE);
+        if(selected && given)
+            g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, CELL_SIZE, CELL_SIZE);
 
         // Center text
