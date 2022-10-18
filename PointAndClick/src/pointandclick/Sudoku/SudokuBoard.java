@@ -39,25 +39,28 @@ public class SudokuBoard extends JComponent implements ActionListener {
     public SudokuBoard() {
         setLayout(new GridLayout(9, 9));
         boardMade = false;
-        
+        setupListeners();
+    }
+
+    private void setupListeners() {
+        // Set cell value when player presses 0-9 (0 clears the cell)
         Action numberAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if (selectedRow != -1 && selectedColumn != -1)
                     cells[selectedRow][selectedColumn].setUserAnswer(Integer.parseInt(e.getActionCommand()));
             }
         };
-
         for (int i = 0; i <= 9; i++) {
             getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(String.valueOf(i)), String.valueOf(i));
             getActionMap().put(String.valueOf(i), numberAction);
         }
         
         
-        // Sudoku Key Select Moves UP
+        // Up key moves selection up
         Action moveUP = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 cells[selectedRow][selectedColumn].setSelected(false);
-                if(selectedRow > 0){
+                if(selectedRow > 0) {
                     selectedRow -= 1;
                 }
                 cells[selectedRow][selectedColumn].setSelected(true);
@@ -66,11 +69,11 @@ public class SudokuBoard extends JComponent implements ActionListener {
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UPKEY");
         getActionMap().put("UPKEY", moveUP);
         
-        // Sudoku Key Select Moves Down
+        // Down key moves selection down
         Action moveDown = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 cells[selectedRow][selectedColumn].setSelected(false);
-                if(selectedRow < 8){
+                if(selectedRow < 8) {
                     selectedRow += 1;
                 }
                 cells[selectedRow][selectedColumn].setSelected(true);
@@ -80,11 +83,11 @@ public class SudokuBoard extends JComponent implements ActionListener {
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWNKEY");
         getActionMap().put("DOWNKEY", moveDown);
         
-        // Sudouku Key Select Moves Left
+        // Left key moves selection left
         Action moveLeft = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 cells[selectedRow][selectedColumn].setSelected(false);
-                if(selectedColumn > 0){
+                if(selectedColumn > 0) {
                     selectedColumn -= 1;
                 }
                 cells[selectedRow][selectedColumn].setSelected(true);
@@ -94,11 +97,11 @@ public class SudokuBoard extends JComponent implements ActionListener {
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LEFTKEY");
         getActionMap().put("LEFTKEY", moveLeft);
         
-        // Sudoku Key Select Moves Right
+        // Right key moves selection right
         Action moveRight = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 cells[selectedRow][selectedColumn].setSelected(false);
-                if(selectedColumn < 8){
+                if(selectedColumn < 8) {
                     selectedColumn += 1;
                 }
                 cells[selectedRow][selectedColumn].setSelected(true);
@@ -107,15 +110,14 @@ public class SudokuBoard extends JComponent implements ActionListener {
         };
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHTKEY");
         getActionMap().put("RIGHTKEY", moveRight);
-        
-        
     }
     
-    public void resetBoard(){
-        for(var activeRow: cells){
-            for(var activeCell: activeRow){
-                if(!activeCell.given)
-                activeCell.setUserAnswer(0);
+    public void resetBoard() {
+        for (var activeRow: cells) {
+            for (var activeCell: activeRow) {
+                if (!activeCell.given) {
+                    activeCell.setUserAnswer(0);
+                }
             }
         }
         selectedRow = 0;
@@ -162,7 +164,7 @@ public class SudokuBoard extends JComponent implements ActionListener {
         cell.setSelected(true);
     }
     
-    public boolean getBoardMade(){
+    public boolean getBoardMade() {
         return this.boardMade;
     }
 }

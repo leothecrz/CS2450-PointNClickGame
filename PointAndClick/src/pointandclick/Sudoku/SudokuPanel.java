@@ -12,7 +12,6 @@ public class SudokuPanel extends JPanel {
     
     private SudokuBoard sudokuBoard;
     private int sudokuScore;
-    private boolean hasBeenSubmitted;
     private JLabel timeLabel;
     private Timer timeLabelTimer;
 
@@ -20,13 +19,11 @@ public class SudokuPanel extends JPanel {
         setLayout(null);
         setPreferredSize(new Dimension(600, 400));
         this.sudokuScore = 0;
-        this.hasBeenSubmitted = false;
         this.sudokuBoard = new SudokuBoard();
         sudokuBoard.setBounds(20, 10, 342, 342);
         add(sudokuBoard);
         
         ActionListener sudokuListener = evt -> {
-            
             ActionEvent endGame = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "SudokuEnd");
             
             switch (evt.getActionCommand()) {
@@ -36,20 +33,11 @@ public class SudokuPanel extends JPanel {
                     break;
                 }
                 case "SudokuSubmit" -> {
-                    if(!hasBeenSubmitted){
-                        hasBeenSubmitted = true;
-                        this.sudokuScore = calculateScore();
-                        if(sudokuScore < 540){
-                            JOptionPane.showMessageDialog(this, "Answer is incorrect.", "Try Again", JOptionPane.ERROR_MESSAGE);
-                        } else {
-                            listener.actionPerformed(endGame);
-                        }
+                    if (calculateScore() == 540) {
+                        this.sudokuScore = 540;
+                        listener.actionPerformed(endGame);
                     } else {
-                        if (calculateScore() == 540){
-                            listener.actionPerformed(endGame);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Answer is incorrect.", "Try Again", JOptionPane.ERROR_MESSAGE);
-                        }
+                        JOptionPane.showMessageDialog(this, "Your answer is incorrect. Please try again.", "Try Again", JOptionPane.ERROR_MESSAGE);
                     }
                     break;
                 }
@@ -94,7 +82,7 @@ public class SudokuPanel extends JPanel {
         add(timeLabel);
     }
     
-    public int getGameScore(){
+    public int getScore() {
         return this.sudokuScore;
     }
 
@@ -103,11 +91,10 @@ public class SudokuPanel extends JPanel {
     }
 
     public void reset() {
-        if(sudokuBoard.getBoardMade()){
+        if(sudokuBoard.getBoardMade()) {
             sudokuBoard.resetBoard();
         } else {
             sudokuBoard.setupBoard();
         }
-        hasBeenSubmitted = false;
     }
 }
