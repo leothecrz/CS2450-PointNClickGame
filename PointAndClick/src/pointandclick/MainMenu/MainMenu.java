@@ -60,6 +60,16 @@ public class MainMenu extends JPanel {
         playButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
         playButton.setToolTipText("Start the minigames.");
         add(playButton);
+        
+        JButton playPongButton = new JButton("Play PONG");
+        playPongButton.addActionListener(mainMenuListener);
+        playPongButton.setActionCommand("Pong");
+        playPongButton.setBounds(450, 120, 120, 40);
+        playPongButton.setBorder(new RoundedBorder(15));
+        playPongButton.setContentAreaFilled(false);
+        playPongButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        playPongButton.setToolTipText("Start Pong");
+        add(playPongButton);
 
         add(highScoresButton);
         add(creditsButton);

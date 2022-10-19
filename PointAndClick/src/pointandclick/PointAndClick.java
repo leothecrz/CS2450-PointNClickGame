@@ -30,6 +30,7 @@ public class PointAndClick extends JFrame {
     
     private GameHandler gameHandler; 
     private HighScores highScores;
+    private Credits credits;
     
     /**
      * Main JFrame constructor. Handles the loading screens 3 second delay before menu. 
@@ -41,6 +42,9 @@ public class PointAndClick extends JFrame {
     public PointAndClick(String title) {
         super(title); // Sets window title
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(600, 400); // sets window size to 600W x 400H
+        setResizable(false); // Forces Window to ALWAYS remain 600x400
+        setLocationRelativeTo(null); // Centers window on the screen
         
         // Font Registration
         try {
@@ -60,23 +64,34 @@ public class PointAndClick extends JFrame {
 
         // Main menu listener
         ActionListener mainMenuListener = evt -> {
-            // Show the frame specified in the action command (see MainMenu class)
-            // Action command should be the name of a class/frame
             
+            // Show the frame specified in the action command (see MainMenu class) Action command should be the name of a class/frame
             if(evt.getActionCommand().equals(gameHandler.getClass().getSimpleName())){
                 gameHandler.startGame();
+                layout.show(cards, evt.getActionCommand());
+                return;
+            }
+            
+            if(evt.getActionCommand().equals("")){
+                layout.show(cards, evt.getActionCommand());
+                return;
             }
             
             if(evt.getActionCommand().equals(highScores.getClass().getSimpleName())){ // update highscore table to latest
                 highScores.getScoreTable().loadScores();
+                layout.show(cards, evt.getActionCommand());
+                return;
             }
             
-            layout.show(cards, evt.getActionCommand());
+            if(evt.getActionCommand().equals(credits.getClass().getSimpleName())){
+                layout.show(cards, evt.getActionCommand());
+                return;
+            }
+            
+            System.err.println("MainMenuListener Detected an action that has not been coded for");
             
         };
         
-        // Back button listener
-        // Gets triggered when the back button in the HIGHSCORES or CREDITS screen gets pressed
         ActionListener backButtonListener = evt -> {
             layout.show(cards, "MainMenu");
         };
@@ -85,7 +100,7 @@ public class PointAndClick extends JFrame {
         LoadingScreen loadingScreen = new LoadingScreen(loadingScreenListener);
         MainMenu mainMenu = new MainMenu(mainMenuListener);
         highScores = new HighScores(backButtonListener);
-        Credits credits = new Credits(backButtonListener);
+        credits = new Credits(backButtonListener);
         gameHandler = new GameHandler(backButtonListener); // gamePanel
 
         // Create the panel that contains the other frames
@@ -98,11 +113,8 @@ public class PointAndClick extends JFrame {
         cards.add(credits, credits.getClass().getSimpleName());
         cards.add(gameHandler, gameHandler.getClass().getSimpleName());
         
-        add(cards);
-        
-        setSize(600, 400); // sets window size to 600W x 400H
-        setResizable(false); // Forces Window to ALWAYS remain 600x400
-        setLocationRelativeTo(null); // Centers window on the screen
+        add(cards); 
+        layout.show(cards, loadingScreen.getClass().getSimpleName());
         
         //Keybinds
         Action escapeKeyAction = new AbstractAction() {

@@ -136,7 +136,7 @@ public class HangmanPanel extends JPanel {
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
         // bottomPanel.setLayout(new GridLayout(4, 26)); // Alternate layout: GRID LAYOUT 2x13
-        bottomPanel.setPreferredSize(new Dimension(595, (int)(400*0.4))); // HARD CODED PANEL SIZES
+        bottomPanel.setPreferredSize(new Dimension(600, (int)(400*0.4))); // HARD CODED PANEL SIZES
         bottomPanel.setBackground(Color.DARK_GRAY); // USED TO DIFFIRENTIATE
  
         // Keyboard buttons
