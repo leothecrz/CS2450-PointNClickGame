@@ -50,3 +50,16 @@ Version 1.2:
 8. Subsequent submissions will only check if correct.
 9. Alert the user if their submission is inccorect.
 10. User input method. If using a text field inform the user of incorrect character use.
+
+Version 1.3:
+
+1. Add "Play Pong" Button to main menu.
+2. Implement the pong game.
+3. Pong Game should have a tittle and show the current data and time. The screen should also have a way for the player to exit the game.
+4. Game must be played by two players
+5. The pong game screen will have to keep track and display each of the player's scores.
+6. 10 points are awarded for each goal. Points are never deducted
+7. The first player to reach 100 wins.
+8. If a player reaches 100, then the game ends and the players are informed.
+9. The players should be allowed to replay or quit to menu.
+
