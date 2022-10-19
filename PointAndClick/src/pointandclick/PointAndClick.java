@@ -72,8 +72,9 @@ public class PointAndClick extends JFrame {
                 return;
             }
             
-            if(evt.getActionCommand().equals("")){
-                layout.show(cards, evt.getActionCommand());
+            if(evt.getActionCommand().equals("Pong")){
+                gameHandler.playPong();
+                layout.show(cards, gameHandler.getClass().getSimpleName());
                 return;
             }
             

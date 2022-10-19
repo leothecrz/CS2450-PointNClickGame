@@ -21,6 +21,7 @@ import javax.swing.*;
 import pointandclick.ColorGame.ColorGamePanel;
 import pointandclick.Hangman.HangmanPanel;
 import pointandclick.MainMenu.ScorePanel;
+import pointandclick.Pong.PongPanel;
 import pointandclick.Sudoku.SudokuPanel;
 
 public class GameHandler extends JPanel {
@@ -29,6 +30,7 @@ public class GameHandler extends JPanel {
     private ColorGamePanel colorGamePanel;
     private SudokuPanel sudokuPanel;
     private ScorePanel scorePanel;
+    private PongPanel pongPanel;
     
     private CardLayout panelLayout;
     
@@ -81,7 +83,9 @@ public class GameHandler extends JPanel {
         colorGamePanel.playerScore = scorePanel.getPlayerScore();                 // get score from scorePanel to store in int newScore from ColorGamePanel class (theoretically at least) 
 
         sudokuPanel = new SudokuPanel(endOfGameListener);
+        pongPanel = new PongPanel();
         
+        face.add(pongPanel, pongPanel.getClass().getSimpleName());
         face.add(scorePanel, scorePanel.getClass().getSimpleName());
         face.add(hangmanPanel, hangmanPanel.getClass().getSimpleName());
         face.add(colorGamePanel, colorGamePanel.getClass().getSimpleName());
@@ -99,6 +103,10 @@ public class GameHandler extends JPanel {
        hangmanPanel.startGame();
        sudokuPanel.reset();
        panelLayout.show(face, hangmanPanel.getClass().getSimpleName());
+    }
+    
+    public void playPong(){
+        panelLayout.show(face, pongPanel.getClass().getSimpleName());
     }
   
 }
