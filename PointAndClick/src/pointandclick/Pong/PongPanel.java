@@ -47,6 +47,8 @@ public final class PongPanel extends JPanel implements ActionListener{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         pongBall.draw(g);
+        paddle1.draw(g);
+        paddle2.draw(g);
     }
 
     @Override
@@ -62,8 +64,8 @@ public final class PongPanel extends JPanel implements ActionListener{
     }
     
     public void resetPaddles() {
-        paddle1 = new Paddle((short)1, 30, 200);
-        paddle2 = new Paddle((short)2, 555, 200);
+        paddle1 = new Paddle((short)1, 30, 150);
+        paddle2 = new Paddle((short)2, 555, 150);
         
     }
     
