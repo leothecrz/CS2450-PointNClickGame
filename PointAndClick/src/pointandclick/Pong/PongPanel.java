@@ -4,7 +4,6 @@ package pointandclick.Pong;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -31,11 +30,6 @@ public final class PongPanel extends JPanel implements ActionListener{
         setLayout(null);
         setPreferredSize(new Dimension(600, 400));
         setBackground(Color.BLACK);
-        
-        
-        pongBall = new Ball(300, 200);
-        paddle1 = new Paddle((short)1, 30, 200);
-        paddle2 = new Paddle((short)2, 555, 200);
           
         ActionListener PongListener = evt -> {
             
@@ -43,15 +37,16 @@ public final class PongPanel extends JPanel implements ActionListener{
         };
         gameLoopTimer = new Timer(MILLISECONDSBETWEENFRAMES, this);
         
+        //method to reset the paddles and ball
+        resetPaddles();
+        resetBall();
+        
     }
     
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        
-        g2.setColor(pongBall.getFillColor());
-        g2.fill(pongBall);
+        pongBall.draw(g);
     }
 
     @Override
@@ -64,6 +59,17 @@ public final class PongPanel extends JPanel implements ActionListener{
             gameLoopTimer.stop();
         }
         repaint();    
+    }
+    
+    public void resetPaddles() {
+        paddle1 = new Paddle((short)1, 30, 200);
+        paddle2 = new Paddle((short)2, 555, 200);
+        
+    }
+    
+    public void resetBall() {
+        rand = new Random();
+        pongBall = new Ball(300-8, 200-8);
     }
     
 }
