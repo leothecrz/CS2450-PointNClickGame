@@ -4,7 +4,7 @@
  */
 package pointandclick.Pong;
 
-import java.awt.Rectangle;
+import java.awt.*;
 
 /**
  *
@@ -17,10 +17,19 @@ public final class Paddle extends Rectangle {
     
     private short id;
     
-    public Paddle(short id, int x, int y){
+    //constructor
+    public Paddle(short id, int x, int y) {
         super(PADDLE_WITH, PADDLE_HEIGHT);
         this.id = id;
         setLocation(x, y);
     }
     
+    //draws the paddles 
+    public void draw(Graphics g) {
+        if(id==1)
+            g.setColor(Color.YELLOW);
+        else
+            g.setColor(Color.GREEN);
+            g.fillRect(x, y, PADDLE_WITH, PADDLE_HEIGHT);
+    }
 }
