@@ -30,6 +30,7 @@ public class GameHandler extends JPanel {
     private ColorGamePanel colorGamePanel;
     private SudokuPanel sudokuPanel;
     private ScorePanel scorePanel;
+    
     private PongPanel pongPanel;
     
     private CardLayout panelLayout;
@@ -106,6 +107,7 @@ public class GameHandler extends JPanel {
     }
     
     public void playPong(){
+        pongPanel.gameLoopTimer.start();
         panelLayout.show(face, pongPanel.getClass().getSimpleName());
     }
   
