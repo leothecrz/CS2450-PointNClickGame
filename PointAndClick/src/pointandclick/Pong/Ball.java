@@ -45,7 +45,7 @@ public final class Ball extends Rectangle{
         if(randYDir == 0)
             randYDir--;
         setYDir(randYDir);
-       
+          
     }
     
     //set x direction

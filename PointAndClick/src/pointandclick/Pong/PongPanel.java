@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -70,7 +71,7 @@ public final class PongPanel extends JPanel implements ActionListener{
     }
     
     public void resetBall() {
-        rand = new Random();
+        Random rand = new Random();
         pongBall = new Ball(300-8, 200-8);
     }
     
