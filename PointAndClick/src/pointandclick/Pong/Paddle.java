@@ -14,8 +14,10 @@ import java.awt.event.KeyEvent;
 public final class Paddle extends Rectangle {
     
     private static int PADDLE_WITH = 15;
-    private static int PADDLE_HEIGHT = 50;
-    private int yDirection;
+    private static int PADDLE_HEIGHT = 75;
+    
+     private int yDirection;
+    
     private short id;
     
     //constructor
@@ -35,17 +37,24 @@ public final class Paddle extends Rectangle {
             case 1:
                 if (e.getKeyCode() == KeyEvent.VK_W) {
                     setYDirection(-1);
+                    System.out.print("W");
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
                     setYDirection(1);
+                    System.out.print("S");
+
                 }
                 break;
             case 2:
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     setYDirection(-1);
+                    System.out.print("UP");
+
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     setYDirection(1);
+                    System.out.print("DOWN");
+
                 }
                 break;
         }
@@ -81,10 +90,11 @@ public final class Paddle extends Rectangle {
             g.setColor(Color.YELLOW);
         else
             g.setColor(Color.GREEN);
-            g.fillRect(x, y, PADDLE_WITH, PADDLE_HEIGHT);
+        g.fillRect(x, y, this.width, this.height);
     }
     
     public void setYDirection(int yDir) {
-		yDirection = yDir;
-	}
+        yDirection = yDir;
+    }
+    
 }
