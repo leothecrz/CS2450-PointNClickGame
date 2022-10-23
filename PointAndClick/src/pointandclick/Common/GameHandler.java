@@ -25,7 +25,9 @@ import pointandclick.Pong.PongPanel;
 import pointandclick.Sudoku.SudokuPanel;
 
 public class GameHandler extends JPanel {
+    
     private JPanel face;
+    
     private HangmanPanel hangmanPanel;
     private ColorGamePanel colorGamePanel;
     private SudokuPanel sudokuPanel;
@@ -47,18 +49,22 @@ public class GameHandler extends JPanel {
         // Handles Game End Events
         ActionListener endOfGameListener = evt -> {
             switch(evt.getActionCommand()) {
+                
                 case "HangmanSkip":
                     scorePanel.addPlayerScore(0);     
                     panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
                     break;
+                    
                 case "HangmanEnd":
                     scorePanel.addPlayerScore(hangmanPanel.getPlayerScore()); // add score from Hangman
                     panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
                     break;
+                    
                 case "ColorGameEnd":
                     scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
                     panelLayout.show(face, sudokuPanel.getClass().getSimpleName());
                     break;
+                    
                 case "SudokuEnd":
                     scorePanel.addPlayerScore(sudokuPanel.getScore());
                     scorePanel.getScoreTable().loadScores();
@@ -71,11 +77,9 @@ public class GameHandler extends JPanel {
                     break;
                 
                 case "PongQuit":
-                    
-                    backButtonListener.actionPerformed(new ActionEvent(getParent(), ActionEvent.ACTION_PERFORMED, "PongQuit"));
-                                       
+                    pongPanel.endPong();
+                    backButtonListener.actionPerformed(new ActionEvent(getParent(), ActionEvent.ACTION_PERFORMED, "PongQuit")); 
                     break;
-                    
                     
                 default:
                     System.err.println("GameHandler: unknown command " + evt.getActionCommand());
@@ -85,14 +89,11 @@ public class GameHandler extends JPanel {
         
         panelLayout = new CardLayout(0, 0);
         face = new JPanel(panelLayout);
+        
         hangmanPanel = new HangmanPanel(endOfGameListener);
-        scorePanel = new ScorePanel(backButtonListener);
-        
-        colorGamePanel = new ColorGamePanel(endOfGameListener);
-        colorGamePanel.playerScore = scorePanel.getPlayerScore();                 // get score from scorePanel to store in int newScore from ColorGamePanel class (theoretically at least) 
-
+        scorePanel = new ScorePanel(backButtonListener); 
+        colorGamePanel = new ColorGamePanel(endOfGameListener);        
         sudokuPanel = new SudokuPanel(endOfGameListener);
-        
         pongPanel = new PongPanel(endOfGameListener);
         
         face.add(pongPanel, pongPanel.getClass().getSimpleName());
@@ -116,6 +117,9 @@ public class GameHandler extends JPanel {
        panelLayout.show(face, hangmanPanel.getClass().getSimpleName());
     }
     
+    /**
+     * 
+     */
     public void playPong(){
         pongPanel.playPong();
         panelLayout.show(face, pongPanel.getClass().getSimpleName());

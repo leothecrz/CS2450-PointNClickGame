@@ -34,82 +34,130 @@ public final class Ball extends Rectangle{
         this.yVelocity = 0;
         
         setLocation(x, y);
-   
-        //rand = new Random();
-        
-        //gets either 0 or 1
-        //int randXDir = rand.nextInt(2);
-        //int randYDir = rand.nextInt(2);
-        
-        // ball move left when 0 is chosen randomly
-        //if(randXDir == 0)
-        //    randXDir--;
-        //setXDir(randXDir);
-        
-        // ball move down when 0 is chosen randomly
-        //if(randYDir == 0)
-        //    randYDir--;
-        //setYDir(randYDir);
           
     }
     
+    /**
+     * 
+     */
     public void tickPass(){
-        this.x += this.xVelocity;
+        Point nxtPosition = getNextPosition();
+        
+        System.out.println(nxtPosition.toString());
+        
+        if(nxtPosition.y < 0){
+            this.y = 0;
+            this.yVelocity *= -1;
+        } else if(nxtPosition.y >= 0 && nxtPosition.y <= 360){
+            this.y = nxtPosition.y;
+        } else {
+            this.y = 360;
+            this.yVelocity *= -1;
+        }
+        
+        this.x = nxtPosition.x;
+        
     }
     
+    /**
+     * 
+     * @param yVel 
+     */
     public void addYVelocity(int yVel){
         yVelocity += yVel;
     }
     
+    /**
+     * 
+     * @param xVel 
+     */
     public void addXVelocity(int xVel){
         xVelocity += xVel;
     }
     
+    /**
+     * 
+     * @param xVel 
+     */
     public void setXVelocity(int xVel) {
         xVelocity = xVel;       
     }
     
+    /**
+     * 
+     * @param yVel 
+     */
     public void setYVelocity(int yVel) {
         yVelocity = yVel;
     }
     
-    
+    /**
+     * 
+     * @param goLeft 
+     */
     public void resetBall(boolean goLeft){
         this.x = X_SPAWN;
         this.y = Y_SPAWN;
         resetVelocity();
         
         if(goLeft){
-            this.xVelocity = -3;
+            this.xVelocity = 1;
+            this.yVelocity = -12;
             
         }else {
-            this.xVelocity = 3;
+            this.xVelocity = 1;
+            this.yVelocity = -12;
         
         }
     }
     
+    /**
+     * 
+     */
     public void resetVelocity(){
         this.xVelocity = 0;
         this.yVelocity = 0;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getYVelocity(){
         return this.yVelocity;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getXVelocity(){
         return this.xVelocity;
     }
     
-    
+    /**
+     * 
+     * @return 
+     */
     public Point getPosition(){
         return new Point(this.x, this.y);
     }
     
-    //draw ball
+    /**
+     * 
+     * @return 
+     */
+    public Point getNextPosition(){
+        return new Point(x+xVelocity, y+yVelocity);
+    }
+    
+    /**
+     * 
+     * @param g 
+     */
     public void draw(Graphics g) {
         g.setColor(fillColor);
-        g.fillOval(x, y, BALL_WIDTH, BALL_HEIGHT);
+        g.fillOval(x-(this.width/2), y-(this.height/2), this.width, this.height);
     }
     
 }

@@ -22,8 +22,10 @@ import pointandclick.Common.RoundedBorder;
  */
 public final class PongPanel extends JPanel{
     
-    private static int MILLISECONDSBETWEENFRAMES = 33;
+    private final static int MILLISECONDS_BETWEEN_FRAMES = 33;
     
+    private final Runnable focusGet;
+
     public Timer gameLoopTimer;
     private Ball pongBall;
     private Paddle paddle1;
@@ -31,20 +33,23 @@ public final class PongPanel extends JPanel{
     
     private boolean gameRunning;
     
-    private Runnable focusGet;
-        
+    /**
+     * 
+     * @param endOfGameListener 
+     */
     public PongPanel(ActionListener endOfGameListener){
         super();
         this.setLayout(null);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setSize(new Dimension(600, 400));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.setVisible(true);
         
+        gameRunning = false;
+
         focusGet = () -> {
             requestFocusInWindow();
         };
-        
         KeyListener pongKeyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -77,8 +82,6 @@ public final class PongPanel extends JPanel{
         quitButton.setFocusable(false);
         add(quitButton);
         
-        gameRunning = false;
-        
         paddle1 = new Paddle((short)1, 30, 150);
         paddle2 = new Paddle((short)2, 555, 150);
         pongBall = new Ball();
@@ -91,7 +94,7 @@ public final class PongPanel extends JPanel{
             repaint();
         };
         
-        gameLoopTimer = new Timer(MILLISECONDSBETWEENFRAMES, gameLoop);
+        gameLoopTimer = new Timer(MILLISECONDS_BETWEEN_FRAMES, gameLoop);
     }
     
     @Override
@@ -103,6 +106,9 @@ public final class PongPanel extends JPanel{
         
     }
     
+    /**
+     * 
+     */
     public void playPong(){
         pongBall.resetBall(true);
         gameRunning = true;
@@ -110,10 +116,16 @@ public final class PongPanel extends JPanel{
         
     }
     
+    /**
+     * 
+     */
     public void endPong(){
         gameLoopTimer.stop();
     }
     
+    /**
+     * 
+     */
     public void getFocus(){
         //System.err.println(this.requestFocusInWindow());
         SwingUtilities.invokeLater(focusGet);
