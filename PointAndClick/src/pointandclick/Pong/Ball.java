@@ -43,7 +43,7 @@ public final class Ball extends Rectangle{
     public void tickPass(){
         Point nxtPosition = getNextPosition();
         
-        System.out.println(nxtPosition.toString());
+        //System.out.println(nxtPosition.toString());
         
         if(nxtPosition.y < 0){
             this.y = 0;
@@ -155,7 +155,7 @@ public final class Ball extends Rectangle{
      * 
      * @param g 
      */
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(fillColor);
         g.fillOval(x-(this.width/2), y-(this.height/2), this.width, this.height);
     }

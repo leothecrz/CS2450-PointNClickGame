@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -31,6 +32,10 @@ public final class PongPanel extends JPanel{
     private Paddle paddle1;
     private Paddle paddle2;
     
+    private int player1Score;
+    private int player2Score;
+    
+    
     private boolean gameRunning;
     
     /**
@@ -46,6 +51,10 @@ public final class PongPanel extends JPanel{
         this.setVisible(true);
         
         gameRunning = false;
+        
+        player1Score = 0;
+        player2Score = 0;
+        
 
         focusGet = () -> {
             requestFocusInWindow();
@@ -103,9 +112,13 @@ public final class PongPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        pongBall.draw(g);
-        paddle1.draw(g);
-        paddle2.draw(g);
+        
+        Graphics2D g2 = (Graphics2D) g;
+        
+        pongBall.draw(g2);
+        paddle1.draw(g2);
+        paddle2.draw(g2);
+        
         
     }
     

@@ -43,14 +43,14 @@ public final class Paddle extends Rectangle {
                 break;
             case 1:
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    if(getYVelocity() > -50){
-                        addYVelocity(-5);
+                    if(getYVelocity() > -25){
+                        addYVelocity(-13);
                     }
                     System.out.print("W");
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
-                    if(getYVelocity() < 50){
-                        addYVelocity(5);
+                    if(getYVelocity() < 25){
+                        addYVelocity(13);
                     }
                     System.out.print("S");
 
@@ -58,15 +58,15 @@ public final class Paddle extends Rectangle {
                 break;
             case 2:
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if(getYVelocity() > -50){
-                        addYVelocity(-5);
+                    if(getYVelocity() > -25){
+                        addYVelocity(-13);
                     }
                     System.out.print("UP");
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if(getYVelocity() < 50){
-                        addYVelocity(5);
+                    if(getYVelocity() < 25){
+                        addYVelocity(13);
                     }
                     System.out.print("DOWN");
 
@@ -104,12 +104,13 @@ public final class Paddle extends Rectangle {
     }
     
     //draws the paddles 
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         if(id==1)
             g.setColor(Color.YELLOW);
         else
             g.setColor(Color.GREEN);
-        g.fillRect(x, y, this.width, this.height);
+        //g.fillRect(x, y, this.width, this.height);
+        g.fill(this);
     }
     
     public void setYDirection(int yDir) {
@@ -118,7 +119,13 @@ public final class Paddle extends Rectangle {
     
     public void tickPass(){
         Point nxtPosition = nextPosition();
-        this.y = nxtPosition.y;
+        if(nxtPosition.y < 0){
+            this.y = 0;
+        }else if(nxtPosition.y >= 0 && nxtPosition.y <= 400-(115)){
+            this.y = nxtPosition.y;
+        } else {
+            this.y = 400-(115);
+        }
     }
     
     public void addYVelocity(int yVel){
