@@ -59,13 +59,15 @@ public final class PongPanel extends JPanel{
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.print("pressed ");
-
+                paddle1.keyPressed(e);
+                paddle2.keyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 System.out.print("released. ");
-
+                paddle1.keyReleased(e);
+                paddle2.keyReleased(e);
             }
         };
         addKeyListener(pongKeyListener);
@@ -89,7 +91,8 @@ public final class PongPanel extends JPanel{
         ActionListener gameLoop = evt -> {
             
             pongBall.tickPass();
-            
+            paddle1.tickPass();
+            paddle2.tickPass();
             
             repaint();
         };
@@ -111,6 +114,8 @@ public final class PongPanel extends JPanel{
      */
     public void playPong(){
         pongBall.resetBall(true);
+        paddle1.resetPaddle();
+        paddle2.resetPaddle();
         gameRunning = true;
         gameLoopTimer.start();
         

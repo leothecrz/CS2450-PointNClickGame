@@ -16,13 +16,20 @@ public final class Paddle extends Rectangle {
     private static int PADDLE_WITH = 15;
     private static int PADDLE_HEIGHT = 75;
     
-     private int yDirection;
+    private int yDirection;
+    private int yVelocity;
+    
+    private int x_Spawn;
+    private int y_Spawn;
+    
     
     private short id;
     
     //constructor
     public Paddle(short id, int x, int y) {
         super(PADDLE_WITH, PADDLE_HEIGHT);
+        this.x_Spawn = x;
+        this.y_Spawn = y;
         this.x = x;
         this.y = y;
         this.id = id;
@@ -36,23 +43,31 @@ public final class Paddle extends Rectangle {
                 break;
             case 1:
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    setYDirection(-1);
+                    if(getYVelocity() > -50){
+                        addYVelocity(-5);
+                    }
                     System.out.print("W");
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
-                    setYDirection(1);
+                    if(getYVelocity() < 50){
+                        addYVelocity(5);
+                    }
                     System.out.print("S");
 
                 }
                 break;
             case 2:
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    setYDirection(-1);
+                    if(getYVelocity() > -50){
+                        addYVelocity(-5);
+                    }
                     System.out.print("UP");
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    setYDirection(1);
+                    if(getYVelocity() < 50){
+                        addYVelocity(5);
+                    }
                     System.out.print("DOWN");
 
                 }
@@ -67,18 +82,22 @@ public final class Paddle extends Rectangle {
                 break;
             case 1:
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    setYDirection(0);
+                    if(getYVelocity() != 0)
+                        setYVelocity(0);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
-                    setYDirection(0);
+                    if(getYVelocity() != 0)
+                        setYVelocity(0);
                 }
                 break;
             case 2:
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    setYDirection(0);
+                    if(getYVelocity() != 0)
+                        setYVelocity(0);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    setYDirection(0);
+                    if(getYVelocity() != 0)
+                        setYVelocity(0);
                 }
                 break;
         }
@@ -95,6 +114,31 @@ public final class Paddle extends Rectangle {
     
     public void setYDirection(int yDir) {
         yDirection = yDir;
+    }
+    
+    public void tickPass(){
+        Point nxtPosition = nextPosition();
+        this.y = nxtPosition.y;
+    }
+    
+    public void addYVelocity(int yVel){
+        this.yVelocity += yVel;
+    }
+    
+    public void setYVelocity(int yVel){
+        this.yVelocity = yVel;
+    }
+    
+    public int getYVelocity(){
+        return this.yVelocity;
+    }
+    
+    public Point nextPosition(){
+        return new Point(x, y+=yVelocity);
+    }
+    
+    public void resetPaddle(){
+        setLocation(x_Spawn, y_Spawn);
     }
     
 }
