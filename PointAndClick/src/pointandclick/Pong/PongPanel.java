@@ -89,7 +89,7 @@ public final class PongPanel extends JPanel{
         quitButton.setForeground(Color.WHITE);
         quitButton.setFont(new Font("Marker Felt", Font.PLAIN, 12));
         quitButton.setContentAreaFilled(false);
-        quitButton.setBounds(20, 10, 50, 25);
+        quitButton.setBounds(280, 10, 50, 25);
         quitButton.setFocusable(false);
         add(quitButton);
         
@@ -119,6 +119,12 @@ public final class PongPanel extends JPanel{
         paddle1.draw(g2);
         paddle2.draw(g2);
         
+        g2.setFont(new Font("MarkerFelt", Font.PLAIN, 72));
+        g2.setColor(Color.LIGHT_GRAY);
+        
+        g2.drawString(String.valueOf(player1Score), 210, 100);
+        g2.drawString(String.valueOf(player2Score), 360, 100);
+
         
     }
     
