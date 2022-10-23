@@ -41,6 +41,8 @@ public class GameHandler extends JPanel {
      */
     public GameHandler(ActionListener backButtonListener) {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        setFocusable(true);
+        setVisible(true);
         
         // Handles Game End Events
         ActionListener endOfGameListener = evt -> {
@@ -100,6 +102,7 @@ public class GameHandler extends JPanel {
         face.add(sudokuPanel, sudokuPanel.getClass().getSimpleName());
              
         add(face);
+        
     }
     
     /**

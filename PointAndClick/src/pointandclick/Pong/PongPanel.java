@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import pointandclick.Common.RoundedBorder;
 
@@ -29,6 +30,8 @@ public final class PongPanel extends JPanel{
     private Paddle paddle2;
     
     private boolean gameRunning;
+    
+    private Runnable focusGet;
         
     public PongPanel(ActionListener endOfGameListener){
         super();
@@ -37,6 +40,10 @@ public final class PongPanel extends JPanel{
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.setVisible(true);
+        
+        focusGet = () -> {
+            requestFocusInWindow();
+        };
         
         KeyListener pongKeyListener = new KeyListener() {
             @Override
@@ -56,7 +63,6 @@ public final class PongPanel extends JPanel{
 
             }
         };
-        
         addKeyListener(pongKeyListener);
         
         JButton quitButton = new JButton();
@@ -77,48 +83,11 @@ public final class PongPanel extends JPanel{
         paddle2 = new Paddle((short)2, 555, 150);
         pongBall = new Ball();
         
-        /*
-        { // Keybindings
-        Action wKey = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                paddle1.keyPressed(new KeyEvent(getParent(), KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_W, 'w'));
-            }
-        };
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0), "W_KEY");
-        getActionMap().put("W_KEY", wKey);
-        
-        Action sKey = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                paddle1.keyPressed(new KeyEvent(getParent(), KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_S, 's'));
-            }
-        };
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0), "S_KEY");
-        getActionMap().put("S_KEY", sKey);
-        
-        Action upKey = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                paddle2.keyPressed(new KeyEvent(getParent(), KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_UP, KeyEvent.CHAR_UNDEFINED));
-            }
-        };
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UP_KEY");
-        getActionMap().put("UP_KEY", upKey);
-        
-        Action downKey = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                paddle2.keyPressed(new KeyEvent(getParent(), KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED));
-            }
-        };
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN_KEY");
-        getActionMap().put("DOWN_KEY", downKey);
-        }
-        */
-        
         ActionListener gameLoop = evt -> {
+            
             pongBall.tickPass();
+            
+            
             repaint();
         };
         
@@ -146,8 +115,8 @@ public final class PongPanel extends JPanel{
     }
     
     public void getFocus(){
-        setFocusable(true);
-        System.err.println(this.requestFocusInWindow());
+        //System.err.println(this.requestFocusInWindow());
+        SwingUtilities.invokeLater(focusGet);
         
     }
     
