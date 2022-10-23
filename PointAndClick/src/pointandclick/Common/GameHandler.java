@@ -30,7 +30,6 @@ public class GameHandler extends JPanel {
     private ColorGamePanel colorGamePanel;
     private SudokuPanel sudokuPanel;
     private ScorePanel scorePanel;
-    
     private PongPanel pongPanel;
     
     private CardLayout panelLayout;
@@ -91,6 +90,7 @@ public class GameHandler extends JPanel {
         colorGamePanel.playerScore = scorePanel.getPlayerScore();                 // get score from scorePanel to store in int newScore from ColorGamePanel class (theoretically at least) 
 
         sudokuPanel = new SudokuPanel(endOfGameListener);
+        
         pongPanel = new PongPanel(endOfGameListener);
         
         face.add(pongPanel, pongPanel.getClass().getSimpleName());
@@ -116,6 +116,7 @@ public class GameHandler extends JPanel {
     public void playPong(){
         pongPanel.playPong();
         panelLayout.show(face, pongPanel.getClass().getSimpleName());
+        pongPanel.getFocus();
     }
   
 }

@@ -1,22 +1,17 @@
 
 package pointandclick.Pong;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JButton;
-import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import pointandclick.Common.RoundedBorder;
 
@@ -24,7 +19,7 @@ import pointandclick.Common.RoundedBorder;
  *
  * @author leothecrz
  */
-public final class PongPanel extends JPanel implements ActionListener{
+public final class PongPanel extends JPanel{
     
     private static int MILLISECONDSBETWEENFRAMES = 33;
     
@@ -32,8 +27,6 @@ public final class PongPanel extends JPanel implements ActionListener{
     private Ball pongBall;
     private Paddle paddle1;
     private Paddle paddle2;
-    
-    private KeyListener pongKeyListener;
     
     private boolean gameRunning;
         
@@ -43,26 +36,28 @@ public final class PongPanel extends JPanel implements ActionListener{
         this.setPreferredSize(new Dimension(600, 400));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
+        this.setVisible(true);
         
-        
-        pongKeyListener = new KeyListener() {
+        KeyListener pongKeyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                System.out.println(e.toString());
+                System.out.print("hit ");
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
+                System.out.print("pressed ");
+
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                System.out.print("released. ");
+
             }
         };
         
         addKeyListener(pongKeyListener);
-        
-        
         
         JButton quitButton = new JButton();
         quitButton.setText("Quit");
@@ -73,6 +68,7 @@ public final class PongPanel extends JPanel implements ActionListener{
         quitButton.setFont(new Font("Marker Felt", Font.PLAIN, 12));
         quitButton.setContentAreaFilled(false);
         quitButton.setBounds(20, 10, 50, 25);
+        quitButton.setFocusable(false);
         add(quitButton);
         
         gameRunning = false;
@@ -81,7 +77,8 @@ public final class PongPanel extends JPanel implements ActionListener{
         paddle2 = new Paddle((short)2, 555, 150);
         pongBall = new Ball();
         
-        /**{ // Keybindings
+        /*
+        { // Keybindings
         Action wKey = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,9 +115,14 @@ public final class PongPanel extends JPanel implements ActionListener{
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DOWN_KEY");
         getActionMap().put("DOWN_KEY", downKey);
         }
-    */
+        */
         
-        gameLoopTimer = new Timer(MILLISECONDSBETWEENFRAMES, this);
+        ActionListener gameLoop = evt -> {
+            pongBall.tickPass();
+            repaint();
+        };
+        
+        gameLoopTimer = new Timer(MILLISECONDSBETWEENFRAMES, gameLoop);
     }
     
     @Override
@@ -131,24 +133,22 @@ public final class PongPanel extends JPanel implements ActionListener{
         paddle2.draw(g);
         
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        pongBall.tickPass();
-        repaint();
-        
-    }
     
     public void playPong(){
-        gameLoopTimer.start();
         pongBall.resetBall(true);
         gameRunning = true;
-        this.grabFocus();
+        gameLoopTimer.start();
         
     }
     
     public void endPong(){
         gameLoopTimer.stop();
+    }
+    
+    public void getFocus(){
+        setFocusable(true);
+        System.err.println(this.requestFocusInWindow());
+        
     }
     
 }
