@@ -42,8 +42,7 @@ public final class PongPanel extends JPanel{
         
         gameRunning = false;
         
-        player1Score = 0;
-        player2Score = 0;
+        
         
 
         focusGet = () -> {
@@ -183,6 +182,8 @@ public final class PongPanel extends JPanel{
         gameRunning = true;
         gameLoopTimer.start();
         
+        player1Score = 0;
+        player2Score = 0;
     }
     
     /**
