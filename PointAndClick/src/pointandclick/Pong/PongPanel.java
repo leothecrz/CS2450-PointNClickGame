@@ -166,8 +166,8 @@ public final class PongPanel extends JPanel {
         // Draw scores
         g2.setFont(new Font("Digital-7", Font.PLAIN, 72));
         g2.setColor(Color.LIGHT_GRAY);
-        g2.drawString(String.valueOf(player1Score), 210, 100);
-        g2.drawString(String.valueOf(player2Score), 360, 100);
+        g2.drawString(String.valueOf(player1Score), 204, 100);
+        g2.drawString(String.valueOf(player2Score), 355, 100);
 
         if (!gameRunning) {
             String text;
@@ -180,7 +180,7 @@ public final class PongPanel extends JPanel {
                 fontSize = 48;
             } else {
                 text = "Press Space to start game.";
-                fontSize = 16;
+                fontSize = 24;
             }
             g2.setFont(new Font("Digital-7", Font.PLAIN, fontSize));
             g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 300);
