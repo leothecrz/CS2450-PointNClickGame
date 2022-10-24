@@ -98,12 +98,17 @@ public class HangmanPanel extends JPanel {
                 }
             } else {
                 playerScore -= 10; // Subtract score
-                if (errors == MAX_ERRORS - 1) {
+                if (errors++ == MAX_ERRORS - 1) {
                     // End game
-                    skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "HangmanEnd"));
-                } else {
-                    // Increment error counter
-                    errors++;
+                    disableButtons();
+
+                    // Wait for 2 seconds before continuing to next game
+                    Timer endTimer = new Timer(2000, end -> {
+                        ((Timer)end.getSource()).stop();
+                        skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "HangmanEnd"));
+                    });
+                    endTimer.setInitialDelay(2000);
+                    endTimer.start();
                 }
             }
 
@@ -206,9 +211,14 @@ public class HangmanPanel extends JPanel {
     /**
      * Enables all buttons.
      */
-    public void resetButtons(){
+    public void resetButtons() {
         for (JButton keyButton : keyboardButtons)
             keyButton.setEnabled(true);
+    }
+
+    private void disableButtons() {
+        for (JButton keyButton : keyboardButtons)
+            keyButton.setEnabled(false);
     }
 
     /**
@@ -256,7 +266,16 @@ public class HangmanPanel extends JPanel {
         if (errors >= 3) g2.drawLine(160, 130, 180, 92);
         if (errors >= 4) g2.drawLine(207, 130, 185, 92);
         if (errors >= 5) g2.drawLine(160, 206, 180, 169);
-        if (errors >= 6) g2.drawLine(207, 206, 182, 165);
+        if (errors >= 6) {
+            g2.drawLine(207, 206, 182, 165);
+
+            // Draw face
+            g2.setFont(new Font("Arial", Font.PLAIN, 12));
+            g2.setColor(Color.WHITE);
+            g2.drawString("X", 172, 72);
+            g2.drawString("X", 187, 72);
+            g.drawArc(176, 80, 15, 15, 20, 140);
+        }
     }
     
     /**
