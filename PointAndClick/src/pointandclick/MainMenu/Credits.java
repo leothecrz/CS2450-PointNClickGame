@@ -18,6 +18,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import pointandclick.Common.RoundedBorder;
+import pointandclick.Common.Student;
 
 public class Credits extends JPanel {
     
@@ -48,10 +49,9 @@ public class Credits extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.drawString("Credits", 245,50);
         g2.setFont(personFont);
-        g2.drawString("Leonardo Davalos, #", 165, 100);
-        g2.drawString("Matthew Finerty, #", 165, 160);
-        g2.drawString("Jasroop Singh, #", 165, 220);
-        g2.drawString("Noris Tang, 4234", 165, 280);
-        g2.drawString("Vivian Trieu, 9553", 165, 340);
+
+        for (int i = 0; i < Student.CREDITS_LIST.length; i++) {
+            g2.drawString(Student.CREDITS_LIST[i].toString(), 165, 100 + 60 * i);
+        }
     }
 }

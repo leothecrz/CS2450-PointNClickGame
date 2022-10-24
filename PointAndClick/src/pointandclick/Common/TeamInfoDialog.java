@@ -7,8 +7,7 @@ import javax.swing.*;
 /**
  *
  */
-public final class TeamInfoDialog extends JDialog implements ActionListener{
-    private static final String[] NAMES = {"   Leonardo #0000   ", "   Matthew #1111   ", "   Jasroop #2222   ", "   Noris #3333   ", "   Vivian #4444   "}; // 3 space padding
+public final class TeamInfoDialog extends JDialog implements ActionListener {
     private static final String DISPLAY_TITLE = "   Point And Click   ";
     private static final String TERM_DISPLAY = "- Term: Fall 2022 -";
     private static final String WINDOW_TITLE = "Dev Team Information";
@@ -43,8 +42,8 @@ public final class TeamInfoDialog extends JDialog implements ActionListener{
         constraints.ipady = 30;
         add(term, constraints);
         
-        for (int i = 0; i < NAMES.length; i++) {
-            JLabel activeLabel = new JLabel(NAMES[i]);
+        for (int i = 0; i < Student.CREDITS_LIST.length; i++) {
+            JLabel activeLabel = new JLabel("   " + Student.CREDITS_LIST[i] + "   ".toString());
             activeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
             activeLabel.setVerticalTextPosition(SwingConstants.CENTER);
             activeLabel.setFont(new Font("Marker Felt", Font.PLAIN, 15));
@@ -53,7 +52,7 @@ public final class TeamInfoDialog extends JDialog implements ActionListener{
             constraints.weightx = 0.2;
             constraints.gridwidth = 1;
             constraints.ipady =0;
-            if(i <= 2) {
+            if (i <= 2) {
                 constraints.gridx = i;
                 constraints.gridy = 2;
             } else {
