@@ -1,4 +1,4 @@
-package pointandclick.MainMenu;
+package pointandclick.Common;
 
 public final class Score {
     private String initials;

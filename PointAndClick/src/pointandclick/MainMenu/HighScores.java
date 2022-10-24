@@ -16,7 +16,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import pointandclick.PointAndClick;
+import pointandclick.Common.ScoreTable;
+import pointandclick.Common.Score;
 import pointandclick.Common.RoundedBorder;
 
 public class HighScores extends JPanel {

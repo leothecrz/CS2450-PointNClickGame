@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import pointandclick.Common.ScoreTable;
 
 import pointandclick.Common.RoundedBorder;
 

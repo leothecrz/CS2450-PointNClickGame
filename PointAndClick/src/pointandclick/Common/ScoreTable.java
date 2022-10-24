@@ -1,4 +1,4 @@
-package pointandclick.MainMenu;
+package pointandclick.Common;
 
 import java.io.File;
 import java.io.FileNotFoundException;
