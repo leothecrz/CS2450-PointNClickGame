@@ -121,6 +121,10 @@ public final class PongPanel extends JPanel{
                         
                         
                     }
+                } else {
+                    if(pongBall.x <= (paddleNxtPos.x) ){
+                        player2Scored();
+                    }
                 }
                 
             } else { // going LEFT
@@ -141,10 +145,13 @@ public final class PongPanel extends JPanel{
                         int newYVel = Math.round(-12 * (float)(yDelta/30));
                         pongBall.setYVelocity(newYVel);
                         
-                        
+                    }
+                }else {
+                    
+                    if(pongBall.x >= (paddleNxtPos.x + paddle2.width)){
+                        player1Scored();
                     }
                 }
-                
             }
             
             pongBall.tickPass();
@@ -193,6 +200,18 @@ public final class PongPanel extends JPanel{
      */
     public void endPong(){
         gameLoopTimer.stop();
+    }
+    
+    public void player1Scored(){
+        System.out.println("p1 scored");
+        player1Score += 10;
+        pongBall.resetBall(true);
+    }
+    
+    public void player2Scored(){
+        System.out.println("p2 scored");
+        player2Score += 10;
+        pongBall.resetBall(false);
     }
     
     /**

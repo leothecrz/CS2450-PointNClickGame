@@ -22,9 +22,7 @@ public final class Ball extends Rectangle{
     private final static int Y_VELOCITY_SPAWN = 2;
     
     private Color fillColor = Color.WHITE;
-    
-    Random rand;
-    
+        
     private int xVelocity;
     private int yVelocity;
     
