@@ -19,16 +19,21 @@ public class ColorGamePanel extends JPanel {
         {130, 180},
         {10, 180}
     };
+
+    // View
     private JLabel timeLabel;
+    private JLabel scoreLabel;
     private JLabel colorLabel;
     private ColorButton[] colorButtons;
     private Timer timeLabelTimer;
+
+    // Model
     private Random random;
     private static final int MAX_ROUNDS = 5;
     private int rounds;
-    public int playerScore; // score to be used in color game, should come from hangman game
+    private int playerScore;
     
-    //Constructor
+    // Constructor
     public ColorGamePanel(ActionListener listener) {
         super();
         setLayout(null);
@@ -54,7 +59,8 @@ public class ColorGamePanel extends JPanel {
         // Color buttons
         ColorButtonListener buttonListener = color -> {
             if (color.equals(colorLabel.getForeground())) {
-                playerScore += 100; // for each correct round add 100 to score
+                playerScore += 100; // For each correct round, add 100 to score
+                scoreLabel.setText("Score: " + String.valueOf(playerScore));
             }
             updateColor();
             shuffleButtons();
@@ -62,7 +68,6 @@ public class ColorGamePanel extends JPanel {
             if (++rounds == MAX_ROUNDS){
                 rounds = 0;
                 listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "ColorGameEnd"));
-                playerScore = 0;
             }
         };
         
@@ -75,14 +80,30 @@ public class ColorGamePanel extends JPanel {
             add(button);
         }
         shuffleButtons();
-        
 
         // Color label
         colorLabel = new JLabel("", SwingConstants.CENTER);
         colorLabel.setBounds(210, 75, 200, 25);
         colorLabel.setFont(new Font("Marker Felt", Font.BOLD, 30));
-        updateColor();
         add(colorLabel);
+
+        // Score label
+        scoreLabel = new JLabel("Score: " + String.valueOf(playerScore), SwingConstants.CENTER);
+        scoreLabel.setBounds(210, 100, 200, 25);
+        scoreLabel.setFont(new Font("Marker Felt", Font.PLAIN, 24));
+        add(scoreLabel);
+
+        // Set color label text
+        updateColor();
+    }
+
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    public void resetPlayerScore() {
+        playerScore = 0;
+        scoreLabel.setText("Score: " + String.valueOf(playerScore));
     }
 
     private void updateColor() {
@@ -90,6 +111,7 @@ public class ColorGamePanel extends JPanel {
         colorLabel.setText(colorName);
         colorLabel.setToolTipText(colorName);
         colorLabel.setForeground(COLORS[random.nextInt(COLORS.length)]);
+        
     }
 
     private void shuffleButtons() {

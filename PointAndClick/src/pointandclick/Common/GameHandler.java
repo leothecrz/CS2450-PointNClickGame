@@ -57,7 +57,8 @@ public class GameHandler extends JPanel {
                     panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
                     break;
                 case "ColorGameEnd":
-                    scorePanel.setColorGameScore(colorGamePanel.playerScore);
+                    scorePanel.setColorGameScore(colorGamePanel.getPlayerScore());
+                    colorGamePanel.resetPlayerScore();
                     panelLayout.show(face, sudokuPanel.getClass().getSimpleName());
                     break;
                 case "SudokuEnd":
