@@ -274,13 +274,30 @@ public class HangmanPanel extends JPanel {
         g2.drawString("Score: " + playerScore, 300, 100);
         
         // Hangman person
+        Stroke stroke = g2.getStroke(); // Save original stroke
+        Stroke newStroke = new BasicStroke(5);
+
         if (errors >= 1) g2.fillOval(163, 53, 40, 40);
         if (errors >= 2) g2.fillRect(180, 50, 5, 120);
-        if (errors >= 3) g2.drawLine(160, 130, 180, 92);
-        if (errors >= 4) g2.drawLine(207, 130, 185, 92);
-        if (errors >= 5) g2.drawLine(160, 206, 180, 169);
+        if (errors >= 3) {
+            g2.setStroke(newStroke);
+            g2.drawLine(160, 130, 180, 92);
+            g2.setStroke(stroke);
+        }
+        if (errors >= 4) {
+            g2.setStroke(newStroke);
+            g2.drawLine(207, 130, 185, 92);
+            g2.setStroke(stroke);
+        }
+        if (errors >= 5) {
+            g2.setStroke(newStroke);
+            g2.drawLine(160, 206, 180, 169);
+            g2.setStroke(stroke);
+        }
         if (errors >= 6) {
+            g2.setStroke(newStroke);
             g2.drawLine(207, 206, 182, 165);
+            g2.setStroke(stroke);
 
             // Draw face
             g2.setFont(new Font("Arial", Font.PLAIN, 12));
