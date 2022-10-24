@@ -1,17 +1,11 @@
-
 package pointandclick.Pong;
-
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import pointandclick.Common.RoundedBorder;
 
-/**
- *
- * @author leothecrz
- */
-public final class PongPanel extends JPanel{
+public final class PongPanel extends JPanel {
     
     private final static int MILLISECONDS_BETWEEN_FRAMES = 33;
     
@@ -21,11 +15,10 @@ public final class PongPanel extends JPanel{
     private Ball pongBall;
     private Paddle paddle1;
     private Paddle paddle2;
+    private JButton quitButton;
     
     private int player1Score;
     private int player2Score;
-    
-    
     private boolean gameRunning;
     
     /**
@@ -42,12 +35,13 @@ public final class PongPanel extends JPanel{
         
         gameRunning = false;
         
-        
-        
+        player1Score = 0;
+        player2Score = 0;
 
         focusGet = () -> {
             requestFocusInWindow();
         };
+
         KeyListener pongKeyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -55,8 +49,15 @@ public final class PongPanel extends JPanel{
 
             @Override
             public void keyPressed(KeyEvent e) {
-                paddle1.keyPressed(e);
-                paddle2.keyPressed(e);
+                if (!gameRunning) {
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        playPong();
+                    }
+                } else {
+                    paddle1.keyPressed(e);
+                    paddle2.keyPressed(e);
+                }
+                
             }
 
             @Override
@@ -67,7 +68,8 @@ public final class PongPanel extends JPanel{
         };
         addKeyListener(pongKeyListener);
         
-        JButton quitButton = new JButton();
+        quitButton = new JButton();
+        quitButton.doClick();
         quitButton.setText("Quit");
         quitButton.setActionCommand("PongQuit");
         quitButton.addActionListener(endOfGameListener);
@@ -156,53 +158,70 @@ public final class PongPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        
         Graphics2D g2 = (Graphics2D) g;
         
+        // Draw ball and paddles
         pongBall.draw(g2);
         paddle1.draw(g2);
         paddle2.draw(g2);
         
+        // Draw scores
         g2.setFont(new Font("MarkerFelt", Font.PLAIN, 72));
         g2.setColor(Color.LIGHT_GRAY);
-        
         g2.drawString(String.valueOf(player1Score), 210, 100);
         g2.drawString(String.valueOf(player2Score), 360, 100);
 
-        
+        if (!gameRunning) {
+            g2.setFont(new Font("MarkerFelt", Font.PLAIN, 16));
+            String text = "Press Space to start game.";
+            g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 300);
+        }
     }
     
     /**
      * 
      */
-    public void playPong(){
-        pongBall.resetBall(true);
+    public void playPong() {
+        pongBall.resetBall();
         paddle1.resetPaddle();
         paddle2.resetPaddle();
         gameRunning = true;
         gameLoopTimer.start();
-        
-        player1Score = 0;
-        player2Score = 0;
     }
     
     /**
      * 
      */
-    public void endPong(){
+    public void endPong() {
         gameLoopTimer.stop();
+        pongBall.resetBall();
+        paddle1.resetPaddle();
+        paddle2.resetPaddle();
+        gameRunning = false;
+        repaint();
     }
     
     public void player1Scored(){
         System.out.println("p1 scored");
         player1Score += 10;
-        pongBall.resetBall(true);
+        pongBall.resetBall();
+        endPong();
     }
     
     public void player2Scored(){
         System.out.println("p2 scored");
         player2Score += 10;
-        pongBall.resetBall(false);
+        pongBall.resetBall();
+        endPong();
+    }
+
+    public int getPlayerScore(int player) {
+        return player == 1 ? player1Score : player2Score;
+    }
+
+    public void resetScores() {
+        player1Score = 0;
+        player2Score = 0;
     }
     
     /**

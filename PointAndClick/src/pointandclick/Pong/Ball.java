@@ -1,6 +1,7 @@
 package pointandclick.Pong;
 
 import java.awt.*;
+import java.util.Random;
 
 public final class Ball extends Rectangle {
     
@@ -17,6 +18,8 @@ public final class Ball extends Rectangle {
         
     private int xVelocity;
     private int yVelocity;
+
+    private Random random;
     
     public Ball(){
         super(BALL_WIDTH, BALL_HEIGHT);
@@ -25,6 +28,8 @@ public final class Ball extends Rectangle {
         
         this.xVelocity = 0;
         this.yVelocity = 0;
+
+        this.random = new Random();
         
         setLocation(x, y);
     }
@@ -82,13 +87,13 @@ public final class Ball extends Rectangle {
     
     /**
      * 
-     * @param goLeft 
      */
-    public void resetBall(boolean goLeft){
+    public void resetBall() {
         this.x = X_SPAWN;
         this.y = Y_SPAWN;
         resetVelocity();
         
+        boolean goLeft = (random.nextInt() & 1) == 1;
         if(goLeft){
             this.xVelocity = -X_VELOCITY_SPAWN;
             this.yVelocity = -Y_VELOCITY_SPAWN;

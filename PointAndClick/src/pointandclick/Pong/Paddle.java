@@ -9,15 +9,15 @@ import java.awt.event.KeyEvent;
  */
 public final class Paddle extends Rectangle {
     
-    private final static int PADDLE_WITH = 15;
+    private final static int PADDLE_WIDTH = 15;
     private final static int PADDLE_HEIGHT = 75;
     
     private final static int MAX_PADDLE_Y_VELOCITY = 25;
-    private final static int PADDLE_ACCELARATION = 13;
+    private final static int PADDLE_ACCELERATION = 13;
     private final static int BOTTOM_LIMIT_BUFFER = 115;
     
-    private final int x_Spawn;
-    private final int y_Spawn;
+    private final int X_SPAWN;
+    private final int Y_SPAWN;
     
     private int yVelocity;
     private short id;
@@ -29,9 +29,9 @@ public final class Paddle extends Rectangle {
      * @param y 
      */
     public Paddle(short id, int x, int y) {
-        super(PADDLE_WITH, PADDLE_HEIGHT);
-        this.x_Spawn = x;
-        this.y_Spawn = y;
+        super(PADDLE_WIDTH, PADDLE_HEIGHT);
+        this.X_SPAWN = x;
+        this.Y_SPAWN = y;
         this.x = x;
         this.y = y;
         this.id = id;
@@ -50,13 +50,13 @@ public final class Paddle extends Rectangle {
             case 1:
                 if (e.getKeyCode() == KeyEvent.VK_W) {
                     if(getYVelocity() > -MAX_PADDLE_Y_VELOCITY){
-                        addYVelocity(-PADDLE_ACCELARATION);
+                        addYVelocity(-PADDLE_ACCELERATION);
                     }
                     System.out.print("W");
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
                     if(getYVelocity() < MAX_PADDLE_Y_VELOCITY){
-                        addYVelocity(PADDLE_ACCELARATION);
+                        addYVelocity(PADDLE_ACCELERATION);
                     }
                     System.out.print("S");
 
@@ -65,14 +65,14 @@ public final class Paddle extends Rectangle {
             case 2:
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     if(getYVelocity() > -MAX_PADDLE_Y_VELOCITY){
-                        addYVelocity(-PADDLE_ACCELARATION);
+                        addYVelocity(-PADDLE_ACCELERATION);
                     }
                     System.out.print("UP");
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     if(getYVelocity() < MAX_PADDLE_Y_VELOCITY){
-                        addYVelocity(PADDLE_ACCELARATION);
+                        addYVelocity(PADDLE_ACCELERATION);
                     }
                     System.out.print("DOWN");
 
@@ -176,7 +176,7 @@ public final class Paddle extends Rectangle {
      * 
      */
     public void resetPaddle(){
-        setLocation(x_Spawn, y_Spawn);
+        setLocation(X_SPAWN, Y_SPAWN);
     }
     
 }

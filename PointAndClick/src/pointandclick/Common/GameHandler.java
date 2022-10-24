@@ -79,7 +79,6 @@ public class GameHandler extends JPanel {
                     pongPanel.endPong();
                     backButtonListener.actionPerformed(new ActionEvent(getParent(), ActionEvent.ACTION_PERFORMED, "PongQuit")); 
                     break;
-                    
                 default:
                     System.err.println("GameHandler: unknown command " + evt.getActionCommand());
                     break;
@@ -109,7 +108,7 @@ public class GameHandler extends JPanel {
      * Sends signal that game is staring to HangmanGamePanel.
      * Sets the face JPanel to display the HangmanGamePanel.
      */
-    public void startGame(){
+    public void startGame() {
        scorePanel.resetPlayerScore();
        hangmanPanel.startGame();
        sudokuPanel.reset();
@@ -119,10 +118,10 @@ public class GameHandler extends JPanel {
     /**
      * 
      */
-    public void playPong(){
-        pongPanel.playPong();
+    public void playPong() {
         panelLayout.show(face, pongPanel.getClass().getSimpleName());
         pongPanel.getFocus();
+        pongPanel.resetScores();
     }
   
 }
