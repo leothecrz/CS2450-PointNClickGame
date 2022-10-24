@@ -4,21 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
 public class ColorGamePanel extends JPanel {
+    // Constants
     private static final Color[] COLORS = {new Color(0xD32F2F), new Color(0xFDD835), new Color(0x4CAF50), new Color(0x1565C0), new Color(0x7B1FA2)};
     private static final String[] COLOR_NAMES = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE"};
-    private static final int[][] BUTTON_POSITIONS = {
-        {490, 180},
-        {370, 180},
-        {240, 180},
-        {130, 180},
-        {10, 180}
-    };
 
     // View
     private JLabel timeLabel;
@@ -95,6 +87,23 @@ public class ColorGamePanel extends JPanel {
 
         // Set color label text
         updateColor();
+
+        // Keybind to shuffle buttons at an interval (for debugging purposes)
+        Timer shuffleTimer = new Timer(1000, evt -> {
+            shuffleButtons();
+        });
+        Action shuffleButtonsAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Toggle timer
+                if (!shuffleTimer.isRunning())
+                    shuffleTimer.start();
+                else
+                    shuffleTimer.stop();
+            }
+        };
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK), "shuffleButtonsAction");
+        getActionMap().put("shuffleButtonsAction", shuffleButtonsAction);
     }
 
     public int getPlayerScore() {
@@ -111,15 +120,52 @@ public class ColorGamePanel extends JPanel {
         colorLabel.setText(colorName);
         colorLabel.setToolTipText(colorName);
         colorLabel.setForeground(COLORS[random.nextInt(COLORS.length)]);
-        
+    }
+    
+    /**
+     * Shuffle button positions by randomly generating positions and checking for collision
+     */
+    private void shuffleButtons() {
+        Rectangle[] boundingBoxes = new Rectangle[8];
+
+        // Add boxes for labels so buttons do not collide with label
+        boundingBoxes[0] = new Rectangle(410, 16, 200, 25); // Time label
+        boundingBoxes[1] = new Rectangle(210, 75, 200, 25); // Color label
+        boundingBoxes[2] = new Rectangle(210, 100, 200, 25); // Score label
+
+        // Find position for each button
+        for (int i = 3; i < 8; i++) {
+            // Keep repeating until a non-colliding position is found
+            boundingBoxes[i] = new Rectangle(getRandomNumber(20, 500), getRandomNumber(0, 250), 100, 100);
+            while (isColliding(boundingBoxes[i], boundingBoxes)) {
+                boundingBoxes[i].setRect(getRandomNumber(20, 500), getRandomNumber(0, 250), 100, 100);
+            }
+
+            // Set position of button once position has been found
+            colorButtons[i - 3].setBounds(boundingBoxes[i]);
+        }
     }
 
-    private void shuffleButtons() {
-        java.util.List<int[]> positions = Arrays.asList(BUTTON_POSITIONS); 
-        Collections.shuffle(positions);
-        int i = 0;
-        for (int[] position : positions) {
-            colorButtons[i++].setBounds(position[0] + (random.nextInt(21) - 10), position[1] + (random.nextInt(101) - 50), 100, 100);
+    /**
+     * Checks if the specified rectangle is colliding with any of the other rectangles in the array
+     */
+    private boolean isColliding(Rectangle rectangle, Rectangle[] boxes) {
+        boolean colliding = false;
+        for (Rectangle box : boxes) {
+            if (box == null || box == rectangle)
+                continue;
+            if (rectangle.intersects(box)) {
+                colliding = true;
+                break;
+            }
         }
+        return colliding;
+    }
+
+    /*
+     * Generate a random number between min and max
+     */
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }

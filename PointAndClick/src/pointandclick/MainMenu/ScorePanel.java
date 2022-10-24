@@ -78,7 +78,7 @@ public class ScorePanel extends JPanel {
 
         gotHSSubmitButton = new JButton("Submit");
         gotHSSubmitButton.addActionListener(gotHStextFieldListener);
-        gotHSSubmitButton.setBounds(263, 120, 80, 25);
+        gotHSSubmitButton.setBounds(260, 120, 80, 25);
         gotHSSubmitButton.setBorder(new RoundedBorder(15));
         gotHSSubmitButton.setContentAreaFilled(false);
         gotHSSubmitButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
