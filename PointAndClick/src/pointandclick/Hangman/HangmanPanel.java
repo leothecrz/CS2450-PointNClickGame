@@ -13,27 +13,20 @@
 
 package pointandclick.Hangman;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.*;
-import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
 import java.util.Random;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 
 import pointandclick.Common.RoundedBorder;
 
 public class HangmanPanel extends JPanel {
     // Constants
     private static final int MAX_ERRORS = 6;
-    private static final String KEYS = "abcdefghijklmnopqrstuvwxyz";
+    private static final String KEYS = "qwertyuiopasdfghjklzxcvbnm";
     private static final String[] WORDBANK = {
         "abstract", "cemetery", "nurse", "pharmacy", "climbing"
     };
@@ -42,7 +35,7 @@ public class HangmanPanel extends JPanel {
     private JPanel topPanel; // Hangman panel
     private JPanel bottomPanel; // Keyboard panel
     private JButton skipButton;
-    private JButton[] keyButtons; // Keyboard buttons
+    private JButton[] keyboardButtons; // Keyboard buttons
     private JLabel timeLabel;
     private Timer timeLabelTimer;
 
@@ -77,9 +70,9 @@ public class HangmanPanel extends JPanel {
          * Action Listener. Handles all interaction with the keyboard on the bottom panel.
          * Handles events that may occur from button presses such as a game loss or a game victory.
          */
-        ActionListener buttonsGameListener = evt -> { //Button Listener
+        buttonsGameListener = evt -> { // Button Listener
             char pressedLetter = evt.getActionCommand().charAt(0);
-            JButton pressedButton = keyButtons[KEYS.indexOf(pressedLetter)];
+            JButton pressedButton = keyboardButtons[KEYS.indexOf(pressedLetter)];
             if (!pressedButton.isEnabled())
                 return; // User pressed letter that is disabled (keybind)
             pressedButton.setEnabled(false); // Disable each letter after it has been used.
@@ -171,21 +164,38 @@ public class HangmanPanel extends JPanel {
         bottomPanel.setBackground(Color.DARK_GRAY);
  
         // Keyboard buttons
-        keyButtons = new JButton[KEYS.length()];
+        keyboardButtons = new JButton[KEYS.length()];
         Font buttonFont = new Font("Marker Felt", Font.PLAIN, 15);
-        for (int i = 0; i < KEYS.length(); i++){
-            keyButtons[i] = new JButton(); 
-            keyButtons[i].setText(String.valueOf(KEYS.charAt(i))); // Set text to key
-            keyButtons[i].addActionListener(buttonsGameListener); // All buttons connected to same listener
-            keyButtons[i].setActionCommand(String.valueOf(KEYS.charAt(i))); // Buttons have action command corresponding to its letter
-            keyButtons[i].setFont(buttonFont);
-            keyButtons[i].setBackground(Color.LIGHT_GRAY);
-            keyButtons[i].setBorder(BorderFactory.createEmptyBorder(15, 15, 20,15));
-            keyButtons[i].setToolTipText("Input the letter '" + KEYS.charAt(i) + "'.");
-            keyButtons[i].setEnabled(true);
+
+        // Create row for each keyboard row
+        // q w e r t y u i o p  10
+        //  a s d f g h j k l   9
+        //   z x c v b n m      7
+        JPanel[] keyboardRows = new JPanel[] { new JPanel(), new JPanel(), new JPanel() };
+        for (int i = 0; i < keyboardRows.length; i++) {
+            keyboardRows[i].setLayout(new GridLayout(1, i == 0 ? 10 : i == 1 ? 9 : 7, 6, 0));
+            keyboardRows[i].setBackground(Color.DARK_GRAY);
+        }
+
+        // Create and add keyboard button for each key
+        for (int i = 0; i < KEYS.length(); i++) {
+            keyboardButtons[i] = new JButton(); 
+            keyboardButtons[i].setText(String.valueOf(KEYS.charAt(i)).toUpperCase()); // Set text to key
+            keyboardButtons[i].addActionListener(buttonsGameListener); // All buttons connected to same listener
+            keyboardButtons[i].setActionCommand(String.valueOf(KEYS.charAt(i))); // Buttons have action command corresponding to its letter
+            keyboardButtons[i].setFont(buttonFont);
+            keyboardButtons[i].setBackground(Color.LIGHT_GRAY);
+            keyboardButtons[i].setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+            keyboardButtons[i].setToolTipText("Input the letter '" + KEYS.charAt(i) + "'.");
+            keyboardButtons[i].setEnabled(true);
             
-             // Add keyButtons to bottomPanel's grid
-            bottomPanel.add(keyButtons[i]);
+            // Add button to respective keyboard row
+            keyboardRows[i < 10 ? 0 : i < 19 ? 1 : 2].add(keyboardButtons[i]);
+        }
+
+        // Add each keyboard row to bottom panel
+        for (JPanel row : keyboardRows) {
+            bottomPanel.add(row);
         }
         
         // Add panels to layout
@@ -197,7 +207,7 @@ public class HangmanPanel extends JPanel {
      * Enables all buttons.
      */
     public void resetButtons(){
-        for (JButton keyButton : keyButtons)
+        for (JButton keyButton : keyboardButtons)
             keyButton.setEnabled(true);
     }
 
