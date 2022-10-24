@@ -99,6 +99,30 @@ public final class PongPanel extends JPanel{
         
         ActionListener gameLoop = evt -> {
             
+            java.awt.Point nxtPos = pongBall.getNextPosition();
+            java.awt.Point paddleNxtPos;
+            if(pongBall.getXVelocity() < 0){ // going RIGHT
+                
+                paddleNxtPos = paddle1.nextPosition();
+                if(nxtPos.y > paddleNxtPos.y && nxtPos.y < (paddleNxtPos.y + paddle1.getHeight() ) ){
+                    System.out.println(nxtPos);
+                    System.out.println(String.valueOf(paddle1.getY() + paddle1.getWidth())   );
+                    
+                    if(nxtPos.x <= (paddleNxtPos.x + paddle1.getWidth()) ){
+                        System.out.println("Hit");
+                        pongBall.setXVelocity(pongBall.getXVelocity() * (-1));
+                    }
+                }
+                
+            } else { // going LEFT
+                
+                paddleNxtPos = paddle2.nextPosition();
+                if(nxtPos.y >0){
+                    
+                }
+                
+            }
+            
             pongBall.tickPass();
             paddle1.tickPass();
             paddle2.tickPass();

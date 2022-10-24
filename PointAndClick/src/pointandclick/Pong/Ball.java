@@ -101,12 +101,12 @@ public final class Ball extends Rectangle{
         resetVelocity();
         
         if(goLeft){
-            this.xVelocity = 1;
-            this.yVelocity = -12;
+            this.xVelocity = -10;
+            this.yVelocity = -6;
             
         }else {
-            this.xVelocity = 1;
-            this.yVelocity = -12;
+            this.xVelocity = 10;
+            this.yVelocity = -6;
         
         }
     }

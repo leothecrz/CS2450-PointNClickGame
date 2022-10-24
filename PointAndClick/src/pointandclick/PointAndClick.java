@@ -151,7 +151,11 @@ public class PointAndClick extends JFrame {
      * @param args - main method default requirement
      */
     public static void main(String[] args) {
-        new PointAndClick("Point and Click Game").setVisible(true);
+        
+        SwingUtilities.invokeLater(() -> {
+            new PointAndClick("Point and Click Game").setVisible(true);
+        });
+        
     }
 
     // Fixes relative file paths when running this program in Visual Studio Code
