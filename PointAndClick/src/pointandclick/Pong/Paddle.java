@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pointandclick.Pong;
 
 import java.awt.*;
@@ -9,22 +6,28 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author leothecrz
  */
 public final class Paddle extends Rectangle {
     
-    private static int PADDLE_WITH = 15;
-    private static int PADDLE_HEIGHT = 75;
+    private final static int PADDLE_WITH = 15;
+    private final static int PADDLE_HEIGHT = 75;
+    
+    private final static int MAX_PADDLE_Y_VELOCITY = 25;
+    private final static int PADDLE_ACCELARATION = 13;
+    private final static int BOTTOM_LIMIT_BUFFER = 115;
+    
+    private final int x_Spawn;
+    private final int y_Spawn;
     
     private int yVelocity;
-    
-    private int x_Spawn;
-    private int y_Spawn;
-    
-    
     private short id;
     
-    //constructor
+    /**
+     * 
+     * @param id
+     * @param x
+     * @param y 
+     */
     public Paddle(short id, int x, int y) {
         super(PADDLE_WITH, PADDLE_HEIGHT);
         this.x_Spawn = x;
@@ -35,6 +38,10 @@ public final class Paddle extends Rectangle {
         setLocation(x, y);
     }
     
+    /**
+     * 
+     * @param e 
+     */
     public void keyPressed(KeyEvent e){
         switch(id){
             default:
@@ -42,14 +49,14 @@ public final class Paddle extends Rectangle {
                 break;
             case 1:
                 if (e.getKeyCode() == KeyEvent.VK_W) {
-                    if(getYVelocity() > -25){
-                        addYVelocity(-13);
+                    if(getYVelocity() > -MAX_PADDLE_Y_VELOCITY){
+                        addYVelocity(-PADDLE_ACCELARATION);
                     }
                     System.out.print("W");
                 }
                 if (e.getKeyCode() == KeyEvent.VK_S) {
-                    if(getYVelocity() < 25){
-                        addYVelocity(13);
+                    if(getYVelocity() < MAX_PADDLE_Y_VELOCITY){
+                        addYVelocity(PADDLE_ACCELARATION);
                     }
                     System.out.print("S");
 
@@ -57,15 +64,15 @@ public final class Paddle extends Rectangle {
                 break;
             case 2:
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if(getYVelocity() > -25){
-                        addYVelocity(-13);
+                    if(getYVelocity() > -MAX_PADDLE_Y_VELOCITY){
+                        addYVelocity(-PADDLE_ACCELARATION);
                     }
                     System.out.print("UP");
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if(getYVelocity() < 25){
-                        addYVelocity(13);
+                    if(getYVelocity() < MAX_PADDLE_Y_VELOCITY){
+                        addYVelocity(PADDLE_ACCELARATION);
                     }
                     System.out.print("DOWN");
 
@@ -74,6 +81,10 @@ public final class Paddle extends Rectangle {
         }
     }
     
+    /**
+     * 
+     * @param e 
+     */
     public void keyReleased(KeyEvent e){
         switch(id){
             default:
@@ -102,7 +113,10 @@ public final class Paddle extends Rectangle {
         }
     }
     
-    //draws the paddles 
+    /**
+     * 
+     * @param g 
+     */
     public void draw(Graphics2D g) {
         if(id==1)
             g.setColor(Color.YELLOW);
@@ -112,33 +126,55 @@ public final class Paddle extends Rectangle {
         g.fill(this);
     }
     
+    /**
+     * 
+     */
     public void tickPass(){
         Point nxtPosition = nextPosition();
         if(nxtPosition.y < 0){
             this.y = 0;
-        }else if(nxtPosition.y >= 0 && nxtPosition.y <= 400-(115)){
+        }else if(nxtPosition.y >= 0 && nxtPosition.y <= 400-(BOTTOM_LIMIT_BUFFER)){
             this.y = nxtPosition.y;
         } else {
-            this.y = 400-(115);
+            this.y = 400-(BOTTOM_LIMIT_BUFFER);
         }
     }
     
+    /**
+     * 
+     * @param yVel 
+     */
     public void addYVelocity(int yVel){
         this.yVelocity += yVel;
     }
     
+    /**
+     * 
+     * @param yVel 
+     */
     public void setYVelocity(int yVel){
         this.yVelocity = yVel;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getYVelocity(){
         return this.yVelocity;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Point nextPosition(){
         return new Point(x, y+=yVelocity);
     }
     
+    /**
+     * 
+     */
     public void resetPaddle(){
         setLocation(x_Spawn, y_Spawn);
     }

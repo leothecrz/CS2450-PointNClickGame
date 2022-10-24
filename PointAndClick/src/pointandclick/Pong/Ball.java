@@ -6,9 +6,9 @@ package pointandclick.Pong;
 
 import java.awt.*;
 import java.util.Random;
+
 /**
  *
- * @author leothecrz
  */
 public final class Ball extends Rectangle{
     
@@ -17,6 +17,9 @@ public final class Ball extends Rectangle{
     
     private final static int X_SPAWN = 293;
     private final static int Y_SPAWN = 193;
+    
+    private final static int X_VELOCITY_SPAWN = 10;
+    private final static int Y_VELOCITY_SPAWN = 2;
     
     private Color fillColor = Color.WHITE;
     
@@ -34,7 +37,6 @@ public final class Ball extends Rectangle{
         this.yVelocity = 0;
         
         setLocation(x, y);
-          
     }
     
     /**
@@ -101,12 +103,12 @@ public final class Ball extends Rectangle{
         resetVelocity();
         
         if(goLeft){
-            this.xVelocity = -10;
-            this.yVelocity = -6;
+            this.xVelocity = -X_VELOCITY_SPAWN;
+            this.yVelocity = -Y_VELOCITY_SPAWN;
             
         }else {
-            this.xVelocity = 10;
-            this.yVelocity = -6;
+            this.xVelocity = X_VELOCITY_SPAWN;
+            this.yVelocity = Y_VELOCITY_SPAWN;
         
         }
     }
