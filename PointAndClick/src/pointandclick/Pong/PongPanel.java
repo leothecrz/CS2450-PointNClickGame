@@ -2,6 +2,9 @@ package pointandclick.Pong;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.*;
 import pointandclick.Common.RoundedBorder;
 
@@ -16,6 +19,8 @@ public final class PongPanel extends JPanel {
     private Paddle paddle1;
     private Paddle paddle2;
     private JButton quitButton;
+    private JLabel timeLabel;
+    private Timer timeLabelTimer;
     
     private int player1Score;
     private int player2Score;
@@ -79,6 +84,23 @@ public final class PongPanel extends JPanel {
         quitButton.setBounds(280, 10, 50, 25);
         quitButton.setFocusable(false);
         add(quitButton);
+
+        // Time
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+        ActionListener timeListener = evt -> {
+            String date = format.format(new Date());
+            timeLabel.setText(date); 
+            timeLabel.setToolTipText("Current time: " + date);
+        };
+        
+        timeLabel = new JLabel("");
+        timeLabel.setBounds(410, 12, 200, 25);
+        timeLabel.setFont(new Font("Digital-7", Font.BOLD, 18));
+        // timeLabel.setForeground(Color.LIGHT_GRAY);
+        timeListener.actionPerformed(null);
+        timeLabelTimer = new Timer(1000, timeListener);
+        timeLabelTimer.start();
+        add(timeLabel);
         
         paddle1 = new Paddle((short)1, 30, 150);
         paddle2 = new Paddle((short)2, 555, 150);
