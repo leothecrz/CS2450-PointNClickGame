@@ -75,7 +75,7 @@ public class ColorGamePanel extends JPanel {
 
         // Color label
         colorLabel = new JLabel("", SwingConstants.CENTER);
-        colorLabel.setBounds(210, 75, 200, 25);
+        colorLabel.setBounds(210, 55, 200, 50);
         colorLabel.setFont(new Font("Marker Felt", Font.BOLD, 30));
         add(colorLabel);
 
