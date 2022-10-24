@@ -1,4 +1,15 @@
 
+/**
+ *      file: Paddle.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.3
+ * 
+ *      purpose: Handles what events the paddle should take
+ *          when a key event is detected on the PongPanel.
+ */
+
 package pointandclick.Pong;
 
 import java.awt.*;

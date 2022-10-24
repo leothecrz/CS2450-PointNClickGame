@@ -1,3 +1,15 @@
+
+/**
+ *      file: Ball.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.3
+ * 
+ *      purpose: Stores and handles certain collision events
+ *          for the pong game's ball object.
+ */
+
 package pointandclick.Pong;
 
 import java.awt.*;
@@ -7,22 +19,19 @@ public final class Ball extends Rectangle {
     
     private final static int BALL_WIDTH = 15;
     private final static int BALL_HEIGHT = BALL_WIDTH;
-    
     private final static int X_SPAWN = 293;
     private final static int Y_SPAWN = 193;
-    
     private final static int X_VELOCITY_SPAWN_MIN = 7;
     private final static int X_VELOCITY_SPAWN_MAX = 10;
     private final static int Y_VELOCITY_SPAWN_MIN = 2;
     private final static int Y_VELOCITY_SPAWN_MAX = 5;
+    private final Color fillColor = Color.WHITE;
     
-    private Color fillColor = Color.WHITE;
-        
+    private final Random random;
+    
     private int xVelocity;
     private int yVelocity;
 
-    private Random random;
-    
     public Ball(){
         super(BALL_WIDTH, BALL_HEIGHT);
         this.x = X_SPAWN;
@@ -36,6 +45,10 @@ public final class Ball extends Rectangle {
         setLocation(x, y);
     }
     
+    /**
+     * Physics simulation moves one step each time the method is called.
+     * Requires that it be called continuously to active motion for Ball.
+     */
     public void tickPass(){
         Point nxtPosition = getNextPosition();
         

@@ -1,6 +1,6 @@
 
 /**
- *      file: Hangman.java
+ *      file: GameHandler.java
  *      authors: Goofy Goobers Team
  *      class: CS2450 - User Interface Dsng and Prgmng
  * 

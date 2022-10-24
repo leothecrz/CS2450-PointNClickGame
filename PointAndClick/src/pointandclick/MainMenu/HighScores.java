@@ -6,7 +6,7 @@
  * 
  *      assignment: Version 1.0
  * 
- *      purpose: (WIP) Will display the high scores from the
+ *      purpose: Will display the high scores from the
  *          game.
  */
 

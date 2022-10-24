@@ -1,3 +1,17 @@
+
+/**
+ *      file: PongPaddle.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.0
+ * 
+ *      purpose: displays the pong game. Handles the game loop, and listens for
+ *          key events to pass to its paddles. Handles collision events that 
+ *          involve both the ball and paddle. Handles win condition detection and 
+ *          board reset.
+ */
+
 package pointandclick.Pong;
 
 import java.awt.*;
@@ -39,10 +53,8 @@ public final class PongPanel extends JPanel {
         this.setVisible(true);
         
         gameRunning = false;
-        
         player1Score = 0;
         player2Score = 0;
-
         focusGet = () -> {
             requestFocusInWindow();
         };

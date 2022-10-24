@@ -1,3 +1,14 @@
+
+/**
+ *      file: ScoreTable.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      purpose: Provides read and write functionality for access
+ *          to a maintained HIGHSCORE file. Reads the file to store contents in memory
+ *          to display or discover a new high score.
+ */
+
 package pointandclick.Common;
 
 import java.io.File;

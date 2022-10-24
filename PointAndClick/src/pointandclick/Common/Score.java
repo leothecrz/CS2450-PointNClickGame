@@ -1,3 +1,13 @@
+
+/**
+ *      file: Score.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      purpose: Simple Data class with the ability to format its
+ *          content to a String for high score file.
+ */
+
 package pointandclick.Common;
 
 public final class Score {

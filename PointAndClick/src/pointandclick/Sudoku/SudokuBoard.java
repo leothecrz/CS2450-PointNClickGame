@@ -1,3 +1,15 @@
+
+/**
+ *      file: SudokuBoard.java
+ *      authors: Goofy Goobers Team
+ *      class: CS2450 - User Interface Dsng and Prgmng
+ * 
+ *      assignment: Version 1.2
+ * 
+ *      purpose: handles board interactions and stores state. Can calculate score of the board and
+ *          if it was correctly solved.
+ */
+
 package pointandclick.Sudoku;
 
 import java.awt.*;

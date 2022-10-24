@@ -1,6 +1,6 @@
 
 /**
- *      file: HangmanScorePanel.java
+ *      file: ScorePanel.java
  *      authors: Goofy Goobers Team
  *      class: CS2450 - User Interface Dsng and Prgmng
  * 
@@ -29,7 +29,7 @@ public class ScorePanel extends JPanel {
     private ScoreTable scoreTable;
     
     private JLabel gotHSLabel;
-    private JTextField gotHSNameField;
+    private JFormattedTextField gotHSNameField;
     private JButton gotHSSubmitButton;
     
     /**
@@ -68,7 +68,7 @@ public class ScorePanel extends JPanel {
         gotHSLabel.setBounds(170, 50, 300, 25);
         gotHSLabel.setVisible(true);
 
-        gotHSNameField = new JTextField(14);
+        gotHSNameField = new JFormattedTextField();
         gotHSNameField.setEnabled(true);
         gotHSNameField.setEditable(true);
         gotHSNameField.addActionListener(gotHStextFieldListener);
@@ -105,7 +105,6 @@ public class ScorePanel extends JPanel {
     
     /**
      * Allows outside classes to reset the playerScore field.
-     * @param playerScore - score for the playerScore field.
      */
     public void resetPlayerScore() {
         this.hangmanScore = 0;
@@ -121,22 +120,42 @@ public class ScorePanel extends JPanel {
         return hangmanScore + colorGameScore + sudokuScore;
     }
 
+    /**
+     * Set the score of the current player in hangman.
+     * @param score 
+     */
     public void setHangmanScore(int score) {
         this.hangmanScore = score;
     }
-
+    
+    /**
+     * Set the score of the current player in the color game.
+     * @param score 
+     */
     public void setColorGameScore(int score) {
         this.colorGameScore = score;
     }
-
+    
+    /**
+     * Set the score of the current player in Sudoku.
+     * @param score 
+     */
     public void setSudokuScore(int score) {
         this.sudokuScore = score;
     }
     
+    /**
+     * Get access to the high score table in memory.
+     * @return 
+     */
     public ScoreTable getScoreTable() {
         return this.scoreTable;
     }
     
+    /**
+     * Set if the high score alert should be displayed. 
+     * @param state 
+     */
     public void setState(boolean state) {
         gotHSLabel.setVisible(state);
         gotHSNameField.setVisible(state);
