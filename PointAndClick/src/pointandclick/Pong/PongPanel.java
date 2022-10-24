@@ -57,7 +57,6 @@ public final class PongPanel extends JPanel {
                     paddle1.keyPressed(e);
                     paddle2.keyPressed(e);
                 }
-                
             }
 
             @Override
@@ -117,7 +116,6 @@ public final class PongPanel extends JPanel {
                         player2Scored();
                     }
                 }
-                
             } else { // going LEFT
                 
                 paddleNxtPos = paddle2.nextPosition();
@@ -172,25 +170,39 @@ public final class PongPanel extends JPanel {
         g2.drawString(String.valueOf(player2Score), 360, 100);
 
         if (!gameRunning) {
-            g2.setFont(new Font("Digital-7", Font.PLAIN, 16));
-            String text = "Press Space to start game.";
+            String text;
+            int fontSize;
+            if (player1Score == 100) {
+                text = "Player 1 wins!";
+                fontSize = 48;
+            } else if (player2Score == 100) {
+                text = "Player 2 wins!";
+                fontSize = 48;
+            } else {
+                text = "Press Space to start game.";
+                fontSize = 16;
+            }
+            g2.setFont(new Font("Digital-7", Font.PLAIN, fontSize));
             g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 300);
         }
     }
     
     /**
-     * 
+     * Start pong game
      */
     public void playPong() {
         pongBall.resetBall();
         paddle1.resetPaddle();
         paddle2.resetPaddle();
         gameRunning = true;
+        if (player1Score == 100 || player2Score == 100) {
+            resetScores();
+        }
         gameLoopTimer.start();
     }
     
     /**
-     * 
+     * End pong game, reset paddle and ball
      */
     public void endPong() {
         gameLoopTimer.stop();
@@ -215,22 +227,14 @@ public final class PongPanel extends JPanel {
         endPong();
     }
 
-    public int getPlayerScore(int player) {
-        return player == 1 ? player1Score : player2Score;
-    }
-
     public void resetScores() {
         player1Score = 0;
         player2Score = 0;
     }
-    
-    /**
-     * 
-     */
+
     public void getFocus(){
         //System.err.println(this.requestFocusInWindow());
         SwingUtilities.invokeLater(focusGet);
-        
     }
     
 }
