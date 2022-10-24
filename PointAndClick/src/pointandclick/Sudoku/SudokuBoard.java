@@ -55,7 +55,6 @@ public class SudokuBoard extends JComponent implements ActionListener {
             getActionMap().put(String.valueOf(i), numberAction);
         }
         
-        
         // Up key moves selection up
         Action moveUP = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -110,6 +109,23 @@ public class SudokuBoard extends JComponent implements ActionListener {
         };
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RIGHTKEY");
         getActionMap().put("RIGHTKEY", moveRight);
+
+        // Shift + Z solves board (super duper secret)
+        Action solveBoard = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int row = 0; row < 9; row++) {
+                    for (int col = 0; col < 9; col++) {
+                        SudokuCell cell = cells[row][col];
+                        if (cell.given)
+                            continue;
+                        cell.setUserAnswer(NUMBERS[row][col]);
+                    }
+                }
+            }
+        };
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK), "solveBoard");
+        getActionMap().put("solveBoard", solveBoard);
     }
     
     public void resetBoard() {
