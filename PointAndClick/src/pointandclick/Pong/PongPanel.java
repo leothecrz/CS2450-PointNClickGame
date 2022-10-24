@@ -62,19 +62,16 @@ public final class PongPanel extends JPanel{
         KeyListener pongKeyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                System.out.print("hit ");
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.print("pressed ");
                 paddle1.keyPressed(e);
                 paddle2.keyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                System.out.print("released. ");
                 paddle1.keyReleased(e);
                 paddle2.keyReleased(e);
             }
@@ -101,24 +98,42 @@ public final class PongPanel extends JPanel{
             
             java.awt.Point nxtPos = pongBall.getNextPosition();
             java.awt.Point paddleNxtPos;
+            
+            double yDelta;
+            
             if(pongBall.getXVelocity() < 0){ // going RIGHT
                 
                 paddleNxtPos = paddle1.nextPosition();
-                if(nxtPos.y > paddleNxtPos.y && nxtPos.y < (paddleNxtPos.y + paddle1.getHeight() ) ){
-                    System.out.println(nxtPos);
-                    System.out.println(String.valueOf(paddle1.getY() + paddle1.getWidth())   );
+                if(nxtPos.y > paddleNxtPos.y && nxtPos.y < (paddleNxtPos.y + paddle1.height ) ){
                     
-                    if(nxtPos.x <= (paddleNxtPos.x + paddle1.getWidth()) ){
-                        System.out.println("Hit");
-                        pongBall.setXVelocity(pongBall.getXVelocity() * (-1));
+                    if(nxtPos.x <= (paddleNxtPos.x + paddle1.width) ){
+                        //pongBall.setXVelocity(pongBall.getXVelocity() * (-1));
+                        
+                        yDelta = ( (paddle1.getY() + ((paddle1.getHeight()/2))) ) - pongBall.y;
+                        
+                        if(pongBall.getXVelocity() > -25){
+                            int newXVel = (int)(pongBall.getXVelocity() * (-1.1));
+                            pongBall.setXVelocity(newXVel);
+                        } else {
+                            pongBall.setXVelocity( (int)(pongBall.getXVelocity() * (-0.8)) );
+                        }
+                        int newYVel = Math.round(-12 * (float)(yDelta/30));
+                        pongBall.setYVelocity(newYVel);
+                        
+                        
                     }
                 }
                 
             } else { // going LEFT
                 
                 paddleNxtPos = paddle2.nextPosition();
-                if(nxtPos.y >0){
+                if(nxtPos.y > paddleNxtPos.y && nxtPos.y < (paddleNxtPos.y + paddle2.getHeight() ) ){
                     
+                    if(nxtPos.x >= paddleNxtPos.x){
+                        pongBall.setXVelocity(pongBall.getXVelocity() * (-1));
+                        
+                        
+                    }
                 }
                 
             }

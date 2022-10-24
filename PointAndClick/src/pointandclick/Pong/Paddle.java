@@ -16,7 +16,6 @@ public final class Paddle extends Rectangle {
     private static int PADDLE_WITH = 15;
     private static int PADDLE_HEIGHT = 75;
     
-    private int yDirection;
     private int yVelocity;
     
     private int x_Spawn;
@@ -111,10 +110,6 @@ public final class Paddle extends Rectangle {
             g.setColor(Color.GREEN);
         //g.fillRect(x, y, this.width, this.height);
         g.fill(this);
-    }
-    
-    public void setYDirection(int yDir) {
-        yDirection = yDir;
     }
     
     public void tickPass(){
