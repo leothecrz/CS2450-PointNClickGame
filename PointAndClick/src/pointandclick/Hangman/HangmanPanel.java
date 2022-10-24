@@ -102,12 +102,23 @@ public class HangmanPanel extends JPanel {
                     // End game
                     disableButtons();
 
-                    // Wait for 2 seconds before continuing to next game
-                    Timer endTimer = new Timer(2000, end -> {
-                        ((Timer)end.getSource()).stop();
-                        skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "HangmanEnd"));
+                    // Slowly reveal each letter
+                    Timer endTimer = new Timer(1000, end -> {
+                        boolean shouldContinue = true;
+                        for (int i = 0; i < wordToFind.length(); i++) {
+                            if (charsFound[i] == '_') {
+                                charsFound[i] = wordToFind.charAt(i);
+                                shouldContinue = false;
+                                repaint();
+                                break;
+                            }
+                        }
+
+                        if (shouldContinue == true) {
+                            ((Timer)end.getSource()).stop();
+                            skipAndEndListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "HangmanEnd"));
+                        }
                     });
-                    endTimer.setInitialDelay(2000);
                     endTimer.start();
                 }
             }
