@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class SudokuCell extends JComponent implements MouseListener {
     private static final int CELL_SIZE = 38;
-    private Font markerFeltFont;
+    private Font arialFont;
 
     public int row;
     public int column;
@@ -29,7 +29,7 @@ public class SudokuCell extends JComponent implements MouseListener {
         this.incorrect = false;
         this.userAnswer = given ? number : 0;
 
-        markerFeltFont = new Font("Marker Felt", Font.PLAIN, 12);
+        arialFont = new Font("Arial", Font.PLAIN, 14);
         addMouseListener(this);
         setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
     }
@@ -71,7 +71,7 @@ public class SudokuCell extends JComponent implements MouseListener {
 
         // Center text
         if (given || userAnswer != 0) {
-            g.setFont(markerFeltFont);
+            g.setFont(arialFont);
             FontMetrics metric = g.getFontMetrics();
             String text = String.valueOf(userAnswer);
             int x = (CELL_SIZE - metric.stringWidth(text)) / 2;

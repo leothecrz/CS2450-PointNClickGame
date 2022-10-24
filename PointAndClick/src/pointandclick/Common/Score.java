@@ -1,6 +1,5 @@
 package pointandclick.MainMenu;
 
-
 public final class Score {
     private String initials;
     private String name;
@@ -42,10 +41,9 @@ public final class Score {
     }
     
     /**
-     * 
      * @return Integer score value.
      */
-    public int getScore(){
+    public int getScore() {
         return this.score;
     }
     
@@ -58,10 +56,9 @@ public final class Score {
     }
     
     /**
-     * 
      * @return String name value
      */
-    public String getName(){
+    public String getName() {
         return this.name;
     }
     
@@ -69,15 +66,14 @@ public final class Score {
      * Sets the name of the class
      * @param name 
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
     
     /**
-     * 
      * @return String initials
      */
-    public String getInitials(){
+    public String getInitials() {
         return this.initials;
     }
     
@@ -85,7 +81,7 @@ public final class Score {
      * Sets the initials of the class
      * @param initials 
      */
-    public void setInitials(String initials){
+    public void setInitials(String initials) {
         this.initials = initials;
     }
     

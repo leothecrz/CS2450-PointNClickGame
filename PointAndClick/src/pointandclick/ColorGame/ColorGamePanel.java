@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class ColorGamePanel extends JPanel {
-    private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA};
+    private static final Color[] COLORS = {new Color(0xD32F2F), new Color(0xFDD835), new Color(0x4CAF50), new Color(0x1565C0), new Color(0x7B1FA2)};
     private static final String[] COLOR_NAMES = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE"};
     private static final int[][] BUTTON_POSITIONS = {
         {490, 180},
