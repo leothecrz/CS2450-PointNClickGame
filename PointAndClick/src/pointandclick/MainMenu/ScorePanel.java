@@ -23,7 +23,9 @@ import pointandclick.Common.RoundedBorder;
 
 public class ScorePanel extends JPanel {
     
-    private int playerScore;
+    private int hangmanScore;
+    private int colorGameScore;
+    private int sudokuScore;
     private ScoreTable scoreTable;
     
     private JLabel gotHSLabel;
@@ -38,7 +40,9 @@ public class ScorePanel extends JPanel {
     public ScorePanel(ActionListener endAndSkip){
         super();
         
-        playerScore = 0;
+        hangmanScore = 0;
+        colorGameScore = 0;
+        sudokuScore = 0;
         scoreTable = new ScoreTable();
         
         setPreferredSize(new Dimension(600, 400));
@@ -53,7 +57,7 @@ public class ScorePanel extends JPanel {
             gotHSNameField.setEnabled(false);
             gotHSSubmitButton.setVisible(false);
             
-            scoreTable.secureAdd(playerScore, userName);
+            scoreTable.secureAdd(getPlayerScore(), userName);
         };
         
         // High score components
@@ -100,27 +104,33 @@ public class ScorePanel extends JPanel {
     }
     
     /**
-     * Allows outside classes to add to the playerScore field.
-     * @param playerScore - score for the playerScore field.
-     */
-    public void addPlayerScore(int pScore) {
-        this.playerScore += pScore;
-    }
-    
-    /**
      * Allows outside classes to reset the playerScore field.
      * @param playerScore - score for the playerScore field.
      */
     public void resetPlayerScore() {
-        this.playerScore = 0;
+        this.hangmanScore = 0;
+        this.colorGameScore = 0;
+        this.sudokuScore = 0;
     }
 
     /**
-     * Allows outside classes to get the playerScore field.
-     * @return The value of the playerScore field
+     * Allows outside classes to get the total score.
+     * @return Total player score
      */
     public int getPlayerScore() {
-        return playerScore;
+        return hangmanScore + colorGameScore + sudokuScore;
+    }
+
+    public void setHangmanScore(int score) {
+        this.hangmanScore = score;
+    }
+
+    public void setColorGameScore(int score) {
+        this.colorGameScore = score;
+    }
+
+    public void setSudokuScore(int score) {
+        this.sudokuScore = score;
     }
     
     public ScoreTable getScoreTable() {
@@ -150,10 +160,15 @@ public class ScorePanel extends JPanel {
         g2.setFont(new Font("Marker Felt", Font.BOLD, 50));
 
         // Center text
-        FontMetrics metric = g2.getFontMetrics();
-        String text = "Score: " + String.valueOf(playerScore);
-        int x = (600 - metric.stringWidth(text)) / 2;
-        int y = 215;
-        g2.drawString(text, x, y);
+        String text = "Score: " + String.valueOf(getPlayerScore());
+        g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 215);
+
+        g2.setFont(new Font("Marker Felt", Font.PLAIN, 25));
+        text = "Hangman: " + String.valueOf(hangmanScore);
+        g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 240);
+        text = "Colors: " + String.valueOf(colorGameScore);
+        g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 265);
+        text = "Sudoku: " + String.valueOf(sudokuScore);
+        g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 290);
     }
 }

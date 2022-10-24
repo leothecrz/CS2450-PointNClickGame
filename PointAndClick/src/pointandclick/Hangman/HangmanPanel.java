@@ -161,7 +161,9 @@ public class HangmanPanel extends JPanel {
         // Time label
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
         ActionListener timeListener = evt -> {
-            timeLabel.setText(formatter.format(new Date())); 
+            String date = formatter.format(new Date());
+            timeLabel.setText(date); 
+            timeLabel.setToolTipText("Current time: " + date);
         };
         timeLabel = new JLabel("");
         timeLabel.setBounds(410, 11, 200, 25);

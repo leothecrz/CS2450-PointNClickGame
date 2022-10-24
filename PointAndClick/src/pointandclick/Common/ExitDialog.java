@@ -17,11 +17,10 @@ public final class ExitDialog extends JOptionPane {
     }
     
     /**
-     * Display the dialog box. 
-     * @return 0 is Yes, 1 is No
+     * Display exit dialog box. 
+     * @return True if user selected yes
      */
     public boolean shouldExit() {
         return showOptionDialog(this, DIALOG_MESSAGE, DIALOG_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, CHOICES, CHOICES[0]) == 0;
     }
-    
 }

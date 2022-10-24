@@ -45,27 +45,23 @@ public class GameHandler extends JPanel {
         setFocusable(true);
         setVisible(true);
         
-        // Handles Game End Events
+        // Handles game end events
         ActionListener endOfGameListener = evt -> {
-            switch(evt.getActionCommand()) {
-                
+            switch (evt.getActionCommand()) {
                 case "HangmanSkip":
-                    scorePanel.addPlayerScore(0);     
+                    scorePanel.setHangmanScore(0);     
                     panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
                     break;
-                    
                 case "HangmanEnd":
-                    scorePanel.addPlayerScore(hangmanPanel.getPlayerScore()); // add score from Hangman
+                    scorePanel.setHangmanScore(hangmanPanel.getPlayerScore());
                     panelLayout.show(face, colorGamePanel.getClass().getSimpleName());
                     break;
-                    
                 case "ColorGameEnd":
-                    scorePanel.addPlayerScore(colorGamePanel.playerScore);// add score in ColorGamePanel to the score in scorePanel
+                    scorePanel.setColorGameScore(colorGamePanel.playerScore);
                     panelLayout.show(face, sudokuPanel.getClass().getSimpleName());
                     break;
-                    
                 case "SudokuEnd":
-                    scorePanel.addPlayerScore(sudokuPanel.getScore());
+                    scorePanel.setSudokuScore(sudokuPanel.getScore());
                     scorePanel.getScoreTable().loadScores();
                     if (scorePanel.getScoreTable().checkIfHighscoreBoolean(scorePanel.getPlayerScore())) {
                         scorePanel.setState(true);
@@ -74,7 +70,6 @@ public class GameHandler extends JPanel {
                     }
                     panelLayout.show(face, scorePanel.getClass().getSimpleName());
                     break;
-                
                 case "PongQuit":
                     pongPanel.endPong();
                     backButtonListener.actionPerformed(new ActionEvent(getParent(), ActionEvent.ACTION_PERFORMED, "PongQuit")); 
@@ -101,7 +96,6 @@ public class GameHandler extends JPanel {
         face.add(sudokuPanel, sudokuPanel.getClass().getSimpleName());
              
         add(face);
-        
     }
     
     /**
@@ -114,14 +108,10 @@ public class GameHandler extends JPanel {
        sudokuPanel.reset();
        panelLayout.show(face, hangmanPanel.getClass().getSimpleName());
     }
-    
-    /**
-     * 
-     */
+
     public void playPong() {
         panelLayout.show(face, pongPanel.getClass().getSimpleName());
         pongPanel.getFocus();
         pongPanel.resetScores();
     }
-  
 }
