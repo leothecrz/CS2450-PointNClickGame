@@ -107,7 +107,6 @@ public final class PongPanel extends JPanel{
                 if(nxtPos.y > paddleNxtPos.y && nxtPos.y < (paddleNxtPos.y + paddle1.height ) ){
                     
                     if(nxtPos.x <= (paddleNxtPos.x + paddle1.width) ){
-                        //pongBall.setXVelocity(pongBall.getXVelocity() * (-1));
                         
                         yDelta = ( (paddle1.getY() + ((paddle1.getHeight()/2))) ) - pongBall.y;
                         
@@ -130,7 +129,17 @@ public final class PongPanel extends JPanel{
                 if(nxtPos.y > paddleNxtPos.y && nxtPos.y < (paddleNxtPos.y + paddle2.getHeight() ) ){
                     
                     if(nxtPos.x >= paddleNxtPos.x){
-                        pongBall.setXVelocity(pongBall.getXVelocity() * (-1));
+                        
+                        yDelta = ( (paddle2.getY() + ((paddle2.getHeight()/2))) ) - pongBall.y;
+                        
+                        if(pongBall.getXVelocity() < 25){
+                            int newXVel = (int)(pongBall.getXVelocity() * (-1.1));
+                            pongBall.setXVelocity(newXVel);
+                        } else {
+                            pongBall.setXVelocity( (int)(pongBall.getXVelocity() * (-0.8)) );
+                        }
+                        int newYVel = Math.round(-12 * (float)(yDelta/30));
+                        pongBall.setYVelocity(newYVel);
                         
                         
                     }
