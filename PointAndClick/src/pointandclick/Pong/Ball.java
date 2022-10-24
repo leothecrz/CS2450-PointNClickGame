@@ -11,8 +11,10 @@ public final class Ball extends Rectangle {
     private final static int X_SPAWN = 293;
     private final static int Y_SPAWN = 193;
     
-    private final static int X_VELOCITY_SPAWN = 10;
-    private final static int Y_VELOCITY_SPAWN = 2;
+    private final static int X_VELOCITY_SPAWN_MIN = 7;
+    private final static int X_VELOCITY_SPAWN_MAX = 10;
+    private final static int Y_VELOCITY_SPAWN_MIN = 2;
+    private final static int Y_VELOCITY_SPAWN_MAX = 5;
     
     private Color fillColor = Color.WHITE;
         
@@ -54,7 +56,7 @@ public final class Ball extends Rectangle {
     }
     
     /**
-     * 
+     * Adds Y velocity to ball
      * @param yVel 
      */
     public void addYVelocity(int yVel){
@@ -62,7 +64,7 @@ public final class Ball extends Rectangle {
     }
     
     /**
-     * 
+     * Adds X velocity to ball
      * @param xVel 
      */
     public void addXVelocity(int xVel){
@@ -70,7 +72,7 @@ public final class Ball extends Rectangle {
     }
     
     /**
-     * 
+     * Sets X velocity
      * @param xVel 
      */
     public void setXVelocity(int xVel) {
@@ -78,33 +80,38 @@ public final class Ball extends Rectangle {
     }
     
     /**
-     * 
+     * Sets Y velocity
      * @param yVel 
      */
     public void setYVelocity(int yVel) {
         yVelocity = yVel;
     }
     
-    /**
-     * 
+    /*
+     * Reset the ball's velocity and position
      */
     public void resetBall() {
         this.x = X_SPAWN;
         this.y = Y_SPAWN;
         resetVelocity();
         
-        boolean goLeft = (random.nextInt() & 1) == 1;
-        if(goLeft){
-            this.xVelocity = -X_VELOCITY_SPAWN;
-            this.yVelocity = -Y_VELOCITY_SPAWN;
-            
-        }else {
-            this.xVelocity = X_VELOCITY_SPAWN;
-            this.yVelocity = Y_VELOCITY_SPAWN;
-        
+        this.xVelocity = getRandomNumber(X_VELOCITY_SPAWN_MIN, X_VELOCITY_SPAWN_MAX);
+        this.yVelocity = getRandomNumber(Y_VELOCITY_SPAWN_MIN, Y_VELOCITY_SPAWN_MAX);
+        if ((random.nextInt() & 1) == 1) { // Go left
+            this.xVelocity = -this.xVelocity;
+        }
+        if ((random.nextInt() & 1) == 1) { // Go up
+            this.yVelocity = -this.yVelocity;
         }
     }
     
+    /*
+     * Generate a random number between min and max
+     */
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
     /**
      * Reset velocity of ball
      */
@@ -142,7 +149,7 @@ public final class Ball extends Rectangle {
     }
     
     /**
-     * 
+     * Draw ball
      * @param g 
      */
     public void draw(Graphics2D g) {
