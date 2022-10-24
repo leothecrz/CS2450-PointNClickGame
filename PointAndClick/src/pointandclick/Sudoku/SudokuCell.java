@@ -93,6 +93,32 @@ public class SudokuCell extends JComponent implements MouseListener {
             g.setColor(row == 3 || row == 6 ? Color.BLACK : Color.GRAY);
             g.drawLine(0, 0, CELL_SIZE, 0);
         }
+
+
+
+        // Borders
+        Graphics2D g2 = (Graphics2D)g;
+        Stroke stroke = g2.getStroke(); // Save original stroke
+        g2.setStroke(new BasicStroke(3));
+
+        if (row == 0) { // Top
+            g.setColor(Color.BLACK);
+            g.drawLine(0, 0, CELL_SIZE, 0);
+        }
+        if (row == 8) { // Bottom
+            g.setColor(Color.BLACK);
+            g.drawLine(0, CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        }
+        if (column == 0) { // Left
+            g.setColor(Color.BLACK);
+            g.drawLine(0, 0, 0, CELL_SIZE);
+        }
+        if (column == 8) { // Right
+            g.setColor(Color.BLACK);
+            g.drawLine(CELL_SIZE, 0, CELL_SIZE, CELL_SIZE);
+        }
+
+        g2.setStroke(stroke);
     }
 
     @Override
