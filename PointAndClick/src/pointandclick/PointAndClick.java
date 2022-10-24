@@ -50,8 +50,9 @@ public class PointAndClick extends JFrame {
         try {
            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(fixFilePath("Fonts/MarkerFelt.ttf"))));
+           ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(fixFilePath("Fonts/Digital-7.ttf"))));
         } catch (FontFormatException | IOException ex){
-            System.err.println("Font not found: MarkerFelt");
+            System.err.println("Font not found");
         }
         
         /// Event listeners

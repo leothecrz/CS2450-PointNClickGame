@@ -153,8 +153,8 @@ public class HangmanPanel extends JPanel {
             timeLabel.setText(formatter.format(new Date())); 
         };
         timeLabel = new JLabel("");
-        timeLabel.setBounds(400, 16, 200, 25);
-        timeLabel.setFont(new Font("Marker Felt", Font.BOLD, 15));
+        timeLabel.setBounds(410, 11, 200, 25);
+        timeLabel.setFont(new Font("Digital-7", Font.BOLD, 18));
         timeListener.actionPerformed(null); // Set the label's initial text
         timeLabelTimer = new Timer(1000, timeListener);
         timeLabelTimer.start();

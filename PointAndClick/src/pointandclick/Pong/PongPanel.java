@@ -166,13 +166,13 @@ public final class PongPanel extends JPanel {
         paddle2.draw(g2);
         
         // Draw scores
-        g2.setFont(new Font("MarkerFelt", Font.PLAIN, 72));
+        g2.setFont(new Font("Digital-7", Font.PLAIN, 72));
         g2.setColor(Color.LIGHT_GRAY);
         g2.drawString(String.valueOf(player1Score), 210, 100);
         g2.drawString(String.valueOf(player2Score), 360, 100);
 
         if (!gameRunning) {
-            g2.setFont(new Font("MarkerFelt", Font.PLAIN, 16));
+            g2.setFont(new Font("Digital-7", Font.PLAIN, 16));
             String text = "Press Space to start game.";
             g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 300);
         }
