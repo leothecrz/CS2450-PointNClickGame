@@ -44,7 +44,7 @@ Version 1.2:
 2. F1 key opens pop up display. Shows Names, Bronco #'s, Project Name, and the term name.
 3. ESC key quits program.
 4. Color Button Game leads to sudoku puzzle.
-5. Sudoku puzzle panel will have the buttons SUMBIT and QUIT. Will display Time. Will display 'Sudoku' tittle.
+5. Sudoku puzzle panel will have the buttons SUBMIT and QUIT. Will display Time. Will display 'Sudoku' tittle.
 6. The puzzle will use the same solution. 54 Empty boxes.
 7. On submit 10 points will be loss for every incorrect box. Only once.
 8. Subsequent submissions will only check if correct.

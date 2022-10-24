@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pointandclick.Pong;
 
 import java.awt.*;
-import java.util.Random;
 
-/**
- *
- */
-public final class Ball extends Rectangle{
+public final class Ball extends Rectangle {
     
     private final static int BALL_WIDTH = 15;
     private final static int BALL_HEIGHT = BALL_WIDTH;
@@ -37,9 +29,6 @@ public final class Ball extends Rectangle{
         setLocation(x, y);
     }
     
-    /**
-     * 
-     */
     public void tickPass(){
         Point nxtPosition = getNextPosition();
         
@@ -112,7 +101,7 @@ public final class Ball extends Rectangle{
     }
     
     /**
-     * 
+     * Reset velocity of ball
      */
     public void resetVelocity(){
         this.xVelocity = 0;
@@ -120,32 +109,28 @@ public final class Ball extends Rectangle{
     }
     
     /**
-     * 
-     * @return 
+     * @return Y velocity of ball
      */
     public int getYVelocity(){
         return this.yVelocity;
     }
     
     /**
-     * 
-     * @return 
+     * @return X velocity of ball
      */
     public int getXVelocity(){
         return this.xVelocity;
     }
     
     /**
-     * 
-     * @return 
+     * @return Coordinate of ball
      */
-    public Point getPosition(){
+    public Point getPosition() {
         return new Point(this.x, this.y);
     }
     
     /**
-     * 
-     * @return 
+     * @return Next coordinate position of ball
      */
     public Point getNextPosition(){
         return new Point(x+xVelocity, y+yVelocity);

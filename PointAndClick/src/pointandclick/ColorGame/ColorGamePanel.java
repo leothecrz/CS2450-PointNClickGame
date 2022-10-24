@@ -1,18 +1,13 @@
 package pointandclick.ColorGame;
 
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class ColorGamePanel extends JPanel {
     private static final Color[] COLORS = {new Color(0xD32F2F), new Color(0xFDD835), new Color(0x4CAF50), new Color(0x1565C0), new Color(0x7B1FA2)};

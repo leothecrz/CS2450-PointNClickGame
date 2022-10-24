@@ -2,19 +2,9 @@
 package pointandclick.Pong;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JButton;
-
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import pointandclick.Common.RoundedBorder;
 
 /**

@@ -43,7 +43,7 @@ public final class Paddle extends Rectangle {
      * @param e 
      */
     public void keyPressed(KeyEvent e){
-        switch(id){
+        switch (id){
             default:
                 System.out.println("Invalid ID in paddle constructor");
                 break;

@@ -135,7 +135,6 @@ public class PointAndClick extends JFrame {
         Action f1KeyAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("The F1 Key was pressed");
                 TeamInfoDialog TID = new TeamInfoDialog(getX(), getY());
                 TID.setVisible(true);
             }
@@ -143,7 +142,6 @@ public class PointAndClick extends JFrame {
         cards.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F1"), "f1KeyAction");
         cards.getActionMap().put("f1KeyAction", f1KeyAction);
     }
-    
 
     /**
      * Entry Point of PointAndClick Program

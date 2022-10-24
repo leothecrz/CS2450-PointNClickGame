@@ -1,8 +1,5 @@
 package pointandclick.Sudoku;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

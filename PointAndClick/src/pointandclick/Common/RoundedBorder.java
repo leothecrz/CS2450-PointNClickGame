@@ -1,9 +1,7 @@
 
 package pointandclick.Common;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
+import java.awt.*;
 import javax.swing.border.Border;
 
 

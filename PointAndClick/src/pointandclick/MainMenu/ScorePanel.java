@@ -14,29 +14,21 @@
 
 package pointandclick.MainMenu;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import pointandclick.Common.ScoreTable;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
+import pointandclick.Common.ScoreTable;
 import pointandclick.Common.RoundedBorder;
 
-/**
- *
- */
-public class ScorePanel extends JPanel{
+public class ScorePanel extends JPanel {
     
     private int playerScore;
     private ScoreTable scoreTable;
     
     private JLabel gotHSLabel;
     private JTextField gotHSNameField;
+    private JButton gotHSSubmitButton;
     
     /**
      * Constructor of the panel. Sets ups the end button
@@ -54,23 +46,24 @@ public class ScorePanel extends JPanel{
         
         Font MarkerFelt = new Font("Marker Felt", Font.BOLD, 15);
         
-        gotHSLabel = new JLabel();
-        gotHSLabel.setText(" You set a high score!! Sumbit your name: ");
-        gotHSLabel.setToolTipText("You set a high score!! Sumbit your name:");
-        gotHSLabel.setFont(MarkerFelt);
-        gotHSLabel.setBounds(170, 50, 300, 25);
-        gotHSLabel.setVisible(true);
-        
-        add(gotHSLabel);
-        
+        // Listener when user submits name for high score
         ActionListener gotHStextFieldListener = evt -> {
             String userName = gotHSNameField.getText();
-            System.out.print(userName);
+            System.out.println(userName);
             gotHSNameField.setEnabled(false);
+            gotHSSubmitButton.setVisible(false);
             
             scoreTable.secureAdd(playerScore, userName);
         };
         
+        // High score components
+        gotHSLabel = new JLabel();
+        gotHSLabel.setText("You set a high score! Submit your name:");
+        gotHSLabel.setToolTipText("You set a high score! Submit your name:");
+        gotHSLabel.setFont(MarkerFelt);
+        gotHSLabel.setBounds(170, 50, 300, 25);
+        gotHSLabel.setVisible(true);
+
         gotHSNameField = new JTextField(14);
         gotHSNameField.setEnabled(true);
         gotHSNameField.setEditable(true);
@@ -78,9 +71,16 @@ public class ScorePanel extends JPanel{
         gotHSNameField.setBounds(220, 90, 150, 25);
         gotHSNameField.setVisible(false);
         gotHSNameField.setToolTipText("Enter your name here.");
+
+        gotHSSubmitButton = new JButton("Submit");
+        gotHSSubmitButton.addActionListener(gotHStextFieldListener);
+        gotHSSubmitButton.setBounds(263, 120, 70, 25);
+        gotHSSubmitButton.setBorder(new RoundedBorder(15));
+        gotHSSubmitButton.setContentAreaFilled(false);
+        gotHSSubmitButton.setFont(new Font("Marker Felt", Font.PLAIN, 15));
+        gotHSSubmitButton.setToolTipText("Submit name");
         
-        add(gotHSNameField);
-        
+        // End button
         JButton endButton = new JButton();
         endButton.setText("END");
         endButton.setFont(MarkerFelt.deriveFont(Font.PLAIN, 25f));
@@ -92,6 +92,9 @@ public class ScorePanel extends JPanel{
         endButton.setSelected(true);
         endButton.setBounds(480, 300, 100, 50);
         
+        add(gotHSLabel);
+        add(gotHSNameField);
+        add(gotHSSubmitButton);
         add(endButton);
         
     }
@@ -120,13 +123,14 @@ public class ScorePanel extends JPanel{
         return playerScore;
     }
     
-    public ScoreTable getScoreTable(){
+    public ScoreTable getScoreTable() {
         return this.scoreTable;
     }
     
-    public void setState(boolean state){
+    public void setState(boolean state) {
         gotHSLabel.setVisible(state);
         gotHSNameField.setVisible(state);
+        gotHSSubmitButton.setVisible(state);
         
         if (state) {
             gotHSNameField.setText("");
@@ -136,16 +140,20 @@ public class ScorePanel extends JPanel{
     
     /**
      * Displays Score directly on the panel
-     * @param g 
+     * @param g
      */
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         
         g2.setFont(new Font("Marker Felt", Font.BOLD, 50));
-        g2.drawString(("Score: "+ String.valueOf(playerScore)), 210, 215);
-        
+
+        // Center text
+        FontMetrics metric = g2.getFontMetrics();
+        String text = "Score: " + String.valueOf(playerScore);
+        int x = (600 - metric.stringWidth(text)) / 2;
+        int y = 215;
+        g2.drawString(text, x, y);
     }
-    
 }

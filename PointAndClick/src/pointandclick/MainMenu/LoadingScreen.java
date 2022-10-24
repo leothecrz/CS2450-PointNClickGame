@@ -12,19 +12,14 @@
 
 package pointandclick.MainMenu;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class LoadingScreen extends JPanel {
     
     /**
-     * Sets up a JPanel with a Java Swing Timer to notify
+     * Sets up a JPanel with a timer to notify
      * PointAndClick to swap to menu.
      * @param loadingScreenListener
      */
@@ -48,9 +43,12 @@ public class LoadingScreen extends JPanel {
         
         g2.setColor(new Color(0,0,0));
         g2.setFont(new Font("Marker Felt", Font.BOLD, 60));
-        g2.drawString("Point and Click Game", 40, 150);
+
+        String text = "Point and Click Game";
+        g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 150);
         
         g2.setFont(new Font("Marker Felt", Font.PLAIN, 30));
-        g2.drawString("- Team Goofy Goobers -", 175, 250);
+        text = "- Team Goofy Goobers -";
+        g2.drawString(text, (600 - g2.getFontMetrics().stringWidth(text)) / 2, 250);
     }
 }

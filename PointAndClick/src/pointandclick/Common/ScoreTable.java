@@ -72,13 +72,13 @@ public final class ScoreTable {
                 reader.nextLine(); // eats the lone '\n'
             }
             reader.close();
-        } 
-        catch (FileNotFoundException ex) { System.err.println("File Not Found Error Not Handled"); } 
-        catch (NoSuchElementException ex1){
+        } catch (FileNotFoundException ex) {
+            System.err.println("Scores file not found");
+        } catch (NoSuchElementException ex1){
             System.err.println("High score file has an error");
             scoresFile.delete();
             createNewFile();
-        } // Catch end
+        }
     }
     
     /**

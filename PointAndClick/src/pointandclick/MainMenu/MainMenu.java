@@ -76,8 +76,6 @@ public class MainMenu extends JPanel {
         add(playButton);
     }
     
-    // adding a hangman picture below the main menu buttons
-    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -85,7 +83,9 @@ public class MainMenu extends JPanel {
         try {
             pic = ImageIO.read(new File(PointAndClick.fixFilePath("Images/menuIcon.png"))); 
             g.drawImage(pic, 80, 20, 300, 310, this);
-        } catch (IOException e) {System.err.println("Image Not Found - Main Menu");} 
+        } catch (IOException e) {
+            System.err.println("MainMenu: image not found");
+        } 
         
     } 
 }

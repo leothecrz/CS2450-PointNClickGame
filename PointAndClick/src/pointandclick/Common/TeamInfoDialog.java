@@ -1,15 +1,8 @@
 package pointandclick.Common;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  *
@@ -60,11 +53,11 @@ public final class TeamInfoDialog extends JDialog implements ActionListener{
             constraints.weightx = 0.2;
             constraints.gridwidth = 1;
             constraints.ipady =0;
-            if(i <= 2){
+            if(i <= 2) {
                 constraints.gridx = i;
                 constraints.gridy = 2;
             } else {
-                if(i == 3) {
+                if (i == 3) {
                     constraints.gridx = 0;
                 } else {
                     constraints.gridx = 2;
