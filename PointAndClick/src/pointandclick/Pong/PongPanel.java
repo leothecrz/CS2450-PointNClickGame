@@ -108,7 +108,7 @@ public final class PongPanel extends JPanel {
         timeLabel = new JLabel("");
         timeLabel.setBounds(410, 12, 200, 25);
         timeLabel.setFont(new Font("Digital-7", Font.BOLD, 18));
-        // timeLabel.setForeground(Color.LIGHT_GRAY);
+        timeLabel.setForeground(Color.LIGHT_GRAY);
         timeListener.actionPerformed(null);
         timeLabelTimer = new Timer(1000, timeListener);
         timeLabelTimer.start();
